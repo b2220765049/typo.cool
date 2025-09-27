@@ -1,0 +1,144 @@
+/* Base styles for Typo website (GitHub Pages) */
+/* Fonts: Lora for headings, Montserrat for body */
+
+@font-face {
+  font-family: 'Lora';
+  src: url('../assets/fonts/lora/Lora-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lora';
+  src: url('../assets/fonts/lora/Lora-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lora';
+  src: url('../assets/fonts/lora/Lora-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lora';
+  src: url('../assets/fonts/lora/Lora-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../assets/fonts/montserrat/Montserrat-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../assets/fonts/montserrat/Montserrat-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../assets/fonts/montserrat/Montserrat-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../assets/fonts/montserrat/Montserrat-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Brand colors from constants/colors.ts light theme */
+  --bg: hsl(37, 37%, 96%);           /* background */
+  --fg: hsl(0, 0%, 20%);             /* foreground */
+  --primary: hsl(13, 39%, 52%);      /* terracotta */
+  --secondary: hsl(155, 15%, 49%);   /* sage */
+  --muted: hsl(45, 8%, 80%);
+  --card: hsl(0, 0%, 100%);
+  --border: hsl(45, 8%, 80%);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  line-height: 1.6;
+}
+img { max-width: 100%; height: auto; }
+
+.container { width: min(1100px, 92%); margin: 0 auto; }
+
+header {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(250, 249, 246, 0.85);
+  backdrop-filter: saturate(160%) blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 0;
+}
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+.brand-logo { width: 36px; height: 36px; }
+.brand-name { font-family: 'Lora', serif; font-size: 22px; letter-spacing: 0.4px; }
+
+.nav-links { display: flex; gap: 16px; align-items: center; }
+.nav-links a {
+  color: var(--fg); text-decoration: none; font-weight: 600; padding: 8px 10px; border-radius: 8px;
+}
+.nav-links a:hover { background: var(--muted); }
+
+.hero {
+  padding: 64px 0 32px;
+}
+.hero .inner { display: grid; grid-template-columns: 1.2fr 1fr; gap: 36px; align-items: center; }
+.hero h1 { font-family: 'Lora', serif; font-size: clamp(32px, 4vw, 48px); margin: 0 0 12px; }
+.hero p { font-size: 18px; margin: 0 0 20px; }
+
+.cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--primary); color: white; border: 0; border-radius: 999px; padding: 12px 18px; font-weight: 700; text-decoration: none;
+}
+.cta.secondary { background: var(--secondary); }
+.buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px;
+}
+
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 900px) { .hero .inner{ grid-template-columns: 1fr; } .grid-3{ grid-template-columns: 1fr; } }
+
+h2, h3 { font-family: 'Lora', serif; }
+
+footer {
+  margin-top: 48px; border-top: 1px solid var(--border); background: rgba(250, 249, 246, 0.6);
+}
+.footer-inner { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; padding: 18px 0; }
+.footer-links { display: flex; gap: 14px; flex-wrap: wrap; }
+.footer-links a { color: var(--fg); text-decoration: none; }
+.footer-links a:hover { text-decoration: underline; }
+
+main { padding: 24px 0 48px; }
+
+.prose h1 { font-family: 'Lora', serif; font-size: 36px; margin-top: 0; }
+.prose h2 { font-size: 24px; margin-top: 36px; }
+.prose p, .prose li { font-size: 16px; }
+.prose a { color: var(--primary); }
+
+.badge { display:inline-block; border:1px solid var(--border); padding:2px 8px; border-radius:999px; font-size:12px; background:#fff7; }
