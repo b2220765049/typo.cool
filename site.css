@@ -3,28 +3,28 @@
 
 @font-face {
   font-family: 'Lora';
-  src: url('../assets/fonts/lora/Lora-Regular.ttf') format('truetype');
+  src: url('./assets/fonts/lora/Lora-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Lora';
-  src: url('../assets/fonts/lora/Lora-Medium.ttf') format('truetype');
+  src: url('./assets/fonts/lora/Lora-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Lora';
-  src: url('../assets/fonts/lora/Lora-SemiBold.ttf') format('truetype');
+  src: url('./assets/fonts/lora/Lora-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Lora';
-  src: url('../assets/fonts/lora/Lora-Bold.ttf') format('truetype');
+  src: url('./assets/fonts/lora/Lora-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -32,28 +32,28 @@
 
 @font-face {
   font-family: 'Montserrat';
-  src: url('../assets/fonts/montserrat/Montserrat-Regular.ttf') format('truetype');
+  src: url('./assets/fonts/montserrat/Montserrat-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Montserrat';
-  src: url('../assets/fonts/montserrat/Montserrat-Medium.ttf') format('truetype');
+  src: url('./assets/fonts/montserrat/Montserrat-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Montserrat';
-  src: url('../assets/fonts/montserrat/Montserrat-SemiBold.ttf') format('truetype');
+  src: url('./assets/fonts/montserrat/Montserrat-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Montserrat';
-  src: url('../assets/fonts/montserrat/Montserrat-Bold.ttf') format('truetype');
+  src: url('./assets/fonts/montserrat/Montserrat-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -93,11 +93,11 @@ header {
   display: flex; align-items: center; justify-content: space-between;
   padding: 14px 0;
 }
-.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
-.brand-logo { width: 36px; height: 36px; }
-.brand-name { font-family: 'Lora', serif; font-size: 22px; letter-spacing: 0.4px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.brand-logo { height: 28px; width: auto; display: block; }
+.brand-name { display: none; }
 
-.nav-links { display: flex; gap: 16px; align-items: center; }
+.nav-links { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
 .nav-links a {
   color: var(--fg); text-decoration: none; font-weight: 600; padding: 8px 10px; border-radius: 8px;
 }
@@ -123,6 +123,15 @@ header {
 
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 @media (max-width: 900px) { .hero .inner{ grid-template-columns: 1fr; } .grid-3{ grid-template-columns: 1fr; } }
+
+/* Mobile tweaks */
+@media (max-width: 600px) {
+  .nav { padding: 10px 0; }
+  .nav-links { gap: 8px; }
+  .nav-links a { padding: 6px 8px; font-size: 14px; }
+  .hero { padding: 40px 0 24px; }
+  .prose h1 { font-size: 28px; }
+}
 
 h2, h3 { font-family: 'Lora', serif; }
 
