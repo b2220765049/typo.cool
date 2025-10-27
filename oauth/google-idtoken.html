@@ -17,7 +17,7 @@
         }
         function genNonce(){return Math.random().toString(36).slice(2)+Date.now().toString(36)}
         var redirect = qs('redirect'); // e.g., typodatingapp://oauth
-        var clientId = qs('client_id') || 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com';
+        var clientId = qs('client_id') || '729794760587-if84r3ogr0gabv5kopptr2hjisjvs6jb.apps.googleusercontent.com';
         var scope = qs('scope') || 'openid profile email';
         var prompt = qs('prompt') || 'select_account';
         var nonce = qs('nonce') || genNonce();
