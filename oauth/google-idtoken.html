@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Google ID Token Bridge</title>
+    <style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;padding:20px;max-width:680px;margin:0 auto;color:#222}code{background:#f2f2f2;padding:2px 4px;border-radius:4px} .muted{color:#666}</style>
+  </head>
+  <body>
+    <h3>Redirecting to Google…</h3>
+    <p class="muted">If you are not redirected automatically, refresh this page.</p>
+    <script>
+      (function() {
+        function qs(name){
+          const url=new URL(window.location.href);
+          return url.searchParams.get(name);
+        }
+        function genNonce(){return Math.random().toString(36).slice(2)+Date.now().toString(36)}
+        var redirect = qs('redirect'); // e.g., typodatingapp://oauth
+        var clientId = qs('client_id') || 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com';
+        var scope = qs('scope') || 'openid profile email';
+        var prompt = qs('prompt') || 'select_account';
+        var nonce = qs('nonce') || genNonce();
+
+        // If Google redirected back with an id_token in the hash, deep link back to the app
+        if (window.location.hash) {
+          var hash = new URLSearchParams(window.location.hash.slice(1));
+          var idToken = hash.get('id_token');
+          var returnedState = hash.get('state');
+          try { if (!redirect && returnedState) { var st = JSON.parse(atob(returnedState)); redirect = st && st.r; } } catch(e) {}
+          if (idToken) {
+            // Carry over optional state param (original state passed in the first request)
+            var origState = qs('state');
+            var deepLink = (redirect || '') + '#id_token=' + encodeURIComponent(idToken) + (origState ? '&state=' + encodeURIComponent(origState) : '');
+            window.location.replace(deepLink);
+            return;
+          }
+        }
+
+        // Start Google OAuth (implicit) with redirect back to THIS page (no query)
+        var thisUrl = window.location.origin + window.location.pathname;
+        var authUrl = new URL('https://accounts.google.com/o/oauth2/v2/auth');
+        authUrl.searchParams.set('client_id', clientId);
+        authUrl.searchParams.set('redirect_uri', thisUrl);
+        authUrl.searchParams.set('response_type', 'id_token');
+        authUrl.searchParams.set('scope', scope);
+        authUrl.searchParams.set('prompt', prompt);
+        authUrl.searchParams.set('nonce', nonce);
+        // Pack our app redirect into state so it comes back in the hash
+        var state = qs('state');
+        var packed = btoa(JSON.stringify({ r: redirect || null, s: state || null }));
+        authUrl.searchParams.set('state', packed);
+        if (!redirect) {
+          document.body.innerHTML = '<h3>Missing redirect parameter</h3><p>Add <code>?redirect=typodatingapp://oauth</code> to the URL.</p>';
+          return;
+        }
+        window.location.replace(authUrl.toString());
+      })();
+    </script>
+    <p class="muted">Note: Add this page URL as an <b>Authorized redirect URI</b> on your Google OAuth Web Client in Google Cloud Console.</p>
+  </body>
+  </html>
