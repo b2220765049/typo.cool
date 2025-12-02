@@ -151,3 +151,9 @@ main { padding: 24px 0 48px; }
 .prose a { color: var(--primary); }
 
 .badge { display:inline-block; border:1px solid var(--border); padding:2px 8px; border-radius:999px; font-size:12px; background:#fff7; }
+
+/* Test cards */
+.test-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
