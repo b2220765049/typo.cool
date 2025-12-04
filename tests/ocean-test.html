@@ -1,0 +1,935 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Big 5 (OCEAN) Kişilik Testi - Typo</title>
+  <meta name="description" content="Typo Big 5 OCEAN Kişilik Testi - Beş Faktör modeliyle kişiliğini keşfet." />
+  <meta property="og:site_name" content="Typo" />
+  <link rel="icon" href="../assets/app_icon.png" />
+  <link rel="preload" href="../assets/fonts/lora/Lora-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../assets/fonts/montserrat/Montserrat-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="../site.css" />
+  <style>
+    /* OCEAN Test Specific Styles */
+    .test-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Progress Bar */
+    .progress-wrapper {
+      padding: 16px 0;
+      position: sticky;
+      top: 60px;
+      background: var(--bg);
+      z-index: 5;
+    }
+    .progress-track {
+      height: 6px;
+      background: rgba(181, 106, 85, 0.2);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 3px;
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+    .progress-text {
+      text-align: center;
+      font-size: 14px;
+      color: var(--fg);
+      margin-top: 8px;
+      opacity: 0.7;
+    }
+
+    /* Question Area */
+    .question-area {
+      padding: 24px 0 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .question-slide {
+      animation: slideIn 0.3s ease forwards;
+    }
+    .question-slide.slide-out-left {
+      animation: slideOutLeft 0.25s ease forwards;
+    }
+    .question-slide.slide-out-right {
+      animation: slideOutRight 0.25s ease forwards;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(60px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideOutLeft {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(-60px); opacity: 0; }
+    }
+    @keyframes slideOutRight {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(60px); opacity: 0; }
+    }
+
+    /* Question Card */
+    .question-card {
+      background: var(--card);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+
+    .question-text {
+      font-family: 'Lora', serif;
+      font-size: clamp(18px, 3.5vw, 22px);
+      font-weight: 600;
+      color: var(--fg);
+      line-height: 1.5;
+      margin-bottom: 32px;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Likert Scale */
+    .likert-container {
+      margin-top: 24px;
+    }
+    .likert-scale {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .likert-btn {
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: var(--card);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .likert-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      border-color: var(--primary);
+    }
+    .likert-btn.selected {
+      border-width: 3px;
+      border-color: var(--primary);
+      background: var(--primary);
+    }
+    .likert-labels {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 4px;
+    }
+    .likert-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--fg);
+      opacity: 0.6;
+    }
+
+    /* Bottom Container */
+    .bottom-container {
+      padding: 16px 0 48px;
+    }
+
+    /* Navigation */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 24px;
+    }
+
+    .nav-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--card);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
+    }
+    .nav-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .nav-btn svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--fg);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    /* Email Collection Modal */
+    .email-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: fadeIn 0.3s ease;
+    }
+    .email-modal.active {
+      display: flex;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .email-card {
+      background: var(--card);
+      border-radius: 24px;
+      padding: 40px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      animation: scaleIn 0.3s ease;
+    }
+    @keyframes scaleIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .email-card h2 {
+      font-family: 'Lora', serif;
+      font-size: 24px;
+      margin: 0 0 12px;
+    }
+    .email-card p {
+      color: var(--fg);
+      opacity: 0.8;
+      margin: 0 0 24px;
+      font-size: 15px;
+    }
+
+    .email-input {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      font-size: 16px;
+      font-family: inherit;
+      margin-bottom: 16px;
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+    .email-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .email-btn {
+      width: 100%;
+      padding: 14px 24px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 12px;
+    }
+    .email-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .skip-btn {
+      background: none;
+      border: none;
+      color: var(--fg);
+      opacity: 0.6;
+      cursor: pointer;
+      font-size: 14px;
+      padding: 8px;
+    }
+    .skip-btn:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    /* Results Section */
+    .results-container {
+      display: none;
+      text-align: center;
+      padding: 40px 0;
+      animation: fadeIn 0.5s ease;
+    }
+    .results-container.active {
+      display: block;
+    }
+
+    .result-icon {
+      font-size: 60px;
+      margin-bottom: 16px;
+    }
+
+    .result-subtitle {
+      font-size: 14px;
+      color: var(--primary);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 0 0 8px;
+    }
+
+    .result-title {
+      font-family: 'Lora', serif;
+      font-size: clamp(28px, 5vw, 36px);
+      color: var(--fg);
+      margin: 0 0 32px;
+    }
+
+    .result-scores {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 500px;
+      margin: 0 auto 32px;
+    }
+
+    .score-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left;
+    }
+    .score-label {
+      font-size: 14px;
+      color: var(--fg);
+      min-width: 180px;
+      font-weight: 500;
+    }
+    .score-bar-container {
+      flex: 1;
+      height: 10px;
+      background: rgba(181, 106, 85, 0.2);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .score-bar {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 5px;
+      transition: width 1s ease;
+    }
+    .score-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--fg);
+      min-width: 50px;
+      text-align: right;
+    }
+
+    .result-description {
+      font-size: 15px;
+      color: var(--fg);
+      line-height: 1.7;
+      max-width: 600px;
+      margin: 0 auto 40px;
+      padding: 24px;
+      background: var(--card);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+    }
+
+    .result-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 28px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .result-cta:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    /* Start Screen */
+    .start-screen {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .start-screen h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(28px, 5vw, 40px);
+      margin: 0 0 16px;
+    }
+    .start-screen p {
+      font-size: 17px;
+      color: var(--fg);
+      opacity: 0.8;
+      max-width: 500px;
+      margin: 0 auto 32px;
+    }
+    .start-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 999px;
+      padding: 16px 32px;
+      font-weight: 700;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .start-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(181, 106, 85, 0.3);
+    }
+
+    .test-info {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    .test-info-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--fg);
+      opacity: 0.7;
+    }
+    .test-info-item svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--primary);
+    }
+
+    /* Trait badges */
+    .trait-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 24px;
+    }
+    .trait-badge {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--fg);
+    }
+
+    /* Hide test when showing start/results */
+    .test-area {
+      display: none;
+    }
+    .test-area.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .question-card {
+        padding: 24px;
+      }
+      .nav-btn {
+        width: 48px;
+        height: 48px;
+      }
+      .email-card {
+        padding: 28px 24px;
+      }
+      .score-label {
+        min-width: 140px;
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="../index.html">
+        <img class="brand-logo" alt="Typo" src="../assets/text_logo.png" />
+      </a>
+      <nav class="nav-links">
+        <a href="../index.html">Ana Sayfa</a>
+        <a href="../privacy.html">Gizlilik</a>
+        <a href="../terms.html">Koşullar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Start Screen -->
+    <div class="start-screen" id="startScreen">
+      <h1>Big 5 (OCEAN) Kişilik Testi</h1>
+      <p>Bu test, Beş Faktör Modeli (Big Five) ile kişiliğinin temel boyutlarını keşfetmene yardımcı olacak. IPIP-BFM-20 ölçeğine dayanmaktadır.</p>
+      <button class="start-btn" onclick="startTest()">
+        Teste Başla
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+      <div class="test-info">
+        <div class="test-info-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
+          <span>~5 dakika</span>
+        </div>
+        <div class="test-info-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 11l3 3L22 4"/>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+          </svg>
+          <span>20 soru</span>
+        </div>
+        <div class="test-info-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <span>Anonim</span>
+        </div>
+      </div>
+      <div class="trait-badges">
+        <span class="trait-badge">Açıklık (O)</span>
+        <span class="trait-badge">Sorumluluk (C)</span>
+        <span class="trait-badge">Dışadönüklük (E)</span>
+        <span class="trait-badge">Uyumluluk (A)</span>
+        <span class="trait-badge">Duygusal Denge (N)</span>
+      </div>
+    </div>
+
+    <!-- Test Area -->
+    <div class="test-container test-area" id="testArea">
+      <!-- Progress Bar -->
+      <div class="progress-wrapper">
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text"><span id="currentQ">1</span> / <span id="totalQ">20</span></div>
+      </div>
+
+      <!-- Question Area -->
+      <div class="question-area" id="questionArea">
+        <!-- Questions will be dynamically inserted here -->
+      </div>
+
+      <!-- Bottom Container -->
+      <div class="bottom-container" id="bottomContainer">
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+          <button class="nav-btn" id="prevBtn" onclick="goToPrevious()" disabled>
+            <svg viewBox="0 0 24 24">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+          <button class="nav-btn" id="nextBtn" onclick="goToNext()" style="visibility: hidden;">
+            <svg viewBox="0 0 24 24">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Container -->
+    <div class="results-container" id="resultsContainer">
+      <div class="result-icon">🧠</div>
+      <p class="result-subtitle">OCEAN Sonuçların</p>
+      <h1 class="result-title" id="resultTitle">Kişilik Profili</h1>
+      <div class="result-scores" id="resultScores">
+        <!-- Scores will be inserted here -->
+      </div>
+      <p class="result-description" id="resultDescription"></p>
+      <a href="../index.html" class="result-cta">
+        Typo'yu Keşfet
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </main>
+
+  <!-- Email Modal -->
+  <div class="email-modal" id="emailModal">
+    <div class="email-card">
+      <h2>Sonuçlarını Kaydet</h2>
+      <p>E-posta adresini girerek sonuçlarını kaydedebilirsin. Typo uygulamasına aynı e-posta ile giriş yaparsan, sonuçların otomatik olarak profiline eklenecek.</p>
+      <input type="email" class="email-input" id="emailInput" placeholder="ornek@email.com" />
+      <button class="email-btn" onclick="submitEmail()">Sonuçları Gör</button>
+      <button class="skip-btn" onclick="skipEmail()">Atla, sonuçları göster</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container footer-inner">
+      <small>© <span id="y"></span> Typo</small>
+      <div class="footer-links">
+        <a href="../privacy.html">Gizlilik</a>
+        <a href="../kvkk.html">KVKK</a>
+        <a href="../terms.html">Koşullar</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ========== OCEAN Test Data (IPIP-BFM-20) ==========
+    const OCEAN_QUESTIONS = [
+      // Extraversion (E)
+      { id: 1, text: 'Partinin / ortamın neşesiyimdir.', trait: 'Extraversion', reverse: false },
+      { id: 6, text: 'Çok fazla konuşmam.', trait: 'Extraversion', reverse: true },
+      { id: 11, text: 'Partilerde birçok farklı kişiyle konuşurum.', trait: 'Extraversion', reverse: false },
+      { id: 16, text: 'Arka planda kalırım.', trait: 'Extraversion', reverse: true },
+
+      // Agreeableness (A)
+      { id: 2, text: 'Başkalarının duygularına sempatiyle yaklaşırım.', trait: 'Agreeableness', reverse: false },
+      { id: 7, text: 'Başkalarının sorunlarıyla ilgilenmem.', trait: 'Agreeableness', reverse: true },
+      { id: 12, text: 'Başkalarının duygularını hissederim.', trait: 'Agreeableness', reverse: false },
+      { id: 17, text: 'Başkalarıyla pek ilgilenmem.', trait: 'Agreeableness', reverse: true },
+
+      // Conscientiousness (C)
+      { id: 3, text: 'Yapılacak işleri hemen hallederim.', trait: 'Conscientiousness', reverse: false },
+      { id: 8, text: 'Eşyaları yerine koymayı sık sık unuturum.', trait: 'Conscientiousness', reverse: true },
+      { id: 13, text: 'Düzeni severim.', trait: 'Conscientiousness', reverse: false },
+      { id: 18, text: 'İşleri karmakarışık yaparım.', trait: 'Conscientiousness', reverse: true },
+
+      // Neuroticism (N)
+      { id: 4, text: 'Sık sık duygu durumu değişimleri yaşarım.', trait: 'Neuroticism', reverse: false },
+      { id: 9, text: 'Çoğu zaman rahatımdır.', trait: 'Neuroticism', reverse: true },
+      { id: 14, text: 'Kolayca üzülürüm.', trait: 'Neuroticism', reverse: false },
+      { id: 19, text: 'Nadiren kendimi kötü hissederim.', trait: 'Neuroticism', reverse: true },
+
+      // Openness/Intellect (O)
+      { id: 5, text: 'Canlı bir hayal gücüm vardır.', trait: 'Openness', reverse: false },
+      { id: 10, text: 'Soyut fikirlere ilgi duymam.', trait: 'Openness', reverse: true },
+      { id: 15, text: 'Soyut fikirleri anlamakta zorlanırım.', trait: 'Openness', reverse: true },
+      { id: 20, text: 'İyi bir hayal gücüm yoktur.', trait: 'Openness', reverse: true },
+    ];
+
+    const TRAIT_LABELS = {
+      Openness: 'Açıklık (O)',
+      Conscientiousness: 'Sorumluluk (C)',
+      Extraversion: 'Dışadönüklük (E)',
+      Agreeableness: 'Uyumluluk (A)',
+      Neuroticism: 'Duygusal Dengesizlik (N)'
+    };
+
+    const LIKERT_POINTS = [1, 2, 3, 4, 5];
+
+    // ========== Test State ==========
+    let currentStep = 0;
+    let answers = {}; // { questionId: likertValue (1-5) }
+    let maxStepReached = 0;
+    let userEmail = '';
+    let isAnimating = false;
+    let shuffledQuestions = [];
+
+    // ========== DOM Elements ==========
+    const startScreen = document.getElementById('startScreen');
+    const testArea = document.getElementById('testArea');
+    const questionArea = document.getElementById('questionArea');
+    const resultsContainer = document.getElementById('resultsContainer');
+    const emailModal = document.getElementById('emailModal');
+    const bottomContainer = document.getElementById('bottomContainer');
+    const progressFill = document.getElementById('progressFill');
+    const currentQSpan = document.getElementById('currentQ');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    // ========== Utility Functions ==========
+    function shuffleArray(array) {
+      const result = [...array];
+      for (let i = result.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [result[i], result[j]] = [result[j], result[i]];
+      }
+      return result;
+    }
+
+    // ========== Core Functions ==========
+    function startTest() {
+      // Shuffle questions
+      shuffledQuestions = shuffleArray(OCEAN_QUESTIONS);
+      
+      startScreen.style.display = 'none';
+      testArea.classList.add('active');
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      const question = shuffledQuestions[currentStep];
+      if (!question) return;
+
+      // Update progress
+      const progress = ((currentStep + 1) / shuffledQuestions.length) * 100;
+      progressFill.style.width = progress + '%';
+      currentQSpan.textContent = currentStep + 1;
+      document.getElementById('totalQ').textContent = shuffledQuestions.length;
+
+      // Update nav buttons
+      prevBtn.disabled = currentStep === 0;
+      const isReviewing = currentStep < maxStepReached;
+      nextBtn.style.visibility = (isReviewing && answers[question.id] !== undefined && currentStep < shuffledQuestions.length - 1) ? 'visible' : 'hidden';
+
+      // Get selected value
+      const selectedValue = answers[question.id];
+
+      // Build Likert scale HTML
+      const sizes = [48, 40, 32, 40, 48];
+      let likertHTML = '';
+      for (let i = 0; i < LIKERT_POINTS.length; i++) {
+        const point = LIKERT_POINTS[i];
+        const isSelected = selectedValue === point;
+        likertHTML += `<button class="likert-btn ${isSelected ? 'selected' : ''}" 
+          style="width: ${sizes[i]}px; height: ${sizes[i]}px;" 
+          onclick="handleAnswer(${question.id}, ${point})"></button>`;
+      }
+
+      // Build question HTML
+      questionArea.innerHTML = `
+        <div class="question-slide">
+          <div class="question-card">
+            <div class="question-text">${question.text}</div>
+            <div class="likert-container">
+              <div class="likert-scale">
+                ${likertHTML}
+              </div>
+              <div class="likert-labels">
+                <span class="likert-label">Katılmıyorum</span>
+                <span class="likert-label">Katılıyorum</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function handleAnswer(questionId, value) {
+      if (isAnimating) return;
+      
+      answers[questionId] = value;
+
+      // Move to next question or finish
+      if (currentStep < shuffledQuestions.length - 1) {
+        animateToNext();
+      } else {
+        finishTest();
+      }
+    }
+
+    function animateToNext() {
+      if (isAnimating) return;
+      isAnimating = true;
+
+      const slide = questionArea.querySelector('.question-slide');
+      if (slide) slide.classList.add('slide-out-left');
+
+      setTimeout(() => {
+        currentStep++;
+        if (currentStep > maxStepReached) {
+          maxStepReached = currentStep;
+        }
+        renderQuestion();
+        isAnimating = false;
+      }, 250);
+    }
+
+    function animateToPrevious() {
+      if (isAnimating) return;
+      isAnimating = true;
+
+      const slide = questionArea.querySelector('.question-slide');
+      if (slide) slide.classList.add('slide-out-right');
+
+      setTimeout(() => {
+        currentStep--;
+        renderQuestion();
+        isAnimating = false;
+      }, 250);
+    }
+
+    function goToPrevious() {
+      if (currentStep > 0 && !isAnimating) {
+        animateToPrevious();
+      }
+    }
+
+    function goToNext() {
+      const question = shuffledQuestions[currentStep];
+      if (currentStep < shuffledQuestions.length - 1 && answers[question.id] !== undefined && !isAnimating) {
+        animateToNext();
+      }
+    }
+
+    function finishTest() {
+      testArea.classList.remove('active');
+      emailModal.classList.add('active');
+    }
+
+    function submitEmail() {
+      const emailInput = document.getElementById('emailInput');
+      userEmail = emailInput.value.trim();
+      
+      if (userEmail) {
+        localStorage.setItem('typo_ocean_email', userEmail);
+      }
+      
+      showResults();
+    }
+
+    function skipEmail() {
+      showResults();
+    }
+
+    function calculateScores() {
+      const scores = {
+        Openness: 0,
+        Conscientiousness: 0,
+        Extraversion: 0,
+        Agreeableness: 0,
+        Neuroticism: 0
+      };
+
+      OCEAN_QUESTIONS.forEach(q => {
+        let val = answers[q.id];
+        if (val === undefined) val = 3; // Default to neutral
+
+        // Reverse score if needed
+        if (q.reverse) {
+          val = 6 - val;
+        }
+
+        scores[q.trait] += val;
+      });
+
+      // Convert to percentages (max per trait = 4 questions * 5 = 20)
+      const maxPerTrait = 20;
+      return {
+        Openness: Math.round((scores.Openness / maxPerTrait) * 100),
+        Conscientiousness: Math.round((scores.Conscientiousness / maxPerTrait) * 100),
+        Extraversion: Math.round((scores.Extraversion / maxPerTrait) * 100),
+        Agreeableness: Math.round((scores.Agreeableness / maxPerTrait) * 100),
+        Neuroticism: Math.round((scores.Neuroticism / maxPerTrait) * 100)
+      };
+    }
+
+    function getPersonalityDescription(scores) {
+      const traits = [];
+      
+      if (scores.Openness > 60) traits.push('yaratıcı ve meraklı');
+      if (scores.Conscientiousness > 60) traits.push('düzenli ve güvenilir');
+      if (scores.Extraversion > 60) traits.push('sosyal ve enerjik');
+      if (scores.Agreeableness > 60) traits.push('uyumlu ve yardımsever');
+      if (scores.Neuroticism > 60) traits.push('duygusal olarak hassas');
+      
+      if (scores.Openness < 40) traits.push('geleneksel');
+      if (scores.Conscientiousness < 40) traits.push('esnek');
+      if (scores.Extraversion < 40) traits.push('içedönük');
+      if (scores.Agreeableness < 40) traits.push('bağımsız düşünen');
+      if (scores.Neuroticism < 40) traits.push('duygusal olarak istikrarlı');
+
+      if (traits.length === 0) {
+        return 'Kişilik profilin dengeli bir görünüm sergiliyor. Beş temel özellikte de ortalama değerlere sahipsin.';
+      }
+
+      return `Kişilik profilin ${traits.join(', ')} özellikler gösteriyor. Bu özellikler, ilişkilerdeki dinamiklerini ve iletişim tarzını şekillendiriyor.`;
+    }
+
+    function showResults() {
+      emailModal.classList.remove('active');
+      resultsContainer.classList.add('active');
+
+      const scores = calculateScores();
+
+      // Build scores HTML
+      const scoresContainer = document.getElementById('resultScores');
+      let scoresHTML = '';
+      
+      const traitOrder = ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Neuroticism'];
+      
+      traitOrder.forEach(trait => {
+        scoresHTML += `
+          <div class="score-item">
+            <span class="score-label">${TRAIT_LABELS[trait]}</span>
+            <div class="score-bar-container">
+              <div class="score-bar" style="width: 0%" data-target="${scores[trait]}"></div>
+            </div>
+            <span class="score-value">${scores[trait]}%</span>
+          </div>
+        `;
+      });
+
+      scoresContainer.innerHTML = scoresHTML;
+
+      // Update description
+      document.getElementById('resultDescription').textContent = getPersonalityDescription(scores);
+
+      // Animate score bars
+      setTimeout(() => {
+        document.querySelectorAll('.score-bar').forEach(bar => {
+          bar.style.width = bar.dataset.target + '%';
+        });
+      }, 100);
+
+      // Save to localStorage
+      localStorage.setItem('typo_ocean_result', JSON.stringify({
+        scores: scores,
+        timestamp: new Date().toISOString()
+      }));
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') goToPrevious();
+      if (e.key === 'ArrowRight') goToNext();
+      if (e.key >= '1' && e.key <= '5') {
+        const question = shuffledQuestions[currentStep];
+        if (question) handleAnswer(question.id, parseInt(e.key));
+      }
+    });
+
+    // Set year in footer
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

@@ -293,8 +293,13 @@ h1, h2, h3, h4 {
 }
 .tests-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 24px;
+}
+@media (min-width: 1100px) {
+  .tests-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 .test-card {
   background: var(--card);
