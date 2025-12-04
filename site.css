@@ -240,6 +240,7 @@ h1, h2, h3, h4 {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 200px;
 }
 .hero-blob {
   position: absolute;
@@ -258,6 +259,12 @@ h1, h2, h3, h4 {
   width: auto;
   filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.15));
   transform: rotate(-2deg);
+}
+.hero-phone.fallback-logo {
+  max-height: 280px;
+  max-width: 280px;
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.1));
+  transform: rotate(0deg);
 }
 
 /* ==================== FEATURES SECTION ==================== */
@@ -576,6 +583,9 @@ h1, h2, h3, h4 {
   .hero-subtitle {
     font-size: 16px;
   }
+  .hero-visual {
+    display: none;
+  }
   .store-badge {
     height: 44px;
   }
@@ -654,6 +664,23 @@ header .nav {
   justify-content: space-between;
   padding: 16px 20px;
 }
+header .back-btn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  color: var(--fg);
+  text-decoration: none;
+  transition: background 0.2s;
+}
+header .back-btn svg {
+  stroke: var(--fg);
+}
+header .back-btn:hover {
+  background: rgba(181, 106, 85, 0.1);
+}
 header .nav-links {
   display: flex;
   gap: 8px;
@@ -677,23 +704,19 @@ header .nav-links a:hover {
 /* Mobile styles for legacy header (test pages) */
 @media (max-width: 600px) {
   header {
-    position: relative;
+    position: sticky;
+    top: 0;
   }
   header .nav {
-    flex-wrap: wrap;
     padding: 12px 16px;
-    gap: 8px;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+  header .back-btn {
+    display: flex;
   }
   header .nav-links {
-    width: 100%;
-    justify-content: center;
-    gap: 4px;
-    padding-top: 8px;
-    border-top: 1px solid var(--border);
-  }
-  header .nav-links a {
-    padding: 10px 12px;
-    font-size: 13px;
+    display: none;
   }
 }
 
