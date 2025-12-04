@@ -209,6 +209,7 @@
       justify-content: space-around;
       align-items: center;
       margin-bottom: 8px;
+      gap: 8px;
     }
     .likert-btn {
       border-radius: 50%;
@@ -219,7 +220,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
     }
+    .likert-btn.size-lg { width: clamp(40px, 10vw, 48px); height: clamp(40px, 10vw, 48px); }
+    .likert-btn.size-md { width: clamp(36px, 8vw, 40px); height: clamp(36px, 8vw, 40px); }
+    .likert-btn.size-sm { width: clamp(32px, 7vw, 36px); height: clamp(32px, 7vw, 36px); }
     .likert-btn:hover {
       transform: scale(1.1);
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
@@ -558,18 +563,68 @@
     /* Responsive */
     @media (max-width: 600px) {
       .question-box {
-        padding: 20px;
+        padding: 16px;
+      }
+      .question-text {
+        font-size: 15px;
+      }
+      .example-content {
+        font-size: 14px;
+      }
+      .likert-container {
+        padding: 0 8px;
+      }
+      .likert-label {
+        font-size: 13px;
       }
       .nav-btn {
         width: 48px;
         height: 48px;
       }
       .email-card {
-        padding: 28px 24px;
+        padding: 28px 20px;
+      }
+      .skip-btn {
+        padding: 12px 16px;
+        min-height: 44px;
       }
       .score-label {
-        min-width: 140px;
-        font-size: 11px;
+        min-width: 100px;
+        font-size: 13px;
+      }
+      .score-item {
+        gap: 8px;
+      }
+      .start-screen {
+        padding: 40px 16px;
+      }
+      .bottom-container {
+        padding-bottom: max(32px, env(safe-area-inset-bottom));
+      }
+    }
+
+    @media (max-width: 380px) {
+      .score-item {
+        flex-wrap: wrap;
+      }
+      .score-label {
+        width: 100%;
+        min-width: unset;
+        margin-bottom: 4px;
+      }
+      .question-box {
+        padding: 14px;
+      }
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      .question-slide {
+        animation: none;
+      }
+      .question-slide.slide-out-left,
+      .question-slide.slide-out-right {
+        animation: none;
       }
     }
   </style>
@@ -913,10 +968,10 @@
     }
 
     function renderLikertScale() {
-      const sizes = [48, 40, 36, 40, 48];
+      const sizeClasses = ['size-lg', 'size-md', 'size-sm', 'size-md', 'size-lg'];
       let html = '';
       for (let i = 1; i <= 5; i++) {
-        html += `<button class="likert-btn" data-value="${i}" style="width: ${sizes[i-1]}px; height: ${sizes[i-1]}px;" onclick="handleAnswer(${i})"></button>`;
+        html += `<button class="likert-btn ${sizeClasses[i-1]}" data-value="${i}" onclick="handleAnswer(${i})"></button>`;
       }
       likertScale.innerHTML = html;
     }

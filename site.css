@@ -136,10 +136,45 @@ h1, h2, h3, h4 {
   padding: 10px 16px; 
   border-radius: 8px;
   transition: background 0.2s, color 0.2s;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
 }
 .nav-links a:hover { 
   background: rgba(181, 106, 85, 0.1); 
   color: var(--primary);
+}
+
+/* Hamburger Menu */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  margin-right: -10px;
+}
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--fg);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.nav-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
 }
 
 /* ==================== HERO SECTION ==================== */
@@ -179,6 +214,7 @@ h1, h2, h3, h4 {
 }
 .store-badge {
   height: 48px;
+  min-height: 44px;
   width: auto;
   cursor: pointer;
   transition: transform 0.2s, opacity 0.2s;
@@ -218,6 +254,7 @@ h1, h2, h3, h4 {
   position: relative;
   z-index: 1;
   max-height: 580px;
+  max-width: 100%;
   width: auto;
   filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.15));
   transform: rotate(-2deg);
@@ -408,6 +445,7 @@ h1, h2, h3, h4 {
 .site-footer {
   background: var(--bg);
   padding: 48px 0 32px;
+  padding-bottom: max(32px, env(safe-area-inset-bottom));
   border-top: 1px solid var(--border);
 }
 .footer-content {
@@ -485,9 +523,6 @@ h1, h2, h3, h4 {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  .tests-grid {
-    grid-template-columns: 1fr;
-  }
   .footer-content {
     flex-direction: column;
     text-align: center;
@@ -501,18 +536,39 @@ h1, h2, h3, h4 {
 }
 
 @media (max-width: 600px) {
+  .navbar {
+    position: relative;
+  }
   .navbar .container {
     padding: 12px 16px;
+    flex-wrap: wrap;
+  }
+  .nav-toggle {
+    display: flex;
   }
   .nav-links {
-    gap: 4px;
+    flex-direction: column;
+    width: 100%;
+    order: 3;
+    background: var(--bg);
+    padding: 0;
+    gap: 0;
+    border-top: 1px solid var(--border);
+    margin-top: 12px;
+    display: none;
+  }
+  .nav-links.active {
+    display: flex;
   }
   .nav-links a {
-    padding: 8px 10px;
-    font-size: 13px;
+    padding: 14px 16px;
+    font-size: 15px;
+    width: 100%;
+    justify-content: center;
+    min-height: 48px;
   }
   .hero {
-    padding: 48px 0 60px;
+    padding: 32px 0 48px;
   }
   .hero h1 {
     font-size: 32px;
@@ -521,20 +577,42 @@ h1, h2, h3, h4 {
     font-size: 16px;
   }
   .store-badge {
-    height: 40px;
+    height: 44px;
   }
   .features {
-    padding: 60px 0;
+    padding: 48px 0;
   }
   .tests {
-    padding: 60px 0;
+    padding: 48px 0;
+  }
+  .tests-grid {
+    grid-template-columns: 1fr;
   }
   .cta-section {
-    padding: 60px 0;
+    padding: 48px 0;
   }
   .cta-badges {
     flex-direction: column;
     align-items: center;
+  }
+  .cta-badges .store-badge {
+    height: 48px;
+  }
+}
+
+@media (max-width: 500px) {
+  .container {
+    padding: 0 16px;
+  }
+  .test-card {
+    padding: 20px;
+  }
+  .test-card h3 {
+    font-size: 18px;
+  }
+  .footer-links-group {
+    flex-direction: column;
+    gap: 24px;
   }
 }
 
@@ -594,6 +672,29 @@ header .nav-links a {
 header .nav-links a:hover {
   background: rgba(181, 106, 85, 0.1);
   color: var(--primary);
+}
+
+/* Mobile styles for legacy header (test pages) */
+@media (max-width: 600px) {
+  header {
+    position: relative;
+  }
+  header .nav {
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    gap: 8px;
+  }
+  header .nav-links {
+    width: 100%;
+    justify-content: center;
+    gap: 4px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+  header .nav-links a {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
 }
 
 /* Old footer structure support */
