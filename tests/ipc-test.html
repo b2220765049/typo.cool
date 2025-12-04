@@ -1046,23 +1046,48 @@
       }));
     }
 
+    // IPC Circle octant angles (in degrees, measured counter-clockwise from positive X axis / lov axis)
+    // Each octant is centered at these angles, spanning 45° (±22.5° from center)
+    const OCTANT_ANGLES = {
+      LM: 0,    // Warm-Agreeable: 0° (positive lov, neutral dom)
+      NO: 45,   // Gregarious-Extraverted: 45° (positive lov, positive dom)
+      PA: 90,   // Assured-Dominant: 90° (positive dom, neutral lov)
+      BC: 135,  // Arrogant-Calculating: 135° (positive dom, negative lov)
+      DE: 180,  // Cold-Hearted: 180° (negative lov, neutral dom)
+      FG: 225,  // Aloof-Introverted: 225° (negative lov, negative dom)
+      HI: 270,  // Unassured-Submissive: 270° (negative dom, neutral lov)
+      JK: 315,  // Unassuming-Ingenuous: 315° (negative dom, positive lov)
+    };
+
+    // Calculate octant type from dom and lov scores using vector angle
+    // IPC Circle: X-axis = Love/Warmth (lov), Y-axis = Dominance (dom)
     function calculateOctant(dom, lov) {
-      const THRESHOLD = 4;
+      // If both scores are 0, default to LM (warm-agreeable)
+      if (dom === 0 && lov === 0) return 'LM';
       
-      if (dom > THRESHOLD && lov >= -THRESHOLD && lov <= THRESHOLD) return 'PA';
-      if (dom > 0 && lov < -THRESHOLD) return 'BC';
-      if (dom >= -THRESHOLD && dom <= THRESHOLD && lov < -THRESHOLD) return 'DE';
-      if (dom < -THRESHOLD && lov < 0) return 'FG';
-      if (dom < -THRESHOLD && lov >= -THRESHOLD && lov <= THRESHOLD) return 'HI';
-      if (dom < 0 && lov > THRESHOLD) return 'JK';
-      if (dom >= -THRESHOLD && dom <= THRESHOLD && lov > THRESHOLD) return 'LM';
-      if (dom > 0 && lov > THRESHOLD) return 'NO';
+      // Calculate angle in degrees from the positive X-axis (lov axis)
+      // atan2(y, x) gives angle where x=lov, y=dom
+      let angle = Math.atan2(dom, lov) * (180 / Math.PI);
       
-      // Default fallback
-      if (dom >= 0 && lov >= 0) return 'NO';
-      if (dom >= 0 && lov < 0) return 'BC';
-      if (dom < 0 && lov >= 0) return 'JK';
-      return 'FG';
+      // Normalize angle to 0-360 range
+      if (angle < 0) angle += 360;
+      
+      // Find the closest octant by comparing angular distance
+      let closestOctant = 'LM';
+      let minDistance = 360;
+      
+      for (const [octant, octantAngle] of Object.entries(OCTANT_ANGLES)) {
+        // Calculate angular distance (accounting for wrap-around at 360°)
+        let distance = Math.abs(angle - octantAngle);
+        if (distance > 180) distance = 360 - distance;
+        
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestOctant = octant;
+        }
+      }
+      
+      return closestOctant;
     }
 
     // Keyboard navigation
