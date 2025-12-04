@@ -13,7 +13,6 @@
   <style>
     /* MBTI Test Specific Styles */
     .test-container {
-      min-height: calc(100vh - 200px);
       display: flex;
       flex-direction: column;
     }
@@ -49,9 +48,7 @@
 
     /* Question Area */
     .question-area {
-      flex: 1;
-      padding: 24px 0;
-      padding-bottom: 220px;
+      padding: 24px 0 16px;
       position: relative;
       overflow: hidden;
     }
@@ -91,6 +88,23 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
+    }
+
+    /* Desktop: horizontal layout */
+    @media (min-width: 768px) {
+      .choices-container {
+        flex-direction: row;
+        gap: 24px;
+        align-items: stretch;
+      }
+      .choices-container .question-box {
+        flex: 1;
+      }
+      .yada-container {
+        display: flex;
+        align-items: center;
+        padding: 0 8px;
+      }
     }
 
     .question-box {
@@ -169,25 +183,19 @@
 
     .yada-container {
       text-align: center;
-      margin: 8px 0;
+      margin: 4px 0;
     }
     .yada-text {
       font-family: 'Lora', serif;
-      font-size: 20px;
-      font-weight: 700;
+      font-size: 18px;
+      font-weight: 600;
       color: var(--fg);
+      opacity: 0.5;
     }
 
-    /* Bottom Container - Fixed */
+    /* Bottom Container - Inline after scenarios */
     .bottom-container {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--bg);
-      padding: 16px 0 24px;
-      border-top: 1px solid var(--border);
-      z-index: 10;
+      padding: 16px 0 48px;
     }
 
     /* Likert Scale */
@@ -563,9 +571,6 @@
         min-width: 140px;
         font-size: 11px;
       }
-      .bottom-container {
-        padding: 12px 0 20px;
-      }
     }
   </style>
 </head>
@@ -632,6 +637,35 @@
       <div class="question-area" id="questionArea">
         <!-- Questions will be dynamically inserted here -->
       </div>
+
+      <!-- Bottom Container (Inline) -->
+      <div class="bottom-container" id="bottomContainer" style="display: none;">
+        <!-- Likert Scale -->
+        <div class="likert-container">
+          <div class="likert-scale" id="likertScale">
+            <!-- Likert buttons will be inserted here -->
+          </div>
+          <div class="likert-labels">
+            <span class="likert-label likert-label-a">Kesinlikle A</span>
+            <span class="likert-label likert-label-neutral">Nötr</span>
+            <span class="likert-label likert-label-b">Kesinlikle B</span>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+          <button class="nav-btn" id="prevBtn" onclick="goToPrevious()" disabled>
+            <svg viewBox="0 0 24 24">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+          <button class="nav-btn" id="nextBtn" onclick="goToNext()" style="visibility: hidden;">
+            <svg viewBox="0 0 24 24">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- Results Container -->
@@ -651,35 +685,6 @@
       </a>
     </div>
   </main>
-
-  <!-- Bottom Container (Fixed) -->
-  <div class="bottom-container" id="bottomContainer" style="display: none;">
-    <!-- Likert Scale -->
-    <div class="likert-container">
-      <div class="likert-scale" id="likertScale">
-        <!-- Likert buttons will be inserted here -->
-      </div>
-      <div class="likert-labels">
-        <span class="likert-label likert-label-a">Kesinlikle A</span>
-        <span class="likert-label likert-label-neutral">Nötr</span>
-        <span class="likert-label likert-label-b">Kesinlikle B</span>
-      </div>
-    </div>
-
-    <!-- Navigation Buttons -->
-    <div class="nav-buttons">
-      <button class="nav-btn" id="prevBtn" onclick="goToPrevious()" disabled>
-        <svg viewBox="0 0 24 24">
-          <path d="M15 18l-6-6 6-6"/>
-        </svg>
-      </button>
-      <button class="nav-btn" id="nextBtn" onclick="goToNext()" style="visibility: hidden;">
-        <svg viewBox="0 0 24 24">
-          <path d="M9 18l6-6-6-6"/>
-        </svg>
-      </button>
-    </div>
-  </div>
 
   <!-- Email Modal -->
   <div class="email-modal" id="emailModal">
