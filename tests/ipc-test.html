@@ -863,6 +863,7 @@
     let currentStep = 0;
     let scores = { dom: 0, lov: 0 };
     let answeredQuestions = new Set();
+    let questionAnswers = {}; // Store which option was selected for each question
     let userEmail = '';
     let isAnimating = false;
 
@@ -925,8 +926,16 @@
       const question = IPC_QUESTIONS[currentStep];
       const option = question.options[optionIndex];
       
-      // Mark as answered
+      // If this question was already answered, subtract the old score first
+      if (questionAnswers[currentStep] !== undefined) {
+        const oldOption = question.options[questionAnswers[currentStep]];
+        scores.dom -= oldOption.effect.dom;
+        scores.lov -= oldOption.effect.lov;
+      }
+      
+      // Mark as answered and store the selected option
       answeredQuestions.add(currentStep);
+      questionAnswers[currentStep] = optionIndex;
       
       // Update scores
       scores.dom += option.effect.dom;
@@ -945,14 +954,11 @@
       isAnimating = true;
 
       const slide = questionArea.querySelector('.question-slide');
-      slide.classList.add('slide-out-left');
+      if (slide) slide.classList.add('slide-out-left');
 
       setTimeout(() => {
         currentStep++;
         renderQuestion();
-        const newSlide = questionArea.querySelector('.question-slide');
-        newSlide.classList.remove('question-slide');
-        newSlide.classList.add('question-slide');
         isAnimating = false;
       }, 250);
     }
@@ -962,14 +968,11 @@
       isAnimating = true;
 
       const slide = questionArea.querySelector('.question-slide');
-      slide.classList.add('slide-out-right');
+      if (slide) slide.classList.add('slide-out-right');
 
       setTimeout(() => {
         currentStep--;
         renderQuestion();
-        const newSlide = questionArea.querySelector('.question-slide');
-        newSlide.classList.remove('question-slide');
-        newSlide.classList.add('slide-in-left');
         isAnimating = false;
       }, 250);
     }

@@ -12,108 +12,171 @@
   <link rel="stylesheet" href="./site.css" />
 </head>
 <body>
-  <header>
-    <div class="container nav">
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
       <a class="brand" href="./index.html">
         <img class="brand-logo" alt="Typo" src="./assets/text_logo.png" />
       </a>
-      <nav class="nav-links">
+      <div class="nav-links">
+        <a href="#features">Özellikler</a>
         <a href="#tests">Testler</a>
         <a href="./privacy.html">Gizlilik</a>
-        <a href="./kvkk.html">KVKK</a>
-        <a href="./csae.html">Çocuk Güvenliği</a>
         <a href="./terms.html">Koşullar</a>
-        <a href="./delete-account.html">Hesap Silme</a>
-      </nav>
+      </div>
     </div>
-  </header>
+  </nav>
 
-  <main>
-    <section class="hero">
-      <div class="container inner">
-        <div>
-          <h1>Typo – Tanışmanın en doğal yolu</h1>
-          <p>Typo, kişilik testleri ve tercihlerinle gerçekten uyumlu insanları bulmana yardımcı olur. Reklam yok, karmaşa yok; sadece güvenli bir topluluk.</p>
-          <div class="buttons">
-            <a class="cta" href="#download">Uygulamayı İndir</a>
-            <a class="cta secondary" href="./privacy.html">Gizlilik Önceliğimiz</a>
-          </div>
-          <p class="badge">Türkiye’ye özel</p>
-        </div>
-        <div>
-          <img src="./assets/loading_logo.png" alt="Typo logotype" style="max-width: 260px; display:block; margin-inline:auto;" />
-        </div>
-      </div>
-    </section>
-
-    <section class="container" id="features">
-      <div class="grid-3">
-        <div class="card">
-          <h3>Gerçek uyum</h3>
-          <p>Kişilik testleri ve tercihlerinle daha anlamlı eşleşmeler.</p>
-        </div>
-        <div class="card">
-          <h3>Gizlilik ve güvenlik</h3>
-          <p>Verilerin şifreli aktarılır; veritabanımız güvenli altyapıda tutulur.</p>
-        </div>
-        <div class="card">
-          <h3>Şeffaflık</h3>
-          <p>KVKK ve gizlilik metinlerimiz basit ve anlaşılır. Hesabını istediğin an silebilirsin.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="container" id="tests" style="margin-top:32px;">
-      <h2 style="text-align:center; margin-bottom:24px;">Kişilik Testleri</h2>
-      <div class="grid-3">
-        <a href="./tests/ipc-test.html" class="card test-card" style="text-decoration:none; color:inherit; display:block; transition: transform 0.2s, box-shadow 0.2s;">
-          <div style="display:flex; align-items:center; gap:16px; margin-bottom:12px;">
-            <img src="./assets/IPC_icons/NO.png" alt="İletişim" style="width:48px; height:48px; object-fit:contain;" />
-            <h3 style="margin:0;">İletişim Testi</h3>
-          </div>
-          <p style="margin:0; opacity:0.8;">Kişilerarası iletişim tarzını keşfet. 26 soru, ~5 dakika.</p>
-        </a>
-        <div class="card" style="opacity:0.6;">
-          <h3>Yakında</h3>
-          <p>Daha fazla kişilik testi çok yakında eklenecek.</p>
-        </div>
-        <div class="card" style="opacity:0.6;">
-          <h3>Yakında</h3>
-          <p>Daha fazla kişilik testi çok yakında eklenecek.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="container" id="download" style="margin-top:32px;">
-      <div class="card">
-        <h2>Yakında App Store ve Google Play’de</h2>
-        <p>Mağaza bağlantıları burada yer alacak. O zamana kadar politikalarımızı inceleyebilirsin:</p>
-        <p>
-          <a href="./privacy.html">Gizlilik Politikası</a> ·
-          <a href="./kvkk.html">KVKK Aydınlatma</a> ·
-          <a href="./csae.html">Çocuk Güvenliği</a> ·
-          <a href="./consent.html">Açık Rıza</a> ·
-          <a href="./terms.html">Hizmet Koşulları</a>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Tanışmanın <span class="highlight">en doğal</span> yolu</h1>
+        <p class="hero-subtitle">
+          Typo, kişilik testleri ve tercihlerinle gerçekten uyumlu insanları bulmana yardımcı olur. Reklam yok, karmaşa yok; sadece güvenli bir topluluk.
         </p>
+        <div class="store-badges">
+          <a href="#download" title="App Store'dan İndir">
+            <img class="store-badge" src="./assets/app-store-badge.svg" alt="App Store'dan İndir" />
+          </a>
+          <a href="#download" title="Google Play'den İndir">
+            <img class="store-badge" src="./assets/google-play-badge.svg" alt="Google Play'den İndir" />
+          </a>
+        </div>
+        <span class="hero-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
+          Türkiye'ye özel
+        </span>
       </div>
-    </section>
-  </main>
+      <div class="hero-visual">
+        <div class="hero-blob"></div>
+        <img class="hero-phone" src="./assets/app_mockup.png" alt="Typo uygulaması" onerror="this.src='./assets/loading_logo.png'; this.style.maxHeight='320px';" />
+      </div>
+    </div>
+  </section>
 
-  <footer>
-    <div class="container footer-inner">
-      <small>© <span id="y"></span> Typo</small>
-      <div class="footer-links">
-        <a href="./privacy.html">Gizlilik</a>
-        <a href="./kvkk.html">KVKK</a>
-        <a href="./csae.html">Çocuk Güvenliği</a>
-        <a href="./consent.html">Açık Rıza</a>
-        <a href="./terms.html">Koşullar</a>
-        <a href="./data-retention.html">Saklama & İmha</a>
-        <a href="./data-request.html">Veri Talebi</a>
-        <a href="./delete-account.html">Hesap Silme</a>
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Gerçek Uyum</h3>
+          <p class="feature-text">Kişilik testleri ve tercihlerinle daha anlamlı ve kalıcı eşleşmeler.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0110 0v4"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Gizlilik Öncelikli</h3>
+          <p class="feature-text">Verilerin şifreli aktarılır; veritabanımız güvenli altyapıda tutulur.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 16v-4M12 8h.01"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Tam Şeffaflık</h3>
+          <p class="feature-text">KVKK ve gizlilik metinlerimiz basit ve anlaşılır. Hesabını istediğin an sil.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tests Section -->
+  <section class="tests" id="tests">
+    <div class="container">
+      <div class="section-header">
+        <h2>Kişilik Testleri</h2>
+        <p>Kendinizi keşfedin, uyumlu eşleşmeler bulun</p>
+      </div>
+      <div class="tests-grid">
+        <a href="./tests/ipc-test.html" class="test-card">
+          <img class="test-card-icon" src="./assets/IPC_icons/NO.png" alt="İletişim" />
+          <h3>İletişim Testi</h3>
+          <p>Kişilerarası iletişim tarzını ve ilişki dinamiklerini keşfet.</p>
+          <div class="test-card-meta">
+            <span>📝 26 soru</span>
+            <span>⏱️ ~5 dakika</span>
+          </div>
+        </a>
+        <a href="./tests/mbti-test.html" class="test-card">
+          <div class="test-card-emoji">✨</div>
+          <h3>MBTI Testi</h3>
+          <p>16 kişilik tipinden hangisi olduğunu ve bilişsel fonksiyonlarını keşfet.</p>
+          <div class="test-card-meta">
+            <span>📝 25 soru</span>
+            <span>⏱️ ~10 dakika</span>
+          </div>
+        </a>
+        <div class="test-card coming-soon">
+          <div class="test-card-emoji">🔮</div>
+          <h3>Yakında</h3>
+          <p>Daha fazla kişilik testi çok yakında eklenecek.</p>
+          <div class="test-card-meta">
+            <span>🚀 Geliştiriliyor</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section" id="download">
+    <div class="container">
+      <h2>Hemen Başla</h2>
+      <p>Typo'yu indir ve gerçek uyumu keşfet</p>
+      <div class="cta-badges">
+        <a href="#" title="App Store'dan İndir">
+          <img class="store-badge" src="./assets/app-store-badge.svg" alt="App Store'dan İndir" />
+        </a>
+        <a href="#" title="Google Play'den İndir">
+          <img class="store-badge" src="./assets/google-play-badge.svg" alt="Google Play'den İndir" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="./assets/text_logo.png" alt="Typo" />
+          <small>© <span id="y"></span> Typo. Tüm hakları saklıdır.</small>
+        </div>
+        <div class="footer-links-group">
+          <div class="footer-links-column">
+            <h4>Yasal</h4>
+            <a href="./privacy.html">Gizlilik Politikası</a>
+            <a href="./kvkk.html">KVKK Aydınlatma</a>
+            <a href="./terms.html">Hizmet Koşulları</a>
+            <a href="./consent.html">Açık Rıza</a>
+          </div>
+          <div class="footer-links-column">
+            <h4>Destek</h4>
+            <a href="./csae.html">Çocuk Güvenliği</a>
+            <a href="./data-retention.html">Saklama & İmha</a>
+            <a href="./data-request.html">Veri Talebi</a>
+            <a href="./delete-account.html">Hesap Silme</a>
+          </div>
+        </div>
       </div>
     </div>
   </footer>
+
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
