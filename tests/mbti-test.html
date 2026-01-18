@@ -771,7 +771,7 @@
   <script>
     // ========== MBTI Test Data ==========
     const MBTI_PAIRS = [
-      // Te vs Ti - Extraverted Thinking vs Introverted Thinking
+      // Te vs Ti - Extraverted Thinking (External Efficiency) vs Introverted Thinking (Internal Logic)
       { 
         id: 1, 
         left: { text: "Bir sistemin nasıl çalıştığından çok, ne kadar verimli sonuç verdiğiyle ilgilenirim.", example: "Bir yöntem işimi hızlıca çözüyorsa, arkasındaki teorik mantığı öğrenmekle vakit kaybetmem.", function: 'Te' }, 
@@ -787,99 +787,107 @@
         left: { text: "Yeni bir cihaz aldığımda kılavuzu okumak yerine hemen tuşlara basıp kurcalayarak öğrenirim.", example: "'Bunu çalıştırmanın en kısa yolu ne?' diye bakarım, teorisiyle ilgilenmem.", function: 'Te' }, 
         right: { text: "Yeni bir cihaz aldığımda önce prensibini anlamaya çalışırım.", example: "'Bu özellik neden buraya konmuş, arkasındaki mantık ne?' diye düşünmeden rahat edemem.", function: 'Ti' } 
       },
+
+      // Fe vs Fi - Extraverted Feeling (Social Harmony) vs Introverted Feeling (Personal Authenticity)
       { 
         id: 4, 
-        left: { text: "Kurallar ve prosedürler düzeni sağlamak için vardır, onlara uyarım.", example: "Bir kural saçma bile olsa, işler yürüsün diye ona itiraz etmeden uygularım.", function: 'Te' }, 
-        right: { text: "Kurallar mantıklı olduğu sürece geçerlidir.", example: "Bir kural bana mantıksız gelirse, onu görmezden gelir veya kendi mantığıma uyan yeni bir yöntem geliştiririm.", function: 'Ti' } 
-      },
-      { 
-        id: 5, 
-        left: { text: "Kaynakları yönetmek ve insanları organize etmekte doğal bir yeteneğim var.", example: "Bir grup projesinde kimin ne yapacağını hemen belirler ve süreci yönetirim.", function: 'Te' }, 
-        right: { text: "Bilgiyi analiz etmek ve tutarsızlıkları bulmakta doğal bir yeteneğim var.", example: "Bir rapordaki veya teorideki mantık hatasını şıp diye fark ederim.", function: 'Ti' } 
-      },
-
-      // Fe vs Fi - Extraverted Feeling vs Introverted Feeling
-      { 
-        id: 6, 
         left: { text: "Kararlarımın başkalarını nasıl etkileyeceği benim için önceliklidir.", example: "Bir seçim yaparken 'Bu gruptaki huzuru bozar mı?' diye endişelenirim.", function: 'Fe' }, 
         right: { text: "Kararlarımın kendi değerlerimle örtüşmesi benim için önceliklidir.", example: "Bir seçim yaparken 'Bu benim vicdanıma ve kimliğime uygun mu?' diye sorarım.", function: 'Fi' } 
       },
       { 
-        id: 7, 
+        id: 5, 
         left: { text: "Ortamın duygusal atmosferini sünger gibi emerim.", example: "Yanımdaki kişi gerginse, sebebini bilmesem bile ben de anında gerilirim.", function: 'Fe' }, 
         right: { text: "Duygularım dışarıdan bağımsız ve derinliklidir.", example: "Ortam çok neşeli olsa bile, içimde hissettiğim hüzün veya ciddiyeti koruyabilirim.", function: 'Fi' } 
       },
       { 
-        id: 8, 
-        left: { text: "İletişimde nezaket ve sosyal uyum, dürüstlükten (eğer kırıcıysa) önce gelebilir.", example: "Birinin kıyafetini beğenmesem bile, onu mutlu etmek için 'Güzel olmuş' diyebilirim.", function: 'Fe' }, 
-        right: { text: "İletişimde samimiyet ve otantiklik, sosyal nezaketten önce gelir.", example: "Yapmacık bir iltifat etmektense sessiz kalmayı veya nazikçe gerçeği söylemeyi tercih ederim.", function: 'Fi' } 
-      },
-      { 
-        id: 9, 
-        left: { text: "Duygularımı dışa vurarak ve paylaşarak işlerim.", example: "Üzüldüğümde veya sevindiğimde bunu hemen birine anlatma veya gösterme ihtiyacı duyarım.", function: 'Fe' }, 
+        id: 6, 
+        left: { text: "Duygularımı dışa vurarak ve paylaşarak işlerim.", example: "Üzüldüğümde veya sevindiğimde bunu hemen birine anlatma veya gösterma ihtiyacı duyarım.", function: 'Fe' }, 
         right: { text: "Duygularımı kendi içimde yaşayarak işlerim.", example: "En yoğun duygularımı dışarıya pek yansıtmam, insanlar beni 'soğuk' veya 'duygusuz' sanabilir ama içimde fırtınalar kopar.", function: 'Fi' } 
       },
-      { 
-        id: 10, 
-        left: { text: "Başkalarının neye ihtiyacı olduğunu onlar söylemeden sezerim.", example: "Bir misafirin üşüdüğünü veya sıkıldığını hemen fark eder, ortamı ona göre ayarlarım.", function: 'Fe' }, 
-        right: { text: "Kendi hislerimi çok iyi tanırım ve başkalarını da bu pencereden anlarım.", example: "'Ben bu durumda olsam ne hissederdim?' diyerek empati kurarım.", function: 'Fi' } 
-      },
 
-      // Se vs Si - Extraverted Sensing vs Introverted Sensing
+      // Se vs Si - Extraverted Sensing (Immediate Reality) vs Introverted Sensing (Subjective Impression)
       { 
-        id: 11, 
+        id: 7, 
         left: { text: "Şu anı tüm duyularımla, olduğu gibi yaşarım.", example: "Bir manzaraya bakarken detayları, renkleri ve sesleri o anki canlılığıyla algılarım.", function: 'Se' }, 
         right: { text: "Şu anı geçmiş deneyimlerimle kıyaslayarak yaşarım.", example: "Bir manzaraya bakarken bana hatırlattığı eski bir anıyı veya hissi düşünürüm.", function: 'Si' } 
       },
       { 
-        id: 12, 
-        left: { text: "Fiziksel dünyada hızlı tepki veririm ve risk almaktan çekinmem.", example: "Spontane gelişen olaylarda paniklemem, aksine canlanırım ve hemen harekete geçerim.", function: 'Se' }, 
-        right: { text: "Fiziksel dünyada temkinliyimdir ve bildiğim yolları tercih ederim.", example: "Yeni bir maceraya atılmadan önce, geçmişte benzer durumlarda ne olduğunu gözden geçiririm.", function: 'Si' } 
-      },
-      { 
-        id: 13, 
+        id: 8, 
         left: { text: "Estetik algım 'etki' ve 'görsellik' üzerinedir.", example: "Modayı, trendleri veya göze çarpan, dikkat çekici tasarımları takip etmeyi severim.", function: 'Se' }, 
         right: { text: "Estetik algım 'konfor' ve 'aşinalık' üzerinedir.", example: "Bana kendimi iyi hissettiren, klasikleşmiş veya kişisel anlamı olan nesneleri severim.", function: 'Si' } 
       },
       { 
-        id: 14, 
+        id: 9, 
         left: { text: "Yeni deneyimler peşinde koşarım, sıkılmak en büyük düşmanımdır.", example: "Sürekli aynı yemeği yemek veya aynı aktiviteyi yapmak beni bunaltır.", function: 'Se' }, 
         right: { text: "Rutinler ve gelenekler bana güven verir.", example: "Her sabah aynı kahveyi içmek veya bayramları aynı şekilde kutlamak benim için huzur kaynağıdır.", function: 'Si' } 
       },
-      { 
-        id: 15, 
-        left: { text: "Gerçekleri 'objektif' olarak görürüm.", example: "'Masa burada, sandalye şurada' gibi somut verilere odaklanırım, yorum katmam.", function: 'Se' }, 
-        right: { text: "Gerçekleri 'subjektif' izlenimlerle kaydederim.", example: "Olayın kendisinden çok, o olayın bende bıraktığı fiziksel ve duygusal izi hatırlarım.", function: 'Si' } 
-      },
 
-      // Ne vs Ni - Extraverted Intuition vs Introverted Intuition
+      // Ne vs Ni - Extraverted Intuition (Expanding Possibilities) vs Introverted Intuition (Converging Insight)
       { 
-        id: 16, 
+        id: 10, 
         left: { text: "Bir fikirden yola çıkıp onlarca farklı olasılık üretirim.", example: "'Bu proje şöyle de olabilir, böyle de olabilir, hatta bambaşka bir şeye de dönüşebilir!' derim.", function: 'Ne' }, 
         right: { text: "Karmaşık verileri birleştirip tek bir olası sonuca odaklanırım.", example: "'Tüm bu işaretler tek bir şeyi gösteriyor, olay kesinlikle şuraya varacak' derim.", function: 'Ni' } 
       },
       { 
-        id: 17, 
-        left: { text: "Zihnim dağınık ve bağlantısaldır; konudan konuya atlarım.", example: "Sohbet ederken bir kelime bana başka bir şeyi hatırlatır ve konu aniden değişir.", function: 'Ne' }, 
-        right: { text: "Zihnim odaklı ve derinlemesine işler; özü ararım.", example: "Konu ne kadar dağılırsa dağılsın, ben hep 'Peki bunun ana fikri, asıl anlamı ne?' diye düşünürüm.", function: 'Ni' } 
-      },
-      { 
-        id: 18, 
+        id: 11, 
         left: { text: "Geleceği 'açık uçlu' bir macera olarak görürüm.", example: "Planlarımın esnek olması ve her an değişebilmesi beni heyecanlandırır.", function: 'Ne' }, 
         right: { text: "Geleceği 'gerçekleşmesi muhtemel bir vizyon' olarak görürüm.", example: "Kafamda geleceğe dair net bir resim vardır ve bugünkü eylemlerimi ona göre şekillendiririm.", function: 'Ni' } 
       },
       { 
-        id: 19, 
-        left: { text: "Bir konuyu anlatırken sürekli yan konulara saparım.", example: "Futboldan bahsederken konu bir anda stadyum mimarisine, oradan da Roma tarihine gelebilir.", function: 'Ne' }, 
-        right: { text: "Bir konuyu anlatırken gereksiz detayları atıp ana fikre odaklanırım.", example: "Lafı dolandırmam, 'Sonuç olarak olay şuraya bağlanıyor' diyerek özeti veririm.", function: 'Ni' } 
-      },
-      { 
-        id: 20, 
+        id: 12, 
         left: { text: "Beyin fırtınası yaparken başkalarının fikirleri beni ateşler.", example: "'Ya şöyle yaparsak?' denildiğinde hemen üzerine beş fikir daha eklerim.", function: 'Ne' }, 
         right: { text: "İçgörülerim genellikle yalnızken ve aniden gelir ('Aha!' anı).", example: "Bir problem üzerine düşünmeyi bıraktığımda, duşta veya yürürken çözüm aniden zihnimde belirir.", function: 'Ni' } 
       },
 
-      // E vs I - Extraversion vs Introversion
+      // Ti vs Fi - Introverted Thinking vs Introverted Feeling (Internal Processing)
+      { 
+        id: 13, 
+        left: { text: "Bir şeyin 'doğru' olması onun 'iyi' olmasından daha önemlidir.", example: "Mantıklı olduğu sürece, insanların duygularını incitse bile doğruyu söylerim.", function: 'Ti' }, 
+        right: { text: "Bir şeyin 'iyi' olması onun 'doğru' olmasından daha önemlidir.", example: "Mantıken haklı olsam bile, içimdeki değerlerime aykırıysa yapmam.", function: 'Fi' } 
+      },
+      { 
+        id: 14, 
+        left: { text: "Karar verirken objektif kriterler ve tutarlılık ararım.", example: "'Bu çözüm her durumda mantıklı mı?' diye düşünürüm.", function: 'Ti' }, 
+        right: { text: "Karar verirken içimdeki etik pusulama danışırım.", example: "'Bu benim değerlerime uygun mu, kendime karşı dürüst müyüm?' diye sorarım.", function: 'Fi' } 
+      },
+
+      // Te vs Fe - Extraverted Thinking vs Extraverted Feeling (External Organization)
+      { 
+        id: 15, 
+        left: { text: "Başarı, hedeflere ulaşmak ve verimlilik ile ölçülür.", example: "'Ne kadar çok iş yaptık?' benim için önemlidir.", function: 'Te' }, 
+        right: { text: "Başarı, insanların mutluluğu ve grup uyumu ile ölçülür.", example: "'Herkes kendini iyi hissetti mi?' benim için önemlidir.", function: 'Fe' } 
+      },
+      { 
+        id: 16, 
+        left: { text: "İnsanları organize ederken net roller ve görevler belirlerim.", example: "'Sen şunu yap, o bunu yapsın' diyerek herkesin sorumluluğunu tanımlarım.", function: 'Te' }, 
+        right: { text: "İnsanları organize ederken motivasyonlarına ve duygularına dikkat ederim.", example: "'Sen bu işte daha rahat edersin, o bunu daha çok sever' diyerek dağıtırım.", function: 'Fe' } 
+      },
+
+      // Si vs Ni - Introverted Sensing vs Introverted Intuition (Internal Perception)
+      { 
+        id: 17, 
+        left: { text: "Bir işi yaparken en güvenilir yol, daha önce denenmiş olandır.", example: "Maceraya gerek yok, kılavuzda ne yazıyorsa veya geçen sefer nasıl yaptıysak adım adım öyle yapalım' derim.", function: 'Si' }, 
+        right: { text: "Bir işi yaparken beni motive eden şey, zihnimdeki bitmiş halidir.", example: "'Nasıl yapacağımızı yolda buluruz, önemli olan zihnimdeki bu vizyonu gerçeğe dönüştürmek' derim.", function: 'Ni' } 
+      },
+      { 
+        id: 18, 
+        left: { text: "Yeni bir şey öğrenirken somut verilere ve pratik detaylara ihtiyaç duyarım.", example: "'Bana sadece teoriyi anlatma, gerçek hayattan bir örnek ver ki konu zihnimde otursun' derim.", function: 'Si' }, 
+        right: { text: "Yeni bir şey öğrenirken detaylarda boğulmak yerine ana fikri kavramak isterim.", example: "'Örnekleri tek tek saymana gerek yok, ben işin mantığını ve nereye varacağını anladım' derim.", function: 'Ni' } 
+      },
+
+      // Se vs Ne - Extraverted Sensing vs Extraverted Intuition (External Perception)
+      { 
+        id: 19, 
+        left: { text: "Mevcut duruma ve elimdeki somut verilere odaklanırım.", example: "'Varsayımları bir kenara bırakalım; şu an sahada ne görüyoruz, elimizdeki gerçek kanıtlar neler?' diyerek durumu netleştiririm.", function: 'Se' }, 
+        right: { text: "Olası senaryolara ve alternatiflere odaklanırım.", example: "'Görünen durum bu ama ya gözden kaçırdığımız bambaşka bir ihtimal varsa? Ya olaylar beklediğimizin tam tersine gelişirse?' diyerek seçenekleri çoğaltırım.", function: 'Ne' } 
+      },
+      { 
+        id: 20, 
+        left: { text: "Bir şeyi anlatırken dolaylı yollara sapmam, olayları olduğu gibi, en net ve yalın haliyle aktarırım.", example: "'Lafı dolandırmaya veya süslemeye gerek yok, olan şey tam olarak şuydu...' diyerek direkt konuya girerim.", function: 'Se' }, 
+        right: { text: "Bir şeyi anlatırken sürekli benzetmelere, metaforlara ve alakasız görünen örneklere başvururum.", example: "'Bu durumu açıklamak zor ama tıpkı bir karıncanın okyanusu geçmeye çalışması gibi düşünebilirsin' diyerek analojiler kurarım.", function: 'Ne' } 
+      },
+
+      // E vs I - Extraversion vs Introversion (OCEAN Style: Comfort & Capacity)
       { 
         id: 21, 
         left: { text: "Hiç tanımadığım insanlarla dolu bir ortamda sohbet başlatmakta zorlanmam.", example: "Bir bekleme salonunda veya etkinlikte yanımda oturan kişiye rahatça soru sorabilirim.", function: 'E' }, 
