@@ -64,9 +64,9 @@
   --bg: hsl(37, 37%, 96%);
   --fg: hsl(0, 0%, 20%);
   --fg-muted: hsl(0, 0%, 45%);
-  --primary: hsl(13, 39%, 52%);      /* terracotta #B56A55 */
+  --primary: hsl(335, 74%, 18%);
   --primary-light: hsl(13, 39%, 95%);
-  --secondary: hsl(155, 15%, 49%);   /* sage */
+  --secondary: hsl(258, 20%, 43%);
   --muted: hsl(45, 8%, 80%);
   --card: hsl(0, 0%, 100%);
   --border: hsl(45, 8%, 85%);
