@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 135 40" width="135" height="40">
   <rect width="135" height="40" rx="6" fill="#000"/>
   <g fill="#fff" font-family="system-ui, -apple-system, sans-serif">
-    <text x="30" y="15" font-size="7.5" letter-spacing="0.5">GET IT ON</text>
-    <text x="30" y="30" font-size="13" font-weight="500">Google Play</text>
+    <text x="30" y="15" font-size="7.5" letter-spacing="0.5">Google Play'de</text>
+    <text x="30" y="30" font-size="13" font-weight="500">Edinin</text>
   </g>
   <!-- Play button icon, 18×18 units.
        Outer triangle: TL(0,0)  BL(0,18)  RT(18,9)

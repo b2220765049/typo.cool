@@ -5,7 +5,7 @@
     <path d="M22.04 12.21a4.87 4.87 0 0 0 1.11-3.49 4.95 4.95 0 0 0-3.2 1.66 4.64 4.64 0 0 0-1.14 3.37 4.1 4.1 0 0 0 3.23-1.54z"/>
   </g>
   <g fill="#fff" font-family="system-ui, -apple-system, sans-serif">
-    <text x="42" y="15" font-size="8">Download on the</text>
-    <text x="42" y="28" font-size="14" font-weight="600">App Store</text>
+    <text x="42" y="15" font-size="8">App Store'dan</text>
+    <text x="42" y="28" font-size="14" font-weight="600">İndir</text>
   </g>
 </svg>
