@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>İletişim Tipleri - Typo</title>
+  <meta name="description" content="Typo İletişim Testi Açıklamaları — IPC Modeli ile 8 iletişim tipini keşfet." />
+  <meta property="og:site_name" content="Typo" />
+  <link rel="icon" href="../assets/app_icon.png" />
+  <link rel="preload" href="../assets/fonts/lora/Lora-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../assets/fonts/montserrat/Montserrat-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="../site.css" />
+  <style>
+    .page-header { padding: 24px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 8px; }
+    .page-header h1 { font-family: 'Lora', serif; font-size: clamp(24px, 4vw, 32px); color: var(--fg); margin: 0 0 4px; }
+    .page-header .subtitle { font-size: 13px; color: var(--fg-muted); margin: 0; }
+    .intro-banner { margin: 24px 0; }
+    .intro-banner-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .intro-banner-header svg { width: 24px; height: 24px; stroke: var(--primary); fill: none; stroke-width: 2; flex-shrink: 0; }
+    .intro-banner-header h2 { font-family: 'Lora', serif; font-size: 22px; color: var(--fg); margin: 0; }
+    .intro-text { font-size: 16px; color: var(--fg); line-height: 26px; opacity: 0.85; }
+    .intro-text strong { font-weight: 700; color: var(--fg); }
+    .type-card { background: var(--card); border-radius: 20px; padding: 24px; margin-bottom: 16px; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+    .type-card-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .type-icon { width: 48px; height: 48px; object-fit: contain; flex-shrink: 0; }
+    .type-card-header .type-key { font-size: 11px; color: var(--fg-muted); letter-spacing: 1px; text-transform: uppercase; margin: 0 0 2px; }
+    .type-card-header .type-name { font-family: 'Lora', serif; font-size: 22px; color: var(--fg); margin: 0; line-height: 28px; }
+    .section-label { font-size: 11px; color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; margin: 0 0 8px; }
+    .traits-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .trait-row { display: flex; align-items: flex-start; gap: 8px; }
+    .trait-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--fg-muted); margin-top: 7px; flex-shrink: 0; }
+    .trait-text { font-size: 14px; color: var(--fg); line-height: 21px; }
+    .section-text { font-size: 14px; color: var(--fg); line-height: 22px; }
+    .cta-button { display: inline-flex; align-items: center; gap: 10px; background: var(--primary); color: white; border: none; border-radius: 999px; padding: 14px 28px; font-weight: 700; text-decoration: none; font-size: 16px; cursor: pointer; transition: all 0.2s; margin: 24px 0 40px; }
+    .cta-button:hover { opacity: 0.9; transform: translateY(-2px); }
+    .cta-button svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
+    @media (max-width: 600px) { .type-card { padding: 18px; } .type-card-header .type-name { font-size: 19px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="back-btn" href="../index.html" aria-label="Geri">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </a>
+      <a class="brand" href="../index.html"><img class="brand-logo" alt="Typo" src="../assets/text_logo.png" /></a>
+      <nav class="nav-links">
+        <a href="../index.html">Ana Sayfa</a>
+        <a href="../privacy.html">Gizlilik</a>
+        <a href="../terms.html">Koşullar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-header">
+      <h1>İletişim Testi</h1>
+      <p class="subtitle">IPC Modeli — 8 İletişim Tipi</p>
+    </div>
+
+    <div class="intro-banner">
+      <div class="intro-banner-header">
+        <svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+        <h2>8 İletişim Tipi</h2>
+      </div>
+      <p class="intro-text">
+        Kişilerarası İletişim Çemberi (IPC), insanların iki temel boyutta nasıl iletişim kurduğunu gösterir:
+        <strong>Baskınlık</strong> (ne kadar yönlendirici olduğun) ve <strong>Samimiyet</strong> (ne kadar sıcak ve ilişki odaklı olduğun).
+        Bu iki eksenin kesişimi 8 farklı iletişim tipi oluşturur.
+      </p>
+    </div>
+
+    <!-- PA — Yönetici -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/IPC_icons/PA.png" alt="PA" />
+        <div>
+          <p class="type-key">PA</p>
+          <h3 class="type-name">Yönetici</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">İddialı ve özgüvenli</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Kararlı ve liderlik odaklı</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Hırslı ve kendinden emin</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Harekete geçiren</span></div>
+      </div>
+      <p class="section-label">İletişim Tarzı</p>
+      <p class="section-text">Bu kişiler sosyal ortamlarda doğal olarak yönlendirici role bürünür. Sohbetleri yönetmekten, karar almaktan ve ilişkilerde yön belirlemekten rahat hissederler. Flörtte netlik ve ilerleme isterler, belirsizlik onları rahatsız eder. Sağlıklı düzeyde ilham verici ve koruyucudurlar; aşırıya kaçtıklarında kontrol edici veya fazla yönlendirici görünebilirler.</p>
+      <p class="section-label" style="margin-top:16px">İlişkide</p>
+      <p class="section-text">Sıcaklık ve karşılık vermeye çekilirler. Eşit derecede baskın partnerlerle, karşılıklı saygı güçlü olmadıkça zorlanabilirler.</p>
+    </div>
+
+    <!-- BC — Stratejist -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/IPC_icons/BC.png" alt="BC" />
+        <div>
+          <p class="type-key">BC</p>
+          <h3 class="type-name">Stratejist</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Rekabetçi ve stratejik</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Baskın ve benmerkezci</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Statü bilincine sahip ve ikna edici</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Kontrol odaklı</span></div>
+      </div>
+      <p class="section-label">İletişim Tarzı</p>
+      <p class="section-text">Kişilerarası dinamiklerde başarı ve etki odaklıdırlar. Flörtte stratejik yaklaşabilir ve hayranlık duyulmasına değer verirler. Saygı gördükleri ve etkili hissettikleri ilişkileri tercih ederler.</p>
+      <p class="section-label" style="margin-top:16px">İlişkide</p>
+      <p class="section-text">Baskı altında yılmayan özgüvenli partnerlerle en iyi uyumu yakalarlar. Aşırıya kaçtıklarında yakınlık odaklı değil, güç odaklı hale gelebilirler.</p>
+    </div>
+
+    <!-- DE — Bağımsız -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/IPC_icons/DE.png" alt="DE" />
+        <div>
+          <p class="type-key">DE</p>
+          <h3 class="type-name">Bağımsız</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Şüpheci ve eleştirel</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Duygusal olarak mesafeli ve tedbirli</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Analitik ve dobra</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Bağımsız düşünceli</span></div>
+      </div>
+      <p class="section-label">İletişim Tarzı</p>
+      <p class="section-text">Bu kişiler duygusal mesafe korur ve duygusal etkileşim yerine rasyonel iletişimi tercih ederler. Flörtte seçici ve etkilenmesi zor görünebilirler. Güven yavaş yavaş kurulur ama bir kez oluştuğunda derinden sadık hale gelebilirler.</p>
+      <p class="section-label" style="margin-top:16px">İlişkide</p>
+      <p class="section-text">Entelektüel uyuma ihtiyaç duyarlar. Duygusal açıdan çok hassas partnerler onları sert olarak algılayabilir.</p>
+    </div>
+
+    <!-- FG — Gözlemci -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/IPC_icons/FG.png" alt="FG" />
+        <div>
+          <p class="type-key">FG</p>
+          <h3 class="type-name">Gözlemci</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Bağımsız ve ketum</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Kendine yeten ve çekingen</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">İçe dönük ve duygusal açıdan ketum</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Mesafeli</span></div>
+      </div>
+      <p class="section-label">İletişim Tarzı</p>
+      <p class="section-text">Özerklik ve kişisel alana değer verirler. Duygusal ifadeleri dışa vurmaktan çok içsel olarak yaşarlar. İlişkilerde okunması zor görünebilirler ancak genellikle dışarıya yansıttıklarından daha derin bir iç dünya deneyimlerler.</p>
+      <p class="section-label" style="margin-top:16px">İlişkide</p>
+      <p class="section-text">Bağımsızlığına saygı duyan partnerlere ihtiyaç duyarlar. Aşırı ifadeci veya duygusal olarak talepkâr partnerler onları bunaltabilir.</p>
+    </div>
+
+    <!-- HI — Uyumlu -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/IPC_icons/HI.png" alt="HI" />
+        <div>
+          <p class="type-key">HI</p>
+          <h3 class="type-name">Uyumlu</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Mütevazı ve uyumlu</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Çekingen ve çatışmadan kaçınan</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Nazik ve uzlaşmacı</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Kendinden şüphe eden</span></div>
+      </div>
+      <p class="section-label">İletişim Tarzı</p>
+      <p class="section-text">Bu kişiler yüzleşmeden kaçınır ve tercihlerini nadiren güçlü bir şekilde öne sürerler. Flörtte ilişkiyi başlatma veya tanımlama konusunda zorlanabilirler. Genellikle partnerlerinin hızına ve tarzına uyum sağlarlar.</p>
+      <p class="section-label" style="margin-top:16px">İlişkide</p>
+      <p class="section-text">Cesaretlendirici ve güçlendirici partnerlerden fayda görürler. Risk: Aşırı baskın dinamiklerde kimliklerini kaybedebilirler.</p>
+    </div>
+
+    <!-- JK — Destekleyici -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/IPC_icons/JK.png" alt="JK" />
+        <div>
+          <p class="type-key">JK</p>
+          <h3 class="type-name">Destekleyici</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Özverili ve koruyucu</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Verici ve bakım odaklı</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Duygusal olarak yatırım yapan ve sadık</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Affedici</span></div>
+      </div>
+      <p class="section-label">İletişim Tarzı</p>
+      <p class="section-text">Kendilerini başkalarını destekleyerek tanımlarlar. İlişkilerde derinden ve tutarlı bir şekilde verirler, bazen karşılık görülenden fazlasını. Sevgi dilleri ilgi ve hizmettir.</p>
+      <p class="section-label" style="margin-top:16px">İlişkide</p>
+      <p class="section-text">Takdir gördüklerinde ve duygusal olarak değer verildiklerinde gelişirler. Aşırı baskın veya benmerkezci partnerlerle eşleştiklerinde dengesizliğe karşı savunmasız kalabilirler.</p>
+    </div>
+
+    <!-- LM — Dost Canlısı -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/IPC_icons/LM.png" alt="LM" />
+        <div>
+          <p class="type-key">LM</p>
+          <h3 class="type-name">Dost Canlısı</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Nazik ve şefkatli</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">İşbirlikçi ve destekleyici</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Güvenilir ve empatik</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Uyumlu</span></div>
+      </div>
+      <p class="section-label">İletişim Tarzı</p>
+      <p class="section-text">Bu kişiler uyum ve duygusal yakınlığı öncelikli tutar. Dikkatli dinleyicilerdir ve genellikle partnerlerinin ihtiyaçlarını kendi ihtiyaçlarının önüne koyarlar. Flörtte duygusal güven ortamı oluştururlar ve gerginliği nazikçe çözme konusunda beceriklidirler.</p>
+      <p class="section-label" style="margin-top:16px">İlişkide</p>
+      <p class="section-text">Özgüvenli ama duygusal olarak duyarlı partnerlerle iyi uyum sağlarlar. Risk: Huzuru korumak için kendi ihtiyaçlarını bastırabilirler.</p>
+    </div>
+
+    <!-- NO — Yıldız -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/IPC_icons/NO.png" alt="NO" />
+        <div>
+          <p class="type-key">NO</p>
+          <h3 class="type-name">Yıldız</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Dışa dönük ve coşkulu</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Sosyal ve ifadeci</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Enerjik ve çekici</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Spontane</span></div>
+      </div>
+      <p class="section-label">İletişim Tarzı</p>
+      <p class="section-text">Sosyal etkileşim ve duygusal paylaşımla beslenen bu kişiler ilişkilere enerji katar ve genellikle planları, sohbetleri ve ortak deneyimleri başlatan taraftır. Bağlantı ve pozitifliğe değer verirler, duygusal mesafeden hoşlanmazlar.</p>
+      <p class="section-label" style="margin-top:16px">İlişkide</p>
+      <p class="section-text">Karşılık ve ortak aktiviteye ihtiyaç duyarlar. Düşük enerjili veya duygusal olarak içe kapanık partnerler onlar için yorucu olabilir.</p>
+    </div>
+
+    <a href="ipc-test.html" class="cta-button">
+      Testi Çöz
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <small>© <span id="y"></span> Typo</small>
+      <div class="footer-links">
+        <a href="../privacy.html">Gizlilik</a>
+        <a href="../kvkk.html">KVKK</a>
+        <a href="../terms.html">Koşullar</a>
+      </div>
+    </div>
+  </footer>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>

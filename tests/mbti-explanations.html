@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>MBTI Kişilik Tipleri - Typo</title>
+  <meta name="description" content="Typo MBTI Kişilik Tipleri — 16 kişilik tipini keşfet." />
+  <meta property="og:site_name" content="Typo" />
+  <link rel="icon" href="../assets/app_icon.png" />
+  <link rel="preload" href="../assets/fonts/lora/Lora-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../assets/fonts/montserrat/Montserrat-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="../site.css" />
+  <style>
+    .page-header { padding: 24px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 8px; }
+    .page-header h1 { font-family: 'Lora', serif; font-size: clamp(24px, 4vw, 32px); color: var(--fg); margin: 0 0 4px; }
+    .page-header .subtitle { font-size: 13px; color: var(--fg-muted); margin: 0; }
+    .intro-banner { margin: 24px 0; }
+    .intro-banner-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .intro-banner-header svg { width: 24px; height: 24px; stroke: var(--primary); fill: none; stroke-width: 2; flex-shrink: 0; }
+    .intro-banner-header h2 { font-family: 'Lora', serif; font-size: 22px; color: var(--fg); margin: 0; }
+    .intro-text { font-size: 16px; color: var(--fg); line-height: 26px; opacity: 0.85; }
+    .intro-text strong { font-weight: 700; color: var(--fg); }
+
+    .category-label { font-family: 'Lora', serif; font-size: 18px; color: var(--fg); margin: 28px 0 12px; padding-left: 4px; }
+
+    .type-card { background: var(--card); border-radius: 20px; padding: 24px; margin-bottom: 16px; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+    .type-card-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .type-icon { width: 48px; height: 48px; object-fit: contain; flex-shrink: 0; }
+    .type-card-header .type-key { font-size: 11px; color: var(--fg-muted); letter-spacing: 1px; text-transform: uppercase; margin: 0 0 2px; }
+    .type-card-header .type-name { font-family: 'Lora', serif; font-size: 22px; color: var(--fg); margin: 0; line-height: 28px; }
+    .section-label { font-size: 11px; color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; margin: 0 0 8px; }
+    .traits-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .trait-row { display: flex; align-items: flex-start; gap: 8px; }
+    .trait-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--fg-muted); margin-top: 7px; flex-shrink: 0; }
+    .trait-text { font-size: 14px; color: var(--fg); line-height: 21px; }
+    .section-text { font-size: 14px; color: var(--fg); line-height: 22px; }
+
+    .cta-button { display: inline-flex; align-items: center; gap: 10px; background: var(--primary); color: white; border: none; border-radius: 999px; padding: 14px 28px; font-weight: 700; text-decoration: none; font-size: 16px; cursor: pointer; transition: all 0.2s; margin: 24px 0 40px; }
+    .cta-button:hover { opacity: 0.9; transform: translateY(-2px); }
+    .cta-button svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
+    @media (max-width: 600px) { .type-card { padding: 18px; } .type-card-header .type-name { font-size: 19px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="back-btn" href="../index.html" aria-label="Geri">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </a>
+      <a class="brand" href="../index.html"><img class="brand-logo" alt="Typo" src="../assets/text_logo.png" /></a>
+      <nav class="nav-links">
+        <a href="../index.html">Ana Sayfa</a>
+        <a href="../privacy.html">Gizlilik</a>
+        <a href="../terms.html">Koşullar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-header">
+      <h1>MBTI Kişilik Tipleri</h1>
+      <p class="subtitle">Myers-Briggs — 16 Kişilik Tipi</p>
+    </div>
+
+    <div class="intro-banner">
+      <div class="intro-banner-header">
+        <svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+        <h2>16 Kişilik Tipi</h2>
+      </div>
+      <p class="intro-text">
+        Myers-Briggs Tip Göstergesi (MBTI), bireylerin bilişsel fonksiyonlarına dayanarak 16 farklı kişilik tipi tanımlar.
+        Her tip, dış dünyayı algılama ve karar verme süreçlerinde kendine özgü tercihlere sahiptir.
+        Bu test, <strong>Düşünme</strong>, <strong>Hissetme</strong>, <strong>Algılama</strong> ve <strong>Sezgi</strong> fonksiyonlarını ölçerek senin kişilik tipini belirler.
+      </p>
+    </div>
+
+    <!-- ═══════════ ANALYSTS ═══════════ -->
+    <h3 class="category-label">Analistler</h3>
+
+    <!-- INTJ -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/MBTI_icons/INTJ.png" alt="INTJ" />
+        <div>
+          <p class="type-key">INTJ</p>
+          <h3 class="type-name">Stratejist</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Bağımsız ve kararlı</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Stratejik düşünen, büyük resmi gören</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Vizyoner ve planlı</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Duygularını bastırma eğiliminde</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Yüksek standartlara sahip</span></div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">İlişkiye logik ve stratejik yaklaşır. Duygusal ifadeler konusunda zorlansa da, sadık ve güvenilir bir partnerdir. Derin bağ kurduğu kişiye büyük önem verir.</p>
+    </div>
+
+    <!-- INTP -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/MBTI_icons/INTP.png" alt="INTP" />
+        <div>
+          <p class="type-key">INTP</p>
+          <h3 class="type-name">Düşünür</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Analitik ve meraklı</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Soyut düşünmeyi seven</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Bağımsız ve bireysel</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Detaylara dikkat eden ama rutinden kaçan</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Sosyal normlardan bağımsız</span></div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">Entelektüel uyum arayan bir partner. Duygusal ifadede zorlanabilir ama partnerini zihinsel olarak derinlemesine anlamaya çalışır. Bağımsızlığına önem verir.</p>
+    </div>
+
+    <!-- ENTJ -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/MBTI_icons/ENTJ.png" alt="ENTJ" />
+        <div>
+          <p class="type-key">ENTJ</p>
+          <h3 class="type-name">Komutan</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Doğal lider</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Karar verici ve yönetici</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Hedef odaklı ve verimli</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Doğrudan ve açık sözlü</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Stratejik ve uzun vadeli plancı</span></div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">İlişkide güçlü ve koruyucu bir rol üstlenir. Partnerinin gelişimini destekler. Bazen çok dominan veya iş odaklı olabilir, duygusal ihtiyaçları görmezden gelebilir.</p>
+    </div>
+
+    <!-- ENTP -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/MBTI_icons/ENTP.png" alt="ENTP" />
+        <div>
+          <p class="type-key">ENTP</p>
+          <h3 class="type-name">Tartışmacı</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Yaratıcı ve yenilikçi</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Tartışma ve münazara seven</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Hızlı düşünen ve uyum sağlayan</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Kuralları sorgulayan</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Entelektüel merak dolu</span></div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">İlişkide entelektüel uyumu çok önemser. Sürekli gelişme ve yenilik arar. Eğlenceli ve dinamik bir partner olsa da, derin duygusal bağ kurmakta zorlanabilir.</p>
+    </div>
+
+    <!-- ═══════════ DIPLOMATS ═══════════ -->
+    <h3 class="category-label">Diplomatlar</h3>
+
+    <!-- INFJ -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/MBTI_icons/INFJ.png" alt="INFJ" />
+        <div>
+          <p class="type-key">INFJ</p>
+          <h3 class="type-name">Savunucu</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Empatik ve derin duygulu</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">İdealist ve vizyoner</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Karmaşık iç dünyası olan</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Başkalarını anlama yeteneği yüksek</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Mükemmeliyetçi ve hassas</span></div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">Derin ve anlamlı bağ kuran bir partner. Partnerini sezgisel olarak anlar. Aşırı idealist olabilir ve hayal kırıklığına uğrayabilir. Sınır koymakta zorlanabilir.</p>
+    </div>
+
+    <!-- INFP -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/MBTI_icons/INFP.png" alt="INFP" />
+        <div>
+          <p class="type-key">INFP</p>
+          <h3 class="type-name">Arabulucu</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Hayalperest ve idealist</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Değerlerine bağlı</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Yaratıcı ve sanatsal ruhlu</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Empati yeteneği yüksek</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">İç dünyası zengin ve derin</span></div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">İlişkide otantiklik ve duygusal derinlik arayan bir partner. Romantik ve sadık olsa da, çatışmalardan kaçınma eğilimi gösterebilir. İdeal ilişki hayali peşinde koşar.</p>
+    </div>
+
+    <!-- ENFJ -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/MBTI_icons/ENFJ.png" alt="ENFJ" />
+        <div>
+          <p class="type-key">ENFJ</p>
+          <h3 class="type-name">Kahraman</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Karizmatik ve ilham verici</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Empati yeteneği çok yüksek</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">İnsanlara yol gösteren</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Organizasyonel ve liderlik becerileri olan</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Başkalarının ihtiyaçlarını kendi önüne koyan</span></div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">İlişkide çok ilgili ve destekleyici bir partner. Partnerinin duygusal ihtiyaçlarını hisseder. Ancak kendi ihtiyaçlarını ihmal edebilir ve aşırı verici olabilir.</p>
+    </div>
+
+    <!-- ENFP -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/MBTI_icons/ENFP.png" alt="ENFP" />
+        <div>
+          <p class="type-key">ENFP</p>
+          <h3 class="type-name">Aktivist</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Heyecanlı ve enerjik</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Yaratıcı ve spontan</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">İnsanlarla bağ kurmayı seven</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Özgür ruhlu ve esnek</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">İlham verici ve motive edici</span></div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">İlişkide eğlenceli, maceraperest ve tutkulu bir partner. Yeni deneyimler arar. Ancak dikkat dağınıklığı ve kararsızlık sorunları yaşayabilir.</p>
+    </div>
+
+    <!-- ═══════════ SENTINELS ═══════════ -->
+    <h3 class="category-label">Koruyucular</h3>
+
+    <!-- ISTJ -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/MBTI_icons/ISTJ.png" alt="ISTJ" />
+        <div>
+          <p class="type-key">ISTJ</p>
+          <h3 class="type-name">Denetçi</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Güvenilir ve sorumluluk sahibi</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Gelenekçi ve kurallara bağlı</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Pratik ve gerçekçi</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Organize ve planlı</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Sadık ve sözünün eri</span></div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">İlişkide güvenilir ve sadık bir partner. Sözlerini tutar ve sorumlulukları ciddiye alır. Duygusal ifadelerde zorlanabilir ama sevgisini eylemlerle gösterir.</p>
+    </div>
+
+    <!-- ISFJ -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/MBTI_icons/ISFJ.png" alt="ISFJ" />
+        <div>
+          <p class="type-key">ISFJ</p>
+          <h3 class="type-name">Koruyucu</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Fedakar ve şefkatli</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Dikkatli ve detaycı</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Geleneklere bağlı</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Uyumlu ve sabırlı</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Başkalarını düşünen ve koruyan</span></div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">İlişkide çok ilgili ve bakıcı bir partner. Partnerinin ihtiyaçlarını sezgisel olarak bilir. Ancak kendi ihtiyaçlarını bastırma eğilimi gösterebilir.</p>
+    </div>
+
+    <!-- ESTJ -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/MBTI_icons/ESTJ.png" alt="ESTJ" />
+        <div>
+          <p class="type-key">ESTJ</p>
+          <h3 class="type-name">Yönetici</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Organize ve disiplinli</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Pratik ve sonuç odaklı</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Liderlik vasıfları güçlü</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Gelenekçi ve kurallara bağlı</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Doğrudan ve açık sözlü</span></div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">İlişkide güvenilir ve koruyucu bir partner. Düzeni ve istikrarı sağlar. Bazen çok katı veya kontrol edici olabilir, duygusal esnekliği geliştirebilir.</p>
+    </div>
+
+    <!-- ESFJ -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/MBTI_icons/ESFJ.png" alt="ESFJ" />
+        <div>
+          <p class="type-key">ESFJ</p>
+          <h3 class="type-name">Diplomat</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Sıcak ve misafirperver</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Sosyal ve ilişki odaklı</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Uyumlu ve işbirlikçi</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Başkalarını mutlu etmeye çalışan</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Geleneklere ve toplumsal normlara bağlı</span></div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">İlişkide çok verici ve ilgili bir partner. Partnerinin comfort ve mutluluğu için çaba harcar. Onay arayabilir ve eleştiriye hassas olabilir.</p>
+    </div>
+
+    <!-- ═══════════ EXPLORERS ═══════════ -->
+    <h3 class="category-label">Kaşifler</h3>
+
+    <!-- ISTP -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/MBTI_icons/ISTP.png" alt="ISTP" />
+        <div>
+          <p class="type-key">ISTP</p>
+          <h3 class="type-name">Zanaatkar</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Pratik ve becerikli</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Bağımsız ve soğukkanlı</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Analitik ve problem çözücü</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Spontan ve esnek</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Az konuşan ama çok gözlemleyen</span></div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">İlişkide bağımsız ve spontan bir partner. Duygusal ifadelerde ketum olsa da, eylemlerle sevgisini gösterir. Kişisel alanına çok önem verir.</p>
+    </div>
+
+    <!-- ISFP -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/MBTI_icons/ISFP.png" alt="ISFP" />
+        <div>
+          <p class="type-key">ISFP</p>
+          <h3 class="type-name">Maceracı</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Sanatsal ve estetik duyarlılığı yüksek</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Uyumlu ve nazik</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Anı yaşayan ve spontan</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Değerlerine derinden bağlı</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Sessiz ama güçlü duyguları olan</span></div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">İlişkide hassas ve sevecen bir partner. Sevgisini küçük ama anlamlı jestlerle gösterir. Çatışmadan kaçabilir ama derin duygusal bağ kurar.</p>
+    </div>
+
+    <!-- ESTP -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/MBTI_icons/ESTP.png" alt="ESTP" />
+        <div>
+          <p class="type-key">ESTP</p>
+          <h3 class="type-name">Girişimci</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Enerjik ve maceraperest</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Pratik ve çözüm odaklı</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Risk almayı seven</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Sosyal ve eğlenceli</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Anı yaşayan ve spontan</span></div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">İlişkide heyecan ve dinamizm arayan bir partner. Eğlenceli ve tutkulu olsa da, uzun vadeli planlama ve duygusal derinlikte zorlanabilir.</p>
+    </div>
+
+    <!-- ESFP -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/MBTI_icons/ESFP.png" alt="ESFP" />
+        <div>
+          <p class="type-key">ESFP</p>
+          <h3 class="type-name">Şovmen</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Neşeli ve eğlenceli</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Sosyal ve ilgi odağı olan</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Spontan ve esnek</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Duygusal ve empatik</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Anı en iyi şekilde yaşayan</span></div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">İlişkide çok eğlenceli ve sevecen bir partner. Hayatı renklendirir. Ancak ciddi konularda kaçınma eğilimi gösterebilir ve uzun vadeli planlama zorlaşabilir.</p>
+    </div>
+
+    <a href="mbti-test.html" class="cta-button">
+      Testi Çöz
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <small>© <span id="y"></span> Typo</small>
+      <div class="footer-links">
+        <a href="../privacy.html">Gizlilik</a>
+        <a href="../kvkk.html">KVKK</a>
+        <a href="../terms.html">Koşullar</a>
+      </div>
+    </div>
+  </footer>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>

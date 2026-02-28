@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>Bağlanma Tarzı Testi - Typo</title>
-  <meta name="description" content="Typo Bağlanma Tarzı Testi - Romantik ilişkilerdeki bağlanma eğilimlerini keşfet." />
+  <title>Enneagram Testi - Typo</title>
+  <meta name="description" content="Typo Enneagram Kişilik Testi - 9 Enneagram tipinden hangisi olduğunu keşfet." />
   <meta property="og:site_name" content="Typo" />
   <link rel="icon" href="../assets/app_icon.png" />
   <link rel="preload" href="../assets/fonts/lora/Lora-Regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="../assets/fonts/montserrat/Montserrat-Regular.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="stylesheet" href="../site.css" />
   <style>
-    /* Attachment Test Specific Styles */
+    /* Enneagram Test Specific Styles */
     .test-container {
       display: flex;
       flex-direction: column;
@@ -92,7 +92,7 @@
       color: var(--fg);
       line-height: 1.5;
       margin-bottom: 32px;
-      min-height: 80px;
+      min-height: 60px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -291,15 +291,12 @@
       display: block;
     }
 
-    .result-icon {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 24px;
-    }
-    .result-icon img {
-      width: 100%;
-      height: 100%;
+    .result-icon-img {
+      width: 80px;
+      height: 80px;
       object-fit: contain;
+      margin: 0 auto 16px;
+      display: block;
     }
 
     .result-subtitle {
@@ -315,13 +312,22 @@
       font-family: 'Lora', serif;
       font-size: clamp(28px, 5vw, 36px);
       color: var(--fg);
-      margin: 0 0 32px;
+      margin: 0 0 12px;
+    }
+
+    .result-short-desc {
+      font-size: 16px;
+      color: var(--fg);
+      opacity: 0.85;
+      max-width: 500px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
     }
 
     .result-scores {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
       max-width: 500px;
       margin: 0 auto 32px;
     }
@@ -335,7 +341,7 @@
     .score-label {
       font-size: 14px;
       color: var(--fg);
-      min-width: 160px;
+      min-width: 180px;
       font-weight: 500;
     }
     .score-bar-container {
@@ -357,18 +363,6 @@
       color: var(--fg);
       min-width: 50px;
       text-align: right;
-    }
-
-    .result-description {
-      font-size: 15px;
-      color: var(--fg);
-      line-height: 1.7;
-      max-width: 600px;
-      margin: 0 auto 40px;
-      padding: 24px;
-      background: var(--card);
-      border-radius: 16px;
-      border: 1px solid var(--border);
     }
 
     .result-cta {
@@ -448,6 +442,24 @@
       stroke: var(--primary);
     }
 
+    /* Trait badges */
+    .trait-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 24px;
+    }
+    .trait-badge {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--fg);
+    }
+
     /* Hide test when showing start/results */
     .test-area {
       display: none;
@@ -464,7 +476,7 @@
       }
       .question-text {
         font-size: 16px;
-        min-height: 60px;
+        min-height: 50px;
         margin-bottom: 24px;
       }
       .likert-scale {
@@ -485,7 +497,7 @@
         min-height: 44px;
       }
       .score-label {
-        min-width: 100px;
+        min-width: 120px;
         font-size: 13px;
       }
       .score-item {
@@ -496,6 +508,10 @@
       }
       .bottom-container {
         padding-bottom: max(48px, env(safe-area-inset-bottom));
+      }
+      .trait-badge {
+        font-size: 12px;
+        padding: 6px 12px;
       }
     }
 
@@ -544,8 +560,8 @@
   <main class="container">
     <!-- Start Screen -->
     <div class="start-screen" id="startScreen">
-      <h1>Bağlanma Tarzı Testi</h1>
-      <p>Bu test, romantik ilişkilerdeki bağlanma eğilimlerini keşfetmene yardımcı olacak. ECR-S (Experiences in Close Relationships - Short Form) ölçeğine dayanmaktadır.</p>
+      <h1>Enneagram Kişilik Testi</h1>
+      <p>Bu test, 9 Enneagram tipinden hangisine daha yakın olduğunu keşfetmene yardımcı olacak. Her tip, farklı motivasyonları ve dünyaya bakış açılarını temsil eder.</p>
       <button class="start-btn" onclick="startTest()">
         Teste Başla
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -558,14 +574,14 @@
             <circle cx="12" cy="12" r="10"/>
             <path d="M12 6v6l4 2"/>
           </svg>
-          <span>~3 dakika</span>
+          <span>~5 dakika</span>
         </div>
         <div class="test-info-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M9 11l3 3L22 4"/>
             <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
           </svg>
-          <span>12 soru</span>
+          <span>36 soru</span>
         </div>
         <div class="test-info-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -573,6 +589,17 @@
           </svg>
           <span>Anonim</span>
         </div>
+      </div>
+      <div class="trait-badges">
+        <span class="trait-badge">Tip 1 - Mükemmeliyetçi</span>
+        <span class="trait-badge">Tip 2 - Yardımsever</span>
+        <span class="trait-badge">Tip 3 - Başaran</span>
+        <span class="trait-badge">Tip 4 - Bireyci</span>
+        <span class="trait-badge">Tip 5 - Araştırmacı</span>
+        <span class="trait-badge">Tip 6 - Sadık</span>
+        <span class="trait-badge">Tip 7 - Maceracı</span>
+        <span class="trait-badge">Tip 8 - Meydan Okuyan</span>
+        <span class="trait-badge">Tip 9 - Barışçı</span>
       </div>
     </div>
 
@@ -583,7 +610,7 @@
         <div class="progress-track">
           <div class="progress-fill" id="progressFill"></div>
         </div>
-        <div class="progress-text"><span id="currentQ">1</span> / <span id="totalQ">12</span></div>
+        <div class="progress-text"><span id="currentQ">1</span> / <span id="totalQ">36</span></div>
       </div>
 
       <!-- Question Area -->
@@ -611,19 +638,17 @@
 
     <!-- Results Container -->
     <div class="results-container" id="resultsContainer">
-      <div class="result-icon" id="resultIcon">
-        <!-- Icon will be inserted here -->
-      </div>
-      <p class="result-subtitle">Bağlanma Tarzın</p>
-      <h1 class="result-title" id="resultTitle">Sonuçlar</h1>
+      <img class="result-icon-img" id="resultIconImg" src="" alt="" />
+      <p class="result-subtitle">Enneagram Sonucun</p>
+      <h1 class="result-title" id="resultTitle"></h1>
+      <p class="result-short-desc" id="resultShortDesc"></p>
       <div class="result-scores" id="resultScores">
         <!-- Scores will be inserted here -->
       </div>
-      <p class="result-description" id="resultDescription"></p>
       <div style="margin: 32px 0; padding: 20px; background: rgba(181, 106, 85, 0.08); border-radius: 12px; border: 1px solid var(--border);">
-        <p style="font-size: 15px; color: var(--fg); margin: 0 0 12px; font-weight: 500;">Tüm bağlanma tarzlarını ve detaylı açıklamalarını görmek ister misin?</p>
-        <a href="attachment-explanations.html" style="display: inline-flex; align-items: center; gap: 8px; color: var(--primary); text-decoration: none; font-weight: 600; font-size: 15px;">
-          4 Bağlanma Tipini Keşfet
+        <p style="font-size: 15px; color: var(--fg); margin: 0 0 12px; font-weight: 500;">Tüm Enneagram tiplerini ve detaylı açıklamalarını görmek ister misin?</p>
+        <a href="enneagram-explanations.html" style="display: inline-flex; align-items: center; gap: 8px; color: var(--primary); text-decoration: none; font-weight: 600; font-size: 15px;">
+          9 Enneagram Tipini Keşfet
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
@@ -651,7 +676,7 @@
 
   <footer>
     <div class="container footer-inner">
-      <small>© <span id="y"></span> Typo</small>
+      <small>&copy; <span id="y"></span> Typo</small>
       <div class="footer-links">
         <a href="../privacy.html">Gizlilik</a>
         <a href="../kvkk.html">KVKK</a>
@@ -661,24 +686,72 @@
   </footer>
 
   <script>
-    // ========== Attachment Test Data (ECR-S) ==========
-    const ATTACHMENT_QUESTIONS = [
-      // Avoidance items
-      { id: 'ecrs_1', text: 'Zor zamanlarda romantik partnerime yönelmek bana yardımcı olur.', category: 'AVOIDANCE', reverse: true },
-      { id: 'ecrs_3', text: 'Partnerime yakınlaşmak istiyorum ama kendimi sürekli geri çekiyorum.', category: 'AVOIDANCE', reverse: false },
-      { id: 'ecrs_5', text: 'Teselli ve güvence dahil birçok konuda partnerime yönelirim.', category: 'AVOIDANCE', reverse: true },
-      { id: 'ecrs_7', text: 'Partnerime çok yakınlaşmaktan kaçınmaya çalışırım.', category: 'AVOIDANCE', reverse: false },
-      { id: 'ecrs_9', text: 'Sorunlarımı ve endişelerimi genellikle partnerimle paylaşırım.', category: 'AVOIDANCE', reverse: true },
-      { id: 'ecrs_11', text: 'Partnerim bana çok yakınlaştığında tedirgin olurum.', category: 'AVOIDANCE', reverse: false },
-
-      // Anxiety items
-      { id: 'ecrs_2', text: 'Partnerim tarafından sevildiğime dair çok fazla güvenceye ihtiyaç duyarım.', category: 'ANXIETY', reverse: false },
-      { id: 'ecrs_4', text: 'Partnerimin benim istediğim kadar yakın olmak istemediğini düşünüyorum.', category: 'ANXIETY', reverse: false },
-      { id: 'ecrs_6', text: 'Çok yakın olma isteğim bazen insanları korkutup uzaklaştırır.', category: 'ANXIETY', reverse: false },
-      { id: 'ecrs_8', text: 'Terk edilmek konusunda sık sık endişelenmem.', category: 'ANXIETY', reverse: true },
-      { id: 'ecrs_10', text: 'İhtiyacım olduğunda romantik partnerim yanımda olmazsa hayal kırıklığına uğrarım.', category: 'ANXIETY', reverse: false },
-      { id: 'ecrs_12', text: 'Romantik partnerimin beni, benim onu önemsediğim kadar önemsemeyeceğinden endişe ederim.', category: 'ANXIETY', reverse: false },
+    // ========== Enneagram Test Data (36 questions, 4 per type, 5-point Likert) ==========
+    const ENNEAGRAM_QUESTIONS = [
+      // Tip 1 – Mükemmeliyetçi (Reformer)
+      { id: 1, text: "Bir işi yarım yapmaktansa hiç yapmamayı tercih ederim.", type: 1 },
+      { id: 2, text: "Etrafımdaki düzensizlikler beni huzursuz eder.", type: 1 },
+      { id: 3, text: "İçimde sürekli 'daha iyisini yapmalıydım' diyen bir ses var.", type: 1 },
+      { id: 4, text: "Adaletsiz bir duruma tanık olduğumda müdahale etmeden duramam.", type: 1 },
+      // Tip 2 – Yardımsever (Helper)
+      { id: 5, text: "Birinin kötü hissettiğini sezdiğimde hemen yanında olmak isterim.", type: 2 },
+      { id: 6, text: "İnsanlar bana ihtiyaç duyduğunda kendimi değerli hissederim.", type: 2 },
+      { id: 7, text: "Kendi ihtiyaçlarımı dile getirmek yerine başkalarına odaklanırım.", type: 2 },
+      { id: 8, text: "Yardımlarımın karşılığında takdir görmediğimde içten içe kırılırım.", type: 2 },
+      // Tip 3 – Başaran (Achiever)
+      { id: 9, text: "Başarısız olma ihtimali beni derinden tedirgin eder.", type: 3 },
+      { id: 10, text: "Ortama göre kendimi farklı şekillerde sunabilirim.", type: 3 },
+      { id: 11, text: "Bir hedefe ulaştığımda hemen bir sonraki hedefi belirlerim.", type: 3 },
+      { id: 12, text: "İnsanların beni nasıl gördüğü, kendimi nasıl hissettiğimi etkiler.", type: 3 },
+      // Tip 4 – Bireyci (Individualist)
+      { id: 13, text: "Hayatta herkesin sahip olduğu ama bende eksik olan bir şey varmış gibi hissederim.", type: 4 },
+      { id: 14, text: "Duygusal yoğunluk yaşamak benim için sıradanlıktan iyidir.", type: 4 },
+      { id: 15, text: "Kendimi çevremdeki insanlardan temelden farklı hissederim.", type: 4 },
+      { id: 16, text: "Sanat, müzik veya yazı gibi yollarla iç dünyamı ifade etmek bana iyi gelir.", type: 4 },
+      // Tip 5 – Araştırmacı (Investigator)
+      { id: 17, text: "Bir konuyu tam olarak anlamadan fikir beyan etmekten kaçınırım.", type: 5 },
+      { id: 18, text: "Sosyal ortamlar bir süre sonra enerjimi tüketir.", type: 5 },
+      { id: 19, text: "Duygularımı yaşamak yerine onları analiz etme eğilimindeyim.", type: 5 },
+      { id: 20, text: "Kişisel alanıma ve zamanıma müdahale edilmesinden rahatsız olurum.", type: 5 },
+      // Tip 6 – Sadık (Loyalist)
+      { id: 21, text: "Bir karar vermeden önce olası tüm riskleri zihnimde canlandırırım.", type: 6 },
+      { id: 22, text: "Güvendiğim insanların fikirlerini almadan büyük adım atmam.", type: 6 },
+      { id: 23, text: "En kötü senaryoyu düşünerek kendimi hazırlamaya çalışırım.", type: 6 },
+      { id: 24, text: "Otorite figürlerine karşı hem saygı hem de şüphe duyarım.", type: 6 },
+      // Tip 7 – Maceracı (Enthusiast)
+      { id: 25, text: "Sıkıcı bir rutine hapsolmak benim için en kötü şeydir.", type: 7 },
+      { id: 26, text: "Acı veren düşüncelerden uzaklaşmak için kendimi yeni aktivitelere atarım.", type: 7 },
+      { id: 27, text: "Aynı anda birçok planım ve projem olur.", type: 7 },
+      { id: 28, text: "Bir şeyin eğlenceli tarafını bulmakta ustayım.", type: 7 },
+      // Tip 8 – Meydan Okuyan (Challenger)
+      { id: 29, text: "Zayıf görünmektense sert görünmeyi tercih ederim.", type: 8 },
+      { id: 30, text: "Haksızlığa uğrayan birini gördüğümde sessiz kalamam.", type: 8 },
+      { id: 31, text: "Kontrolün başkasının elinde olması beni rahatsız eder.", type: 8 },
+      { id: 32, text: "İnsanlarla doğrudan ve dobra konuşmayı tercih ederim.", type: 8 },
+      // Tip 9 – Barışçı (Peacemaker)
+      { id: 33, text: "Tartışma çıkmasın diye kendi fikrimi söylemekten vazgeçebilirim.", type: 9 },
+      { id: 34, text: "Herkesin mutlu olduğu bir ortam benim için en önemli şeydir.", type: 9 },
+      { id: 35, text: "Karar vermek zorunda kaldığımda zorlanırım çünkü her iki tarafı da anlarım.", type: 9 },
+      { id: 36, text: "Hayatımda büyük değişiklikler yapmak yerine akışına bırakmayı tercih ederim.", type: 9 },
     ];
+
+    const ENNEAGRAM_TYPE_NAMES = {
+      1: 'Mükemmeliyetçi', 2: 'Yardımsever', 3: 'Başaran',
+      4: 'Bireyci', 5: 'Araştırmacı', 6: 'Sadık',
+      7: 'Maceracı', 8: 'Meydan Okuyan', 9: 'Barışçı',
+    };
+
+    const ENNEAGRAM_SHORT_DESCRIPTIONS = {
+      1: 'Mükemmeliyeti hedefler; yüksek standartları ve güçlü ahlaki değerleriyle her şeyi en doğru şekilde yapmaya çalışır.',
+      2: 'Başkalarına yardım etmeyi hayatının merkezine koyar; sevgisini verme, ilgilenme ve bakım gösterme yoluyla ifade eder.',
+      3: 'Başarıya odaklanır; hedeflerini kararlılıkla gerçekleştirir ve çevresindekilere ilham kaynağı olur.',
+      4: 'Özgünlüğünü ve duygusal derinliğini ön plana koyar; kendini sanat ve yaratıcılık yoluyla ifade etmeyi sever.',
+      5: 'Bilgiyi ve anlayışı derinlemesine arar; bağımsızlığını koruyarak dünyayı gözlemler ve titizlikle analiz eder.',
+      6: 'Güvenlik ve sadakati her şeyin üstünde tutar; öngörülü ve sorumlu davranarak sevdiklerini korumaya çalışır.',
+      7: 'Yaşamı heyecan ve neşeyle doldurur; yeni deneyimlere açık, spontan ve iyimser bir ruhla ilerlemeyi sever.',
+      8: 'Güç ve kararlılıkla liderlik eder; haksızlığa karşı çekinmeden durur ve sevdiklerini kararlılıkla korur.',
+      9: 'Huzur ve uyumu her şeyin üstünde tutar; sabırlı, kabullenici ve uzlaştırıcı bir yapıyla ilişkilerine değer katar.',
+    };
 
     const LIKERT_POINTS = [1, 2, 3, 4, 5];
 
@@ -714,9 +787,7 @@
 
     // ========== Core Functions ==========
     function startTest() {
-      // Shuffle questions
-      shuffledQuestions = shuffleArray(ATTACHMENT_QUESTIONS);
-      
+      shuffledQuestions = shuffleArray(ENNEAGRAM_QUESTIONS);
       startScreen.style.display = 'none';
       testArea.classList.add('active');
       renderQuestion();
@@ -747,7 +818,7 @@
         const point = LIKERT_POINTS[i];
         const isSelected = selectedValue === point;
         likertHTML += `<button class="likert-btn ${sizeClasses[i]} ${isSelected ? 'selected' : ''}" 
-          onclick="handleAnswer('${question.id}', ${point})"></button>`;
+          onclick="handleAnswer(${question.id}, ${point})"></button>`;
       }
 
       // Build question HTML
@@ -760,8 +831,8 @@
                 ${likertHTML}
               </div>
               <div class="likert-labels">
-                <span class="likert-label">Kesinlikle Katılmıyorum</span>
-                <span class="likert-label">Kesinlikle Katılıyorum</span>
+                <span class="likert-label">Katılmıyorum</span>
+                <span class="likert-label">Katılıyorum</span>
               </div>
             </div>
           </div>
@@ -771,10 +842,9 @@
 
     function handleAnswer(questionId, value) {
       if (isAnimating) return;
-      
+
       answers[questionId] = value;
 
-      // Move to next question or finish
       if (currentStep < shuffledQuestions.length - 1) {
         animateToNext();
       } else {
@@ -834,11 +904,11 @@
     function submitEmail() {
       const emailInput = document.getElementById('emailInput');
       userEmail = emailInput.value.trim();
-      
+
       if (userEmail) {
-        localStorage.setItem('typo_attachment_email', userEmail);
+        localStorage.setItem('typo_enneagram_email', userEmail);
       }
-      
+
       showResults();
     }
 
@@ -847,110 +917,79 @@
     }
 
     function calculateScores() {
-      let anxietyScore = 0;
-      let avoidanceScore = 0;
-      let anxietyCount = 0;
-      let avoidanceCount = 0;
+      const typeCounts = { 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0 };
 
-      ATTACHMENT_QUESTIONS.forEach(q => {
-        let val = answers[q.id];
-        if (val === undefined) val = 3; // Default to neutral
-
-        // Reverse score if needed
-        if (q.reverse) {
-          val = 6 - val;
-        }
-
-        if (q.category === 'ANXIETY') {
-          anxietyScore += val;
-          anxietyCount++;
-        } else if (q.category === 'AVOIDANCE') {
-          avoidanceScore += val;
-          avoidanceCount++;
+      ENNEAGRAM_QUESTIONS.forEach(q => {
+        const score = answers[q.id];
+        if (score !== undefined) {
+          typeCounts[q.type] += score;
         }
       });
 
-      // Calculate percentages (max per category = count * 5)
-      const anxietyPercent = Math.round((anxietyScore / (anxietyCount * 5)) * 100);
-      const avoidancePercent = Math.round((avoidanceScore / (avoidanceCount * 5)) * 100);
+      // Find dominant type
+      let maxCount = 0;
+      let determinedType = 0;
+      for (const type in typeCounts) {
+        if (typeCounts[type] > maxCount) {
+          maxCount = typeCounts[type];
+          determinedType = parseInt(type);
+        }
+      }
+
+      // Convert to percentages (max per type = 4 questions * 5 = 20)
+      const maxPerType = 20;
+      const percentages = {};
+      for (const type in typeCounts) {
+        percentages[type] = Math.round((typeCounts[type] / maxPerType) * 100);
+      }
 
       return {
-        anxiety: anxietyPercent,
-        avoidance: avoidancePercent
+        dominantType: determinedType,
+        percentages: percentages,
+        raw: typeCounts,
       };
-    }
-
-    const ATTACHMENT_ICONS = {
-      'Güvenli Bağlanma': 'secure',
-      'Kaygılı Bağlanma': 'anxious',
-      'Kaçıngan Bağlanma': 'avoidant',
-      'Korkulu-Kaçıngan Bağlanma': 'fearfull'
-    };
-
-    function getAttachmentStyle(anxiety, avoidance) {
-      // Determine attachment style based on scores
-      const highAnxiety = anxiety > 50;
-      const highAvoidance = avoidance > 50;
-
-      if (!highAnxiety && !highAvoidance) {
-        return {
-          style: 'Güvenli Bağlanma',
-          description: 'Düşük kaygı ve düşük kaçınma skorların, güvenli bir bağlanma tarzına işaret ediyor. İlişkilerde rahat hissediyorsun, yakınlık kurmaktan çekinmiyorsun ve partnerine güveniyorsun. Duygularını ifade etmekte zorlanmaz, başkalarına güvenmeyi doğal bulursun. İlişkilerde sağlıklı sınırlar koyabilir, hem bağımsızlığını hem de yakınlığı dengeleyebilirsin.'
-        };
-      } else if (highAnxiety && !highAvoidance) {
-        return {
-          style: 'Kaygılı Bağlanma',
-          description: 'Yüksek kaygı skorun, ilişkilerde onaylanma ve güvence arayışında olduğunu gösteriyor. Terk edilme korkusu yaşayabilir ve partnerinin seni gerçekten sevip sevmediğini sorgulayabilirsin. Yoğun duygusal tepkiler verebilir, ilişkilerinde sürekli güvence arayabilirsin. Partnerinden gelen sinyallere karşı aşırı duyarlı olabilir ve küçük değişiklikleri büyük sorunlar olarak algılayabilirsin.'
-        };
-      } else if (!highAnxiety && highAvoidance) {
-        return {
-          style: 'Kaçıngan Bağlanma',
-          description: 'Yüksek kaçınma skorun, duygusal yakınlıktan rahatsız olduğunu gösteriyor. Bağımsızlığını korumayı tercih edebilir ve ilişkilerde mesafe koyma eğiliminde olabilirsin. Duygularını paylaşmakta zorlanabilir ve başkalarına güvenme konusunda tereddüt yaşayabilirsin. Kendi başına yetebilme ihtiyacın güçlüdür ve duygusal bağımlılıktan kaçınırsın.'
-        };
-      } else {
-        return {
-          style: 'Korkulu-Kaçıngan Bağlanma',
-          description: 'Hem yüksek kaygı hem de yüksek kaçınma skorların, ilişkilerde çelişkili duygular yaşadığını gösteriyor. Yakınlık isterken aynı zamanda ondan korkabilirsin. Güven konusunda zorluk yaşar, hem reddedilme hem de terk edilme kaygısı taşıyabilirsin. İlişkilerde yakınlaştığında geri çekilme, uzaklaştığında ise özlem duyma döngüsüne girebilirsin.'
-        };
-      }
     }
 
     function showResults() {
       emailModal.classList.remove('active');
       resultsContainer.classList.add('active');
 
-      const scores = calculateScores();
-      const attachmentInfo = getAttachmentStyle(scores.anxiety, scores.avoidance);
+      const result = calculateScores();
+      const dominantType = result.dominantType;
 
-      // Update icon
-      const resultIcon = document.getElementById('resultIcon');
-      const iconName = ATTACHMENT_ICONS[attachmentInfo.style];
-      resultIcon.innerHTML = `<img src="../assets/attachment_icons/${iconName}.png" alt="${attachmentInfo.style}" />`;
+      // Set icon
+      const iconImg = document.getElementById('resultIconImg');
+      iconImg.src = `../assets/enneagram_icons/${dominantType}.png`;
+      iconImg.alt = `Tip ${dominantType}`;
 
-      // Update title
-      document.getElementById('resultTitle').textContent = attachmentInfo.style;
+      // Set title
+      document.getElementById('resultTitle').textContent = `Tip ${dominantType} – ${ENNEAGRAM_TYPE_NAMES[dominantType]}`;
 
-      // Build scores HTML
+      // Set short description
+      document.getElementById('resultShortDesc').textContent = ENNEAGRAM_SHORT_DESCRIPTIONS[dominantType];
+
+      // Build scores HTML (sorted by percentage descending)
       const scoresContainer = document.getElementById('resultScores');
-      scoresContainer.innerHTML = `
-        <div class="score-item">
-          <span class="score-label">Kaygılı Bağlanma</span>
-          <div class="score-bar-container">
-            <div class="score-bar" style="width: 0%" data-target="${scores.anxiety}"></div>
-          </div>
-          <span class="score-value">${scores.anxiety}%</span>
-        </div>
-        <div class="score-item">
-          <span class="score-label">Kaçıngan Bağlanma</span>
-          <div class="score-bar-container">
-            <div class="score-bar" style="width: 0%" data-target="${scores.avoidance}"></div>
-          </div>
-          <span class="score-value">${scores.avoidance}%</span>
-        </div>
-      `;
+      let scoresHTML = '';
 
-      // Update description
-      document.getElementById('resultDescription').textContent = attachmentInfo.description;
+      const sortedTypes = Object.keys(result.percentages)
+        .map(t => parseInt(t))
+        .sort((a, b) => result.percentages[b] - result.percentages[a]);
+
+      sortedTypes.forEach(type => {
+        const isTop = type === dominantType;
+        scoresHTML += `
+          <div class="score-item">
+            <span class="score-label">${isTop ? '<strong>' : ''}Tip ${type} – ${ENNEAGRAM_TYPE_NAMES[type]}${isTop ? '</strong>' : ''}</span>
+            <div class="score-bar-container">
+              <div class="score-bar" style="width: 0%" data-target="${result.percentages[type]}"></div>
+            </div>
+            <span class="score-value">${result.percentages[type]}%</span>
+          </div>
+        `;
+      });
+
+      scoresContainer.innerHTML = scoresHTML;
 
       // Animate score bars
       setTimeout(() => {
@@ -960,10 +999,10 @@
       }, 100);
 
       // Save to localStorage
-      localStorage.setItem('typo_attachment_result', JSON.stringify({
-        style: attachmentInfo.style,
-        anxiety: scores.anxiety,
-        avoidance: scores.avoidance,
+      localStorage.setItem('typo_enneagram_result', JSON.stringify({
+        dominantType: dominantType,
+        typeName: ENNEAGRAM_TYPE_NAMES[dominantType],
+        percentages: result.percentages,
         timestamp: new Date().toISOString()
       }));
     }

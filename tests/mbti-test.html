@@ -401,8 +401,14 @@
     }
 
     .result-icon {
-      font-size: 60px;
-      margin-bottom: 16px;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 24px;
+    }
+    .result-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
     .result-subtitle {
@@ -730,13 +736,24 @@
 
     <!-- Results Container -->
     <div class="results-container" id="resultsContainer">
-      <div class="result-icon">✨</div>
+      <div class="result-icon" id="resultIcon">
+        <!-- Icon will be inserted here -->
+      </div>
       <p class="result-subtitle">MBTI Sonucun</p>
       <h1 class="result-title" id="resultTitle">—</h1>
       <div class="result-scores" id="resultScores">
         <!-- Scores will be inserted here -->
       </div>
       <p class="result-description" id="resultDescription">Test tamamlandı. Sonuçlarınız kaydedildi.</p>
+      <div style="margin: 32px 0; padding: 20px; background: rgba(181, 106, 85, 0.08); border-radius: 12px; border: 1px solid var(--border);">
+        <p style="font-size: 15px; color: var(--fg); margin: 0 0 12px; font-weight: 500;">Tüm MBTI kişilik tiplerini ve detaylı açıklamalarını görmek ister misin?</p>
+        <a href="mbti-explanations.html" style="display: inline-flex; align-items: center; gap: 8px; color: var(--primary); text-decoration: none; font-weight: 600; font-size: 15px;">
+          16 MBTI Tipini Keşfet
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
       <a href="../index.html" class="result-cta">
         Typo'yu Keşfet
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -951,6 +968,26 @@
       E: 'Dışadönüklük (E)'
     };
 
+    // MBTI Type Descriptions
+    const MBTI_TYPE_DESCRIPTIONS = {
+      ISTJ: 'Sorumluluk sahibi ve güvenilir bir kişiliğe sahipsin. Kurallara bağlı, düzenli ve pratik yaklaşımınla tanınırsın. Geleneklere değer verirsin ve detaylara özen gösterirsin. Başladığın işi mutlaka bitiren, sözünü tutan ve çevresindeki insanların güvenini kazanan birisin.',
+      ISFJ: 'Şefkatli ve koruyucu bir kişiliğe sahipsin. Başkalarının ihtiyaçlarına duyarlı, güvenilir ve sadıksın. Sessiz bir şekilde arkadan destek olmayı tercih edersin. Geleneklere bağlılığın ve yardımseverliğinle tanınır, çevrendeki insanların kendilerini güvende hissetmesini sağlarsın.',
+      INFJ: 'Derin düşünen ve idealist bir kişiliğe sahipsin. İnsanları derinden anlama yeteneğin güçlüdür. Bir amaca hizmet etmek ve anlam aramak senin için önemlidir. Sözlerinin ve eylemlerinin dünya üzerinde fark yaratabileceğine inanır, yoğun sezgilerin ve empatin sayesinde insanların gerçek duygularını hissedebilirsin.',
+      INTJ: 'Stratejik düşünen ve vizyoner bir kişiliğe sahipsin. Hedeflerine ulaşmak için bağımsız ve kararlı çalışırsın. Mükemmelliyetçi ve analitik bir bakış açına sahipsin. Uzun vadeli planlar yapma ve karmaşık problemleri çözme konusunda doğal bir yeteneğin var.',
+      ISTP: 'Pratik ve çözüm odaklı bir kişiliğe sahipsin. Meraklı, esnek ve bağımsızsın. Karmaşık sorunları elle tutulur çözümlere dönüştürme yeteneğin güçlüdür. Kriz anlarında soğukkanlılığını korur, mantıklı ve hızlı kararlar alırsın.',
+      ISFP: 'Sanatsal ve hassas bir kişiliğe sahipsin. Değerlerine sadık, nazik ve uyumlusun. Güzelliği ve uyumu yaratmayı seversin. İç dünyan zengin ve estetik anlayışın güçlüdür. Yaşamı kendi değerlerin ve duyarlılıkların üçlüğünde yaşar, çevrene farkında olmadan uyum getirirsin.',
+      INFP: 'İdealist ve yaratıcı bir kişiliğe sahipsin. Derin duygular taşırsın ve otantik olmaya büyük önem verirsin. İç dünyan zengin ve hayal gücün güçlüdür. Empati yeteneğin yüksek, diğer insanların duygularını derinden hissedebilirsin. Adalete ve doğruya olan bağlılığın seni her zaman ileriye taşır.',
+      INTP: 'Mantıksal ve meraklı bir kişiliğe sahipsin. Teorileri ve soyut kavramları analiz etmeyi seversin. Bağımsız düşünce yapın ve bilgiye olan tutkun seni tanımlar. Bir konunun derinliklerine inmekten ve her şeyi sorgulayarak anlam aramaktan keyif alırsın.',
+      ESTP: 'Enerjik ve maceraperest bir kişiliğe sahipsin. Anlık kararlar alma, risk alma ve harekete geçme konusunda doğal bir yeteneğin var. Pratik zeka ve sosyal becerilerin güçlüdür. Eyleme geçmeyi seven, çevresine enerji katan ve zorlukları fırsata çeviren birisin.',
+      ESFP: 'Eğlenceli ve sosyal bir kişiliğe sahipsin. Hayatın tadını çıkarmayı, insanlarla vakit geçirmeyi ve anı yaşamayı seversin. Enerjin bulaşıcı, doğallığın etkileyicidir. Etrafındaki insanları neşelendirme ve ortama canlılık katma konusunda eşsizsin.',
+      ENFP: 'Tutkulu ve ilham verici bir kişiliğe sahipsin. Yeni fikirler üretmeyi, insanlarla bağ kurmayı ve olasılıkları keşfetmeyi seversin. Yaratıcılığın ve coşkun bulaşıcıdır. Her insanda potansiyel görür ve onları motive etme konusunda doğal bir yeteneğin vardır.',
+      ENTP: 'Yenilikçi ve zeki bir kişiliğe sahipsin. Tartışmayı, meydan okumayı ve farklı bakış açılarını keşfetmeyi seversin. Hızlı düşünen, girişimci ve entelektüel merakın güçlüdür. Yeni sistemler tasarlamayı ve sınırları zorlamayı seven bir vizyonersin.',
+      ESTJ: 'Organize ve güvenilir bir kişiliğe sahipsin. Düzeni ve verimliliği sağlamak senin doğal rolündür. Sorumluluk bilinci yüksek, kararlı ve sonuç odaklısın. Bir işi en verimli şekilde organize etme ve yönetme konusunda doğal bir lidersin.',
+      ESFJ: 'Yardımsever ve topluluk odaklı bir kişiliğe sahipsin. İnsanların ihtiyaçlarını fark etme ve onlara destek olma konusunda doğal bir yeteneğin var. Uyumlu ve şefkatlisin. Sosyal bağları güçlendirme ve herkesin kendini değerli hissetmesini sağlama konusunda benzersizsin.',
+      ENFJ: 'Karizmatik ve ilham verici bir lider kişiliğine sahipsin. İnsanları motive etme, onlara rehberlik etme ve toplulukları bir araya getirme konusunda doğal bir yeteneğin var. Empatin derin, vizyonun güçlüdür ve başkalarının potansiyelini ortaya çıkarmak seni mutlu eder.',
+      ENTJ: 'Kararlı ve stratejik bir lider kişiliğine sahipsin. Büyük resmi görme, uzun vadeli planlar yapma ve hedeflere ulaşmak için insanları organize etme konusunda güçlüsün. Doğal bir otorite ve vizyonla, zorlukları sistematik bir şekilde aşma yeteneğine sahipsin.'
+    };
+
     // ========== Test State ==========
     let currentStep = 0;
     let answers = {}; // { questionId: likertValue (1-5) }
@@ -1157,8 +1194,15 @@
       // Calculate result
       const result = calculateResult();
       
+      // Update icon
+      const resultIcon = document.getElementById('resultIcon');
+      resultIcon.innerHTML = `<img src="../assets/MBTI_icons/${result.type}.png" alt="${result.type}" />`;
+
       // Update title
       document.getElementById('resultTitle').textContent = result.type;
+
+      // Update description
+      document.getElementById('resultDescription').textContent = MBTI_TYPE_DESCRIPTIONS[result.type] || 'Kişilik tipin belirlendi. Sonuçların kaydedildi.';
 
       // Build scores HTML
       const scoresContainer = document.getElementById('resultScores');

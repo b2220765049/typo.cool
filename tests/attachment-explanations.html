@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Bağlanma Tarzları - Typo</title>
+  <meta name="description" content="Typo Bağlanma Tarzı Açıklamaları — 4 bağlanma tipini keşfet." />
+  <meta property="og:site_name" content="Typo" />
+  <link rel="icon" href="../assets/app_icon.png" />
+  <link rel="preload" href="../assets/fonts/lora/Lora-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../assets/fonts/montserrat/Montserrat-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="../site.css" />
+  <style>
+    .page-header {
+      padding: 24px 0 16px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 8px;
+    }
+    .page-header h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(24px, 4vw, 32px);
+      color: var(--fg);
+      margin: 0 0 4px;
+    }
+    .page-header .subtitle {
+      font-size: 13px;
+      color: var(--fg-muted);
+      margin: 0;
+    }
+    .intro-banner {
+      margin: 24px 0;
+    }
+    .intro-banner-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .intro-banner-header svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--primary);
+      fill: none;
+      stroke-width: 2;
+      flex-shrink: 0;
+    }
+    .intro-banner-header h2 {
+      font-family: 'Lora', serif;
+      font-size: 22px;
+      color: var(--fg);
+      margin: 0;
+      line-height: 28px;
+    }
+    .intro-text {
+      font-size: 16px;
+      color: var(--fg);
+      line-height: 26px;
+      opacity: 0.85;
+    }
+    .intro-text strong {
+      font-weight: 700;
+      color: var(--fg);
+    }
+    .type-card {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+    .type-card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .type-icon {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+    .type-card-header .type-key {
+      font-size: 11px;
+      color: var(--fg-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin: 0 0 2px;
+    }
+    .type-card-header .type-name {
+      font-family: 'Lora', serif;
+      font-size: 22px;
+      color: var(--fg);
+      margin: 0;
+      line-height: 28px;
+    }
+    .section-label {
+      font-size: 11px;
+      color: var(--fg-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-weight: 600;
+      margin: 0 0 8px;
+    }
+    .traits-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .trait-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .trait-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--fg-muted);
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+    .trait-text {
+      font-size: 14px;
+      color: var(--fg);
+      line-height: 21px;
+    }
+    .section-text {
+      font-size: 14px;
+      color: var(--fg);
+      line-height: 22px;
+    }
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 28px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin: 24px 0 40px;
+    }
+    .cta-button:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+    .cta-button svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+    @media (max-width: 600px) {
+      .type-card { padding: 18px; }
+      .type-card-header .type-name { font-size: 19px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="back-btn" href="../index.html" aria-label="Geri">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </a>
+      <a class="brand" href="../index.html">
+        <img class="brand-logo" alt="Typo" src="../assets/text_logo.png" />
+      </a>
+      <nav class="nav-links">
+        <a href="../index.html">Ana Sayfa</a>
+        <a href="../privacy.html">Gizlilik</a>
+        <a href="../terms.html">Koşullar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-header">
+      <h1>Bağlanma Tarzı</h1>
+      <p class="subtitle">ECR-S Modeli — 4 Bağlanma Tipi</p>
+    </div>
+
+    <div class="intro-banner">
+      <div class="intro-banner-header">
+        <svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+        <h2>4 Bağlanma Tipi</h2>
+      </div>
+      <p class="intro-text">
+        Bağlanma kuramı, ilişkilerde iki temel boyutu ölçer: <strong>Kaygı</strong> (terk edilme ve reddedilme korkusu) ve <strong>Kaçınma</strong> (duygusal yakınlıktan duyulan rahatsızlık). Bu iki eksenin kesişimi 4 farklı bağlanma tarzı oluşturur.
+      </p>
+    </div>
+
+    <!-- Güvenli Bağlanma -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/attachment_icons/secure.png" alt="Güvenli Bağlanma" />
+        <div>
+          <p class="type-key">SECURE</p>
+          <h3 class="type-name">Güvenli Bağlanma</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Yakınlık kurmaktan çekinmez</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Duygusal ihtiyaçlarını rahatça ifade eder</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Partnerine güvenir, kıskanç değildir</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Bağımsızlığa ve bireyselliğe saygı duyar</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Çatışmalarda yapıcı ve sakin kalır</span></div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">İlişkide sağlıklı bir denge kurar. Hem yakınlık hem de bireysel alan ihtiyacını doğal bir şekilde yönetir. Stresli anlarda partnerine yönelmeyi bilir, ancak aşırı bağımlı olmaz. İlişkide kendini güvende hisseder ve bunu partnerine de yansıtır.</p>
+    </div>
+
+    <!-- Kaygılı Bağlanma -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/attachment_icons/anxious.png" alt="Kaygılı Bağlanma" />
+        <div>
+          <p class="type-key">ANXIOUS</p>
+          <h3 class="type-name">Kaygılı Bağlanma</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Sürekli güvence ve onay arar</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Terk edilme korkusu yaşar</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">İlişkide duygusal iniş çıkışlar yaşar</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Partnerinin mesafesine aşırı hassas</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Yakınlık arayışı yoğun ve sürekli</span></div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">İlişkide çok fazla yakınlık ister ve partnerinin ilgisini sürekli ölçer. Mesajlara geç yanıt gelmesi veya planların değişmesi gibi küçük şeyler bile büyük kaygıya neden olabilir. Partner uzaklaştığında daha çok yapışma eğilimi gösterir, bu da bazen ters etki yaratabilir.</p>
+    </div>
+
+    <!-- Kaçıngan Bağlanma -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/attachment_icons/avoidant.png" alt="Kaçıngan Bağlanma" />
+        <div>
+          <p class="type-key">AVOIDANT</p>
+          <h3 class="type-name">Kaçıngan Bağlanma</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Duygusal yakınlıktan rahatsız olur</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Bağımsızlığına aşırı düşkün</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Duygularını bastırma eğiliminde</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">İlişkide mesafe koymayı tercih eder</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Kendi kendine yetmeyi önemser</span></div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">İlişki derinleştikçe içgüdüsel olarak geri çekilir. Duygusal konuşmalardan kaçınır ve "her şey yolunda" der. Partnerinin ihtiyaçlarını görmezden gelebilir, çünkü kendi duygusal ihtiyaçlarını bastırmaya alışmıştır. Bağımsızlığını korumak ilişkiden daha önemli hissedilir.</p>
+    </div>
+
+    <!-- Korkulu Bağlanma -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <img class="type-icon" src="../assets/attachment_icons/fearfull.png" alt="Korkulu Bağlanma" />
+        <div>
+          <p class="type-key">FEARFUL</p>
+          <h3 class="type-name">Korkulu Bağlanma</h3>
+        </div>
+      </div>
+      <p class="section-label">Ana Özellikler</p>
+      <div class="traits-list">
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Hem yakınlık ister hem de yakınlıktan korkar</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Duyguları çelişkili ve yoğun</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Güven duymakta zorlanır</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">İlişkide öngörülemeyen davranışlar sergiler</span></div>
+        <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Geçmişte yaşanmış kırılmalar etkilidir</span></div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">İçsel bir çelişki yaşar: Bir yandan yakınlık ve sevgi isterken, öbür yandan bunun acı vereceğinden korkar. Bu nedenle ilişkide bazen çok yakın, bazen çok uzak olabilir. Partneri şaşırtabilir çünkü davranışları değişkendir. Güven inşa etmek zaman alır ama mümkündür.</p>
+    </div>
+
+    <a href="attachment-test.html" class="cta-button">
+      Testi Çöz
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <small>© <span id="y"></span> Typo</small>
+      <div class="footer-links">
+        <a href="../privacy.html">Gizlilik</a>
+        <a href="../kvkk.html">KVKK</a>
+        <a href="../terms.html">Koşullar</a>
+      </div>
+    </div>
+  </footer>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>

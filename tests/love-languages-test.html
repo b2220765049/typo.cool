@@ -1,0 +1,1206 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Sevgi Dilleri Testi - Typo</title>
+  <meta name="description" content="Typo Sevgi Dilleri Testi - 5 sevgi dilinden hangisinin sana en yakın olduğunu keşfet." />
+  <meta property="og:site_name" content="Typo" />
+  <link rel="icon" href="../assets/app_icon.png" />
+  <link rel="preload" href="../assets/fonts/lora/Lora-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../assets/fonts/montserrat/Montserrat-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="../site.css" />
+  <style>
+    /* Love Languages Test Specific Styles */
+    .test-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Progress Bar */
+    .progress-wrapper {
+      padding: 16px 0;
+      position: sticky;
+      top: 60px;
+      background: var(--bg);
+      z-index: 5;
+    }
+    .progress-track {
+      height: 6px;
+      background: rgba(181, 106, 85, 0.2);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 3px;
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+    .progress-text {
+      text-align: center;
+      font-size: 14px;
+      color: var(--fg);
+      margin-top: 8px;
+      opacity: 0.7;
+    }
+
+    /* Phase Label */
+    .phase-label {
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 8px;
+      opacity: 0.8;
+    }
+
+    /* Question Area */
+    .question-area {
+      padding: 24px 0 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .question-slide {
+      animation: slideIn 0.3s ease forwards;
+    }
+    .question-slide.slide-out-left {
+      animation: slideOutLeft 0.25s ease forwards;
+    }
+    .question-slide.slide-out-right {
+      animation: slideOutRight 0.25s ease forwards;
+    }
+    .question-slide.slide-in-left {
+      animation: slideInLeft 0.3s ease forwards;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(60px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideOutLeft {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(-60px); opacity: 0; }
+    }
+    @keyframes slideOutRight {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(60px); opacity: 0; }
+    }
+    @keyframes slideInLeft {
+      from { transform: translateX(-60px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* Binary Choice Cards */
+    .scenario-text {
+      font-family: 'Lora', serif;
+      font-size: clamp(16px, 3vw, 20px);
+      font-weight: 600;
+      color: var(--fg);
+      text-align: center;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .choices-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Desktop: horizontal layout */
+    @media (min-width: 768px) {
+      .choices-container {
+        flex-direction: row;
+        gap: 24px;
+        align-items: stretch;
+      }
+      .choices-container .choice-card {
+        flex: 1;
+      }
+    }
+
+    .choice-card {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+    .choice-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      border-color: var(--primary);
+    }
+    .choice-card:active {
+      transform: translateY(-1px);
+    }
+
+    .choice-text {
+      font-size: clamp(14px, 2.5vw, 16px);
+      color: var(--fg);
+      line-height: 1.6;
+    }
+
+    /* Bottom Container */
+    .bottom-container {
+      padding: 16px 0 48px;
+    }
+
+    /* Navigation */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 24px;
+    }
+
+    .nav-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--card);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
+    }
+    .nav-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .nav-btn svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--fg);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    /* Email Collection Modal */
+    .email-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: fadeIn 0.3s ease;
+    }
+    .email-modal.active {
+      display: flex;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .email-card {
+      background: var(--card);
+      border-radius: 24px;
+      padding: 40px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      animation: scaleIn 0.3s ease;
+    }
+    @keyframes scaleIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .email-card h2 {
+      font-family: 'Lora', serif;
+      font-size: 24px;
+      margin: 0 0 12px;
+    }
+    .email-card p {
+      color: var(--fg);
+      opacity: 0.8;
+      margin: 0 0 24px;
+      font-size: 15px;
+    }
+
+    .email-input {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      font-size: 16px;
+      font-family: inherit;
+      margin-bottom: 16px;
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+    .email-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .email-btn {
+      width: 100%;
+      padding: 14px 24px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 12px;
+    }
+    .email-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .skip-btn {
+      background: none;
+      border: none;
+      color: var(--fg);
+      opacity: 0.6;
+      cursor: pointer;
+      font-size: 14px;
+      padding: 8px;
+    }
+    .skip-btn:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    /* Results Section */
+    .results-container {
+      display: none;
+      text-align: center;
+      padding: 40px 0;
+      animation: fadeIn 0.5s ease;
+    }
+    .results-container.active {
+      display: block;
+    }
+
+    .result-icon-img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin: 0 auto 16px;
+      display: block;
+    }
+
+    .result-subtitle {
+      font-size: 14px;
+      color: var(--primary);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 0 0 8px;
+    }
+
+    .result-title {
+      font-family: 'Lora', serif;
+      font-size: clamp(28px, 5vw, 36px);
+      color: var(--fg);
+      margin: 0 0 12px;
+    }
+
+    .result-short-desc {
+      font-size: 16px;
+      color: var(--fg);
+      opacity: 0.85;
+      max-width: 500px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+    }
+
+    .result-scores {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 500px;
+      margin: 0 auto 32px;
+    }
+
+    .score-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left;
+    }
+    .score-icon {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+    .score-label {
+      font-size: 14px;
+      color: var(--fg);
+      min-width: 160px;
+      font-weight: 500;
+    }
+    .score-bar-container {
+      flex: 1;
+      height: 10px;
+      background: rgba(181, 106, 85, 0.2);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .score-bar {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 5px;
+      transition: width 1s ease;
+    }
+    .score-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--fg);
+      min-width: 50px;
+      text-align: right;
+    }
+
+    .result-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 28px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .result-cta:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    /* Start Screen */
+    .start-screen {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .start-screen h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(28px, 5vw, 40px);
+      margin: 0 0 16px;
+    }
+    .start-screen p {
+      font-size: 17px;
+      color: var(--fg);
+      opacity: 0.8;
+      max-width: 500px;
+      margin: 0 auto 32px;
+    }
+    .start-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 999px;
+      padding: 16px 32px;
+      font-weight: 700;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .start-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(181, 106, 85, 0.3);
+    }
+
+    .test-info {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    .test-info-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--fg);
+      opacity: 0.7;
+    }
+    .test-info-item svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--primary);
+    }
+
+    /* Trait badges */
+    .trait-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 24px;
+    }
+    .trait-badge {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--fg);
+    }
+
+    /* Hide test when showing start/results */
+    .test-area {
+      display: none;
+    }
+    .test-area.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .choice-card {
+        padding: 18px 16px;
+      }
+      .choice-text {
+        font-size: 14px;
+      }
+      .scenario-text {
+        font-size: 15px;
+      }
+      .nav-btn {
+        width: 48px;
+        height: 48px;
+      }
+      .email-card {
+        padding: 28px 20px;
+      }
+      .skip-btn {
+        padding: 12px 16px;
+        min-height: 44px;
+      }
+      .score-label {
+        min-width: 120px;
+        font-size: 13px;
+      }
+      .score-item {
+        gap: 8px;
+      }
+      .score-icon {
+        width: 24px;
+        height: 24px;
+      }
+      .start-screen {
+        padding: 40px 16px;
+      }
+      .bottom-container {
+        padding-bottom: max(48px, env(safe-area-inset-bottom));
+      }
+      .trait-badge {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .score-item {
+        flex-wrap: wrap;
+      }
+      .score-label {
+        width: 100%;
+        min-width: unset;
+        margin-bottom: 4px;
+      }
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      .question-slide {
+        animation: none;
+      }
+      .question-slide.slide-out-left,
+      .question-slide.slide-out-right {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="back-btn" href="../index.html" aria-label="Geri">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </a>
+      <a class="brand" href="../index.html">
+        <img class="brand-logo" alt="Typo" src="../assets/text_logo.png" />
+      </a>
+      <nav class="nav-links">
+        <a href="../index.html">Ana Sayfa</a>
+        <a href="../privacy.html">Gizlilik</a>
+        <a href="../terms.html">Koşullar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Start Screen -->
+    <div class="start-screen" id="startScreen">
+      <h1>Sevgi Dilleri Testi</h1>
+      <p>Bu test, ilişkilerde seni en çok mutlu eden ve değerli hissettiren sevgi dilini keşfetmene yardımcı olacak. 3 aşamada ikili seçimler yaparak baskın sevgi dilini belirleyeceksin.</p>
+      <button class="start-btn" onclick="startTest()">
+        Teste Başla
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+      <div class="test-info">
+        <div class="test-info-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
+          <span>~3 dakika</span>
+        </div>
+        <div class="test-info-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 11l3 3L22 4"/>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+          </svg>
+          <span>11 soru</span>
+        </div>
+        <div class="test-info-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <span>Anonim</span>
+        </div>
+      </div>
+      <div class="trait-badges">
+        <span class="trait-badge">Onaylayıcı Kelimeler</span>
+        <span class="trait-badge">Kaliteli Zaman</span>
+        <span class="trait-badge">Hizmet Eylemleri</span>
+        <span class="trait-badge">Fiziksel Temas</span>
+        <span class="trait-badge">Hediyeler</span>
+      </div>
+    </div>
+
+    <!-- Test Area -->
+    <div class="test-container test-area" id="testArea">
+      <!-- Progress Bar -->
+      <div class="progress-wrapper">
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text"><span id="currentQ">1</span> / <span id="totalQ">11</span></div>
+        <div class="phase-label" id="phaseLabel">Aşama 1 / 3</div>
+      </div>
+
+      <!-- Question Area -->
+      <div class="question-area" id="questionArea">
+        <!-- Questions will be dynamically inserted here -->
+      </div>
+
+      <!-- Bottom Container -->
+      <div class="bottom-container" id="bottomContainer">
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+          <button class="nav-btn" id="prevBtn" onclick="goToPrevious()" disabled>
+            <svg viewBox="0 0 24 24">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+          <button class="nav-btn" id="nextBtn" onclick="goToNext()" style="visibility: hidden;">
+            <svg viewBox="0 0 24 24">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Container -->
+    <div class="results-container" id="resultsContainer">
+      <img class="result-icon-img" id="resultIconImg" src="" alt="" />
+      <p class="result-subtitle">Baskın Sevgi Dilin</p>
+      <h1 class="result-title" id="resultTitle"></h1>
+      <p class="result-short-desc" id="resultShortDesc"></p>
+      <div class="result-scores" id="resultScores">
+        <!-- Scores will be inserted here -->
+      </div>
+      <div style="margin: 32px 0; padding: 20px; background: rgba(181, 106, 85, 0.08); border-radius: 12px; border: 1px solid var(--border);">
+        <p style="font-size: 15px; color: var(--fg); margin: 0 0 12px; font-weight: 500;">Tüm sevgi dillerini ve detaylı açıklamalarını görmek ister misin?</p>
+        <a href="love-languages-explanations.html" style="display: inline-flex; align-items: center; gap: 8px; color: var(--primary); text-decoration: none; font-weight: 600; font-size: 15px;">
+          5 Sevgi Dilini Keşfet
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+      <a href="../index.html" class="result-cta">
+        Typo'yu Keşfet
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </main>
+
+  <!-- Email Modal -->
+  <div class="email-modal" id="emailModal">
+    <div class="email-card">
+      <h2>Sonuçlarını Kaydet</h2>
+      <p>E-posta adresini girerek sonuçlarını kaydedebilirsin. Typo uygulamasına aynı e-posta ile giriş yaparsan, sonuçların otomatik olarak profiline eklenecek.</p>
+      <input type="email" class="email-input" id="emailInput" placeholder="ornek@email.com" />
+      <button class="email-btn" onclick="submitEmail()">Sonuçları Gör</button>
+      <button class="skip-btn" onclick="skipEmail()">Atla, sonuçları göster</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container footer-inner">
+      <small>&copy; <span id="y"></span> Typo</small>
+      <div class="footer-links">
+        <a href="../privacy.html">Gizlilik</a>
+        <a href="../kvkk.html">KVKK</a>
+        <a href="../terms.html">Koşullar</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ========== Love Languages Test Data (3-Phase Game Theory) ==========
+
+    const LOVE_LANGUAGES = {
+      words: 'Onaylayıcı Kelimeler',
+      time: 'Kaliteli Zaman',
+      acts: 'Hizmet Eylemleri',
+      touch: 'Fiziksel Temas',
+      gifts: 'Hediyeler',
+    };
+
+    const LOVE_LANGUAGE_DESCRIPTIONS = {
+      words: 'Sözlü iltifatlar, takdir ve cesaretlendirme seni mutlu eder. Partnerinin seni sözleriyle desteklemesi ve sevgisini ifade etmesi senin için çok değerli.',
+      time: 'Bölünmemiş ilgi ve birlikte geçirilen anlamlı vakit senin için en önemli şey. Partnerinle kaliteli zaman geçirmek seni değerli hissettiriyor.',
+      acts: 'Hayatını kolaylaştıran yardımlar ve jestler seni mutlu eder. Partnerinin senin için bir şeyler yapması, sevgisini eyleme dökmeyi bilmesi senin için çok anlamlı.',
+      touch: 'El ele tutuşma, sarılma ve fiziksel yakınlık senin için vazgeçilmez. Fiziksel temas yoluyla sevgiyi hissedebilmek senin temel ihtiyacın.',
+      gifts: 'Düşünceli hediyeler ve küçük sürprizler seni özel hissettiriyor. Partnerinin seni düşündüğünü somut bir şekilde göstermesi senin için çok değerli.',
+    };
+
+    const LOVE_LANG_ICON_MAP = {
+      words: '../assets/love_languages_icons/words_of_affirmation.png',
+      time: '../assets/love_languages_icons/quality_time.png',
+      acts: '../assets/love_languages_icons/act_of_service.png',
+      touch: '../assets/love_languages_icons/physical_touch.png',
+      gifts: '../assets/love_languages_icons/gift_giving.png',
+    };
+
+    const LANGUAGE_ORDER = ['words', 'time', 'acts', 'touch', 'gifts'];
+
+    // Phase 1: Positive Preferences (Binary Choice - "Which do you prefer?")
+    const PHASE_1_SCENARIOS = [
+      {
+        id: 'p1_pref_1',
+        optionA: { lang: 'words', text: 'Partnerimin beni takdir etmesi ve güzel sözler söylemesi.' },
+        optionB: { lang: 'time', text: 'Partnerimin bana özel zaman ayırıp benimle ilgilenmesi.' },
+      },
+      {
+        id: 'p1_pref_2',
+        optionA: { lang: 'acts', text: 'Partnerimin işlerimi kolaylaştıracak bir şey yapması (yardım etmesi).' },
+        optionB: { lang: 'touch', text: 'Partnerimin bana sarılması, elimi tutması ve fiziksel yakınlık göstermesi.' },
+      },
+      {
+        id: 'p1_pref_3',
+        optionA: { lang: 'gifts', text: 'Partnerimin düşünceli bir hediye veya küçük bir sürpriz yapması.' },
+        optionB: { lang: 'words', text: 'Partnerimin bana "Seni seviyorum" demesi ve bunu sözleriyle hissettirmesi.' },
+      },
+      {
+        id: 'p1_pref_4',
+        optionA: { lang: 'time', text: 'Birlikte telefonsuz, bölünmeden kaliteli vakit geçirmemiz.' },
+        optionB: { lang: 'acts', text: 'Zor bir günümde benim yerime bir sorumluluğu üstlenmesi.' },
+      },
+      {
+        id: 'p1_pref_5',
+        optionA: { lang: 'touch', text: 'Gün içinde küçük dokunuşlar ve sıcak fiziksel temas.' },
+        optionB: { lang: 'gifts', text: 'Beni düşündüğünü gösteren küçük ama anlamlı bir hediye.' },
+      },
+    ];
+
+    // Phase 2: Negative Triggers (Binary Choice - "Which is worse?")
+    const PHASE_2_SCENARIOS = [
+      {
+        id: 'p2_neg_1',
+        optionA: { lang: 'words', text: 'Partnerimin beni sürekli eleştirmesi veya sözlü olarak kırması.' },
+        optionB: { lang: 'touch', text: 'Partnerimin bana hiç dokunmaması, sarılmaması veya fiziksel olarak uzak durması.' },
+      },
+      {
+        id: 'p2_neg_2',
+        optionA: { lang: 'time', text: 'Partnerimin benimle hiç vakit geçirmemesi, hep meşgul olması.' },
+        optionB: { lang: 'acts', text: 'Partnerimin hiçbir konuda bana yardımcı olmaması, her şeyi üzerime yıkması.' },
+      },
+      {
+        id: 'p2_neg_3',
+        optionA: { lang: 'gifts', text: 'Özel günlerimi unutması veya hiç hediye almaması.' },
+        optionB: { lang: 'words', text: 'Bana hiç "Seni seviyorum" dememesi veya takdir etmemesi.' },
+      },
+      {
+        id: 'p2_neg_4',
+        optionA: { lang: 'touch', text: 'İlişkimizde cinsellik veya fiziksel yakınlığın tamamen bitmesi.' },
+        optionB: { lang: 'time', text: 'Beni dinlememesi ve birlikteyken bile başka şeylerle ilgilenmesi.' },
+      },
+      {
+        id: 'p2_neg_5',
+        optionA: { lang: 'acts', text: 'Hastayken veya yorgunken bile benden hizmet beklemesi.' },
+        optionB: { lang: 'gifts', text: 'Bana aldığı hediyelerin özensiz ve düşünülmemiş olması.' },
+      },
+    ];
+
+    // Points per phase
+    const PHASE_1_POINTS = 30;
+    const PHASE_2_POINTS = 35;
+    const PHASE_3_POINTS = 15;
+
+    // ========== Test State ==========
+    let phase = 1; // 1, 2, or 3
+    let currentStep = 0;
+    let isAnimating = false;
+    let userEmail = '';
+
+    // Score tracking
+    let scores = { words: 0, time: 0, acts: 0, touch: 0, gifts: 0 };
+    let phase1Scores = { words: 0, time: 0, acts: 0, touch: 0, gifts: 0 };
+    let phase2Scores = { words: 0, time: 0, acts: 0, touch: 0, gifts: 0 };
+
+    // Answers for each phase (to allow changing answers)
+    let phase1Answers = new Array(PHASE_1_SCENARIOS.length).fill(null);
+    let phase2Answers = new Array(PHASE_2_SCENARIOS.length).fill(null);
+
+    // Phase 3 state
+    let topTwo = [];
+
+    // Track answered questions for navigation
+    let answeredQuestions = new Set();
+
+    // Total steps: Phase 1 (5) + Phase 2 (5) + Phase 3 (1) = 11
+    const totalSteps = PHASE_1_SCENARIOS.length + PHASE_2_SCENARIOS.length + 1;
+
+    // ========== DOM Elements ==========
+    const startScreen = document.getElementById('startScreen');
+    const testArea = document.getElementById('testArea');
+    const questionArea = document.getElementById('questionArea');
+    const resultsContainer = document.getElementById('resultsContainer');
+    const emailModal = document.getElementById('emailModal');
+    const progressFill = document.getElementById('progressFill');
+    const currentQSpan = document.getElementById('currentQ');
+    const phaseLabel = document.getElementById('phaseLabel');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    // ========== Utility Functions ==========
+    function createEmptyScores() {
+      return { words: 0, time: 0, acts: 0, touch: 0, gifts: 0 };
+    }
+
+    function getCurrentOverallStep() {
+      if (phase === 1) return currentStep;
+      if (phase === 2) return PHASE_1_SCENARIOS.length + currentStep;
+      if (phase === 3) return PHASE_1_SCENARIOS.length + PHASE_2_SCENARIOS.length;
+      return totalSteps;
+    }
+
+    function sortLanguagesWithTieBreak(totals, p2Totals, p1Totals) {
+      return [...LANGUAGE_ORDER].sort((a, b) => {
+        const totalDiff = totals[b] - totals[a];
+        if (totalDiff !== 0) return totalDiff;
+        const p2Diff = p2Totals[b] - p2Totals[a];
+        if (p2Diff !== 0) return p2Diff;
+        const p1Diff = p1Totals[b] - p1Totals[a];
+        if (p1Diff !== 0) return p1Diff;
+        return LANGUAGE_ORDER.indexOf(a) - LANGUAGE_ORDER.indexOf(b);
+      });
+    }
+
+    // ========== Core Functions ==========
+    function startTest() {
+      startScreen.style.display = 'none';
+      testArea.classList.add('active');
+      renderQuestion();
+    }
+
+    function updateProgress() {
+      const overallStep = getCurrentOverallStep();
+      const progress = ((overallStep + 1) / totalSteps) * 100;
+      progressFill.style.width = progress + '%';
+      currentQSpan.textContent = overallStep + 1;
+      document.getElementById('totalQ').textContent = totalSteps;
+
+      // Update phase label
+      phaseLabel.textContent = `Aşama ${phase} / 3`;
+
+      // Update nav buttons
+      const canGoBack = !(phase === 1 && currentStep === 0);
+      prevBtn.disabled = !canGoBack;
+
+      // Show next button only if the current question was already answered (for review)
+      const isAnswered = answeredQuestions.has(overallStep);
+      const isLastQuestion = (phase === 3);
+      const isLastInPhase1 = (phase === 1 && currentStep === PHASE_1_SCENARIOS.length - 1);
+      const isLastInPhase2 = (phase === 2 && currentStep === PHASE_2_SCENARIOS.length - 1);
+      
+      if (isAnswered && !isLastQuestion) {
+        nextBtn.style.visibility = 'visible';
+      } else {
+        nextBtn.style.visibility = 'hidden';
+      }
+    }
+
+    function renderQuestion() {
+      updateProgress();
+
+      if (phase === 1) {
+        renderPhase1();
+      } else if (phase === 2) {
+        renderPhase2();
+      } else if (phase === 3) {
+        renderPhase3();
+      }
+    }
+
+    function renderPhase1() {
+      const scenario = PHASE_1_SCENARIOS[currentStep];
+
+      questionArea.innerHTML = `
+        <div class="question-slide">
+          <div class="scenario-text">Aşağıdaki iki davranıştan hangisini daha çok tercih edersiniz?</div>
+          <div class="choices-container">
+            <div class="choice-card" onclick="handlePhase1Answer('${scenario.optionA.lang}')">
+              <div class="choice-text">${scenario.optionA.text}</div>
+            </div>
+            <div class="choice-card" onclick="handlePhase1Answer('${scenario.optionB.lang}')">
+              <div class="choice-text">${scenario.optionB.text}</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderPhase2() {
+      const scenario = PHASE_2_SCENARIOS[currentStep];
+
+      questionArea.innerHTML = `
+        <div class="question-slide">
+          <div class="scenario-text">Aşağıdaki iki durumdan hangisi sizin için daha katlanılmaz olurdu?</div>
+          <div class="choices-container">
+            <div class="choice-card" onclick="handlePhase2Answer('${scenario.optionA.lang}')">
+              <div class="choice-text">${scenario.optionA.text}</div>
+            </div>
+            <div class="choice-card" onclick="handlePhase2Answer('${scenario.optionB.lang}')">
+              <div class="choice-text">${scenario.optionB.text}</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderPhase3() {
+      const langA = topTwo[0];
+      const langB = topTwo[1];
+
+      questionArea.innerHTML = `
+        <div class="question-slide">
+          <div class="scenario-text">Son karar! İlişkide hangisi senin için daha önemli?</div>
+          <div class="choices-container">
+            <div class="choice-card" onclick="handlePhase3Answer('${langA}')">
+              <div class="choice-text" style="font-weight: 600;">${LOVE_LANGUAGES[langA]}</div>
+            </div>
+            <div class="choice-card" onclick="handlePhase3Answer('${langB}')">
+              <div class="choice-text" style="font-weight: 600;">${LOVE_LANGUAGES[langB]}</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function handlePhase1Answer(selectedLang) {
+      if (isAnimating) return;
+
+      const index = currentStep;
+      const prevAnswer = phase1Answers[index];
+
+      // Reverse previous answer if exists
+      if (prevAnswer) {
+        scores[prevAnswer] -= PHASE_1_POINTS;
+        phase1Scores[prevAnswer] -= PHASE_1_POINTS;
+      }
+
+      // Apply new answer
+      scores[selectedLang] += PHASE_1_POINTS;
+      phase1Scores[selectedLang] += PHASE_1_POINTS;
+      phase1Answers[index] = selectedLang;
+
+      answeredQuestions.add(getCurrentOverallStep());
+
+      if (currentStep < PHASE_1_SCENARIOS.length - 1) {
+        animateToNext(() => {
+          currentStep++;
+          renderQuestion();
+        });
+      } else {
+        // Move to Phase 2
+        animateToNext(() => {
+          phase = 2;
+          currentStep = 0;
+          renderQuestion();
+        });
+      }
+    }
+
+    function handlePhase2Answer(selectedLang) {
+      if (isAnimating) return;
+
+      const index = currentStep;
+      const prevAnswer = phase2Answers[index];
+
+      // Reverse previous answer if exists
+      if (prevAnswer) {
+        scores[prevAnswer] -= PHASE_2_POINTS;
+        phase2Scores[prevAnswer] -= PHASE_2_POINTS;
+      }
+
+      // Apply new answer
+      scores[selectedLang] += PHASE_2_POINTS;
+      phase2Scores[selectedLang] += PHASE_2_POINTS;
+      phase2Answers[index] = selectedLang;
+
+      answeredQuestions.add(getCurrentOverallStep());
+
+      if (currentStep < PHASE_2_SCENARIOS.length - 1) {
+        animateToNext(() => {
+          currentStep++;
+          renderQuestion();
+        });
+      } else {
+        // Prepare Phase 3 - determine top two languages
+        const sorted = sortLanguagesWithTieBreak(scores, phase2Scores, phase1Scores);
+        topTwo = [sorted[0], sorted[1]];
+
+        animateToNext(() => {
+          phase = 3;
+          currentStep = 0;
+          renderQuestion();
+        });
+      }
+    }
+
+    function handlePhase3Answer(winner) {
+      if (isAnimating) return;
+
+      scores[winner] += PHASE_3_POINTS;
+      answeredQuestions.add(getCurrentOverallStep());
+
+      finishTest();
+    }
+
+    function animateToNext(callback) {
+      isAnimating = true;
+      const slide = questionArea.querySelector('.question-slide');
+      if (slide) slide.classList.add('slide-out-left');
+
+      setTimeout(() => {
+        callback();
+        isAnimating = false;
+      }, 250);
+    }
+
+    function animateToPrevious(callback) {
+      isAnimating = true;
+      const slide = questionArea.querySelector('.question-slide');
+      if (slide) slide.classList.add('slide-out-right');
+
+      setTimeout(() => {
+        callback();
+        isAnimating = false;
+      }, 250);
+    }
+
+    function goToPrevious() {
+      if (isAnimating) return;
+
+      if (phase === 1 && currentStep > 0) {
+        animateToPrevious(() => {
+          currentStep--;
+          renderQuestion();
+        });
+      } else if (phase === 2 && currentStep > 0) {
+        animateToPrevious(() => {
+          currentStep--;
+          renderQuestion();
+        });
+      } else if (phase === 2 && currentStep === 0) {
+        animateToPrevious(() => {
+          phase = 1;
+          currentStep = PHASE_1_SCENARIOS.length - 1;
+          renderQuestion();
+        });
+      } else if (phase === 3) {
+        animateToPrevious(() => {
+          phase = 2;
+          currentStep = PHASE_2_SCENARIOS.length - 1;
+          renderQuestion();
+        });
+      }
+    }
+
+    function goToNext() {
+      if (isAnimating) return;
+      const overallStep = getCurrentOverallStep();
+      if (!answeredQuestions.has(overallStep)) return;
+
+      if (phase === 1 && currentStep < PHASE_1_SCENARIOS.length - 1) {
+        animateToNext(() => {
+          currentStep++;
+          renderQuestion();
+        });
+      } else if (phase === 1 && currentStep === PHASE_1_SCENARIOS.length - 1) {
+        animateToNext(() => {
+          phase = 2;
+          currentStep = 0;
+          renderQuestion();
+        });
+      } else if (phase === 2 && currentStep < PHASE_2_SCENARIOS.length - 1) {
+        animateToNext(() => {
+          currentStep++;
+          renderQuestion();
+        });
+      } else if (phase === 2 && currentStep === PHASE_2_SCENARIOS.length - 1) {
+        const sorted = sortLanguagesWithTieBreak(scores, phase2Scores, phase1Scores);
+        topTwo = [sorted[0], sorted[1]];
+        animateToNext(() => {
+          phase = 3;
+          currentStep = 0;
+          renderQuestion();
+        });
+      }
+    }
+
+    function finishTest() {
+      testArea.classList.remove('active');
+      emailModal.classList.add('active');
+    }
+
+    function submitEmail() {
+      const emailInput = document.getElementById('emailInput');
+      userEmail = emailInput.value.trim();
+
+      if (userEmail) {
+        localStorage.setItem('typo_love_languages_email', userEmail);
+      }
+
+      showResults();
+    }
+
+    function skipEmail() {
+      showResults();
+    }
+
+    function showResults() {
+      emailModal.classList.remove('active');
+      resultsContainer.classList.add('active');
+
+      // Normalize scores to 0-100 (relative to max)
+      const values = Object.values(scores);
+      const max = Math.max(...values);
+      const normalized = {};
+
+      if (max === 0) {
+        LANGUAGE_ORDER.forEach(lang => { normalized[lang] = 100; });
+      } else {
+        LANGUAGE_ORDER.forEach(lang => {
+          normalized[lang] = Math.round((scores[lang] / max) * 100);
+        });
+      }
+
+      // Determine dominant language
+      const sorted = sortLanguagesWithTieBreak(normalized, phase2Scores, phase1Scores);
+      const dominant = sorted[0];
+
+      // Set icon
+      const iconImg = document.getElementById('resultIconImg');
+      iconImg.src = LOVE_LANG_ICON_MAP[dominant];
+      iconImg.alt = LOVE_LANGUAGES[dominant];
+
+      // Set title
+      document.getElementById('resultTitle').textContent = LOVE_LANGUAGES[dominant];
+
+      // Set description
+      document.getElementById('resultShortDesc').textContent = LOVE_LANGUAGE_DESCRIPTIONS[dominant];
+
+      // Build scores HTML (sorted by score descending)
+      const scoresContainer = document.getElementById('resultScores');
+      let scoresHTML = '';
+
+      sorted.forEach(lang => {
+        const isTop = lang === dominant;
+        scoresHTML += `
+          <div class="score-item">
+            <img class="score-icon" src="${LOVE_LANG_ICON_MAP[lang]}" alt="${LOVE_LANGUAGES[lang]}" />
+            <span class="score-label">${isTop ? '<strong>' : ''}${LOVE_LANGUAGES[lang]}${isTop ? '</strong>' : ''}</span>
+            <div class="score-bar-container">
+              <div class="score-bar" style="width: 0%" data-target="${normalized[lang]}"></div>
+            </div>
+            <span class="score-value">${normalized[lang]}%</span>
+          </div>
+        `;
+      });
+
+      scoresContainer.innerHTML = scoresHTML;
+
+      // Animate score bars
+      setTimeout(() => {
+        document.querySelectorAll('.score-bar').forEach(bar => {
+          bar.style.width = bar.dataset.target + '%';
+        });
+      }, 100);
+
+      // Save to localStorage
+      localStorage.setItem('typo_love_languages_result', JSON.stringify({
+        dominant: dominant,
+        dominantName: LOVE_LANGUAGES[dominant],
+        scores: normalized,
+        timestamp: new Date().toISOString()
+      }));
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') goToPrevious();
+      if (e.key === 'ArrowRight') goToNext();
+    });
+
+    // Set year in footer
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

@@ -641,6 +641,15 @@
         <!-- Scores will be inserted here -->
       </div>
       <p class="result-description" id="resultDescription"></p>
+      <div style="margin: 32px 0; padding: 20px; background: rgba(181, 106, 85, 0.08); border-radius: 12px; border: 1px solid var(--border);">
+        <p style="font-size: 15px; color: var(--fg); margin: 0 0 12px; font-weight: 500;">Tüm OCEAN kişilik boyutlarını ve detaylı açıklamalarını görmek ister misin?</p>
+        <a href="ocean-explanations.html" style="display: inline-flex; align-items: center; gap: 8px; color: var(--primary); text-decoration: none; font-weight: 600; font-size: 15px;">
+          5 Kişilik Boyutunu Keşfet
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
       <a href="../index.html" class="result-cta">
         Typo'yu Keşfet
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -912,26 +921,51 @@
       };
     }
 
-    function getPersonalityDescription(scores) {
-      const traits = [];
-      
-      if (scores.Openness > 60) traits.push('yaratıcı ve meraklı');
-      if (scores.Conscientiousness > 60) traits.push('düzenli ve güvenilir');
-      if (scores.Extraversion > 60) traits.push('sosyal ve enerjik');
-      if (scores.Agreeableness > 60) traits.push('uyumlu ve yardımsever');
-      if (scores.Neuroticism > 60) traits.push('duygusal olarak hassas');
-      
-      if (scores.Openness < 40) traits.push('geleneksel');
-      if (scores.Conscientiousness < 40) traits.push('esnek');
-      if (scores.Extraversion < 40) traits.push('içedönük');
-      if (scores.Agreeableness < 40) traits.push('bağımsız düşünen');
-      if (scores.Neuroticism < 40) traits.push('duygusal olarak istikrarlı');
-
-      if (traits.length === 0) {
-        return 'Kişilik profilin dengeli bir görünüm sergiliyor. Beş temel özellikte de ortalama değerlere sahipsin.';
+    const TRAIT_DESCRIPTIONS = {
+      Openness: {
+        high: 'Yeni deneyimlere açık, yaratıcı ve meraklı bir yapıya sahipsin. Sanat, felsefe ve soyut düşünceler seni çekiyor. Farklı bakış açılarını keşfetmekten ve alışılmışın dışına çıkmaktan keyif alırsın.',
+        low: 'Pratik, geleneksel ve somut yaklaşımları tercih edersin. Alışılmış yöntemler ve kanıtlanmış çözümler sana güven verir. Ayakların yere basar ve gerçekçi bir bakış açına sahipsin.',
+        mid: 'Yeni deneyimlere açıklık konusunda dengeli bir profil sergiliyorsun. Hem yenilikçi fikirlere ilgi duyabilir hem de geleneksel yaklaşımları benimseyebilirsin.'
+      },
+      Conscientiousness: {
+        high: 'Düzenli, disiplinli ve hedef odaklı bir yapıya sahipsin. Planlama ve organize etme konusunda güçlüsün. Sorumluluklarını ciddiye alır, başladığın işi mutlaka tamamlarsın.',
+        low: 'Esnek, spontane ve akışa bırakan bir yapıya sahipsin. Katı kurallardan ve planlardan sıkılabilirsin. Hayatı daha rahat yaşar, esnekliğin seni farklı fırsatlara açık kılar.',
+        mid: 'Sorumluluk ve esneklik arasında dengeli bir profil sergiliyorsun. Gerektiğinde disiplinli olabilir, gerektiğinde ise akışa bırakabilirsin.'
+      },
+      Extraversion: {
+        high: 'Sosyal, enerjik ve dışa dönük bir yapıya sahipsin. İnsanlarla vakit geçirmekten enerji alır, yeni tanışıklıklar kurmaktan keyif duyarsın. Ortamda canlılık yaratan, dikkat çeken birisin.',
+        low: 'Sakin, düşünceli ve içe dönük bir yapıya sahipsin. Kendi iç dünyanı keşfetmekten keyif alırsın. Az sayıda ama derin ilişkiler kurmayı tercih eder, yalnız kalarak enerji toplarsın.',
+        mid: 'Dışadönüklük konusunda dengeli bir profil sergiliyorsun. Sosyal ortamlardan keyif alabilir, aynı zamanda yalnız vakit geçirmekten de hoşlanabilirsin.'
+      },
+      Agreeableness: {
+        high: 'Uyumlu, yardımsever ve empati yeteneği yüksek bir yapıya sahipsin. Başkalarının ihtiyaçlarına duyarlısın ve işbirliği kurmayı seversin. Güvenilir ve destekleyici bir arkadaşın olarak bilinirsin.',
+        low: 'Bağımsız düşünen, rekabetçi ve analitik bir yapıya sahipsin. Kendi fikirlerini savunmaktan çekinmez, eleştirel bir bakış açısıyla olaylara yaklaşırsın. Doğruluğu, uyumu korumaktan daha önemli görürsün.',
+        mid: 'Uyumluluk konusunda dengeli bir profil sergiliyorsun. Hem işbirliği yapabilir hem de gerektiğinde kendi görüşünü savunabilirsin.'
+      },
+      Neuroticism: {
+        high: 'Duygusal olarak hassas ve derin hisseden bir yapıya sahipsin. Duyguların yoğun yaşanır ve stres altında güçlü tepkiler verebilirsin. Bu hassasiyetin aynı zamanda empati yeteneğini ve duygusal farkındalığını güçlendirir.',
+        low: 'Duygusal olarak istikrarlı ve sakin bir yapıya sahipsin. Stresli durumlarda soğukkanlılığını korur, duygularını dengeli bir şekilde yönetirsin. Güçlü bir iç denge ve dayanıklılığa sahipsin.',
+        mid: 'Duygusal tepkisellik konusunda dengeli bir profil sergiliyorsun. Hem hassas olabilir hem de gerektiğinde soğukkanlılığını koruyabilirsin.'
       }
+    };
 
-      return `Kişilik profilin ${traits.join(', ')} özellikler gösteriyor. Bu özellikler, ilişkilerdeki dinamiklerini ve iletişim tarzını şekillendiriyor.`;
+    function getPersonalityDescription(scores) {
+      const parts = [];
+      const traitOrder = ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Neuroticism'];
+      
+      traitOrder.forEach(trait => {
+        const score = scores[trait];
+        const desc = TRAIT_DESCRIPTIONS[trait];
+        if (score > 60) {
+          parts.push(desc.high);
+        } else if (score < 40) {
+          parts.push(desc.low);
+        } else {
+          parts.push(desc.mid);
+        }
+      });
+
+      return parts.join(' ');
     }
 
     function showResults() {

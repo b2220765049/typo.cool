@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>OCEAN Kişilik Boyutları - Typo</title>
+  <meta name="description" content="Typo OCEAN (Big Five) Kişilik Boyutları — 5 temel kişilik boyutunu keşfet." />
+  <meta property="og:site_name" content="Typo" />
+  <link rel="icon" href="../assets/app_icon.png" />
+  <link rel="preload" href="../assets/fonts/lora/Lora-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="../assets/fonts/montserrat/Montserrat-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="../site.css" />
+  <style>
+    .page-header { padding: 24px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 8px; }
+    .page-header h1 { font-family: 'Lora', serif; font-size: clamp(24px, 4vw, 32px); color: var(--fg); margin: 0 0 4px; }
+    .page-header .subtitle { font-size: 13px; color: var(--fg-muted); margin: 0; }
+    .intro-banner { margin: 24px 0; }
+    .intro-banner-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .intro-banner-header svg { width: 24px; height: 24px; stroke: var(--primary); fill: none; stroke-width: 2; flex-shrink: 0; }
+    .intro-banner-header h2 { font-family: 'Lora', serif; font-size: 22px; color: var(--fg); margin: 0; }
+    .intro-text { font-size: 16px; color: var(--fg); line-height: 26px; opacity: 0.85; }
+    .intro-text strong { font-weight: 700; color: var(--fg); }
+
+    .type-card { background: var(--card); border-radius: 20px; padding: 24px; margin-bottom: 16px; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+    .type-card-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .letter-badge { width: 48px; height: 48px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-family: 'Lora', serif; font-size: 22px; font-weight: 700; flex-shrink: 0; }
+    .type-card-header .type-key { font-size: 11px; color: var(--fg-muted); letter-spacing: 1px; text-transform: uppercase; margin: 0 0 2px; }
+    .type-card-header .type-name { font-family: 'Lora', serif; font-size: 22px; color: var(--fg); margin: 0; line-height: 28px; }
+    .description-text { font-size: 14px; color: var(--fg); line-height: 22px; opacity: 0.85; margin-bottom: 16px; }
+    .section-label { font-size: 11px; color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; margin: 0 0 8px; }
+    .traits-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .trait-row { display: flex; align-items: flex-start; gap: 8px; }
+    .trait-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--fg-muted); margin-top: 7px; flex-shrink: 0; }
+    .trait-text { font-size: 14px; color: var(--fg); line-height: 21px; }
+    .section-text { font-size: 14px; color: var(--fg); line-height: 22px; }
+    .high-low-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    @media (max-width: 600px) { .high-low-grid { grid-template-columns: 1fr; } }
+    .cta-button { display: inline-flex; align-items: center; gap: 10px; background: var(--primary); color: white; border: none; border-radius: 999px; padding: 14px 28px; font-weight: 700; text-decoration: none; font-size: 16px; cursor: pointer; transition: all 0.2s; margin: 24px 0 40px; }
+    .cta-button:hover { opacity: 0.9; transform: translateY(-2px); }
+    .cta-button svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
+    @media (max-width: 600px) { .type-card { padding: 18px; } .type-card-header .type-name { font-size: 19px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="back-btn" href="../index.html" aria-label="Geri">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </a>
+      <a class="brand" href="../index.html"><img class="brand-logo" alt="Typo" src="../assets/text_logo.png" /></a>
+      <nav class="nav-links">
+        <a href="../index.html">Ana Sayfa</a>
+        <a href="../privacy.html">Gizlilik</a>
+        <a href="../terms.html">Koşullar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-header">
+      <h1>OCEAN Kişilik Boyutları</h1>
+      <p class="subtitle">Big Five — 5 Temel Kişilik Boyutu</p>
+    </div>
+
+    <div class="intro-banner">
+      <div class="intro-banner-header">
+        <svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+        <h2>5 Temel Boyut</h2>
+      </div>
+      <p class="intro-text">
+        Beş Faktör Modeli (Big Five/OCEAN), kişiliğin en kapsamlı ve bilimsel olarak en çok desteklenen modelidir.
+        Her boyut bir spektrum üzerinde ölçülür — yüksek veya düşük puan iyi ya da kötü değildir, sadece farklı eğilimleri yansıtır.
+      </p>
+    </div>
+
+    <!-- Openness -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <div class="letter-badge">O</div>
+        <div>
+          <p class="type-key">OPENNESS</p>
+          <h3 class="type-name">Açıklık</h3>
+        </div>
+      </div>
+      <p class="description-text">Açıklık (Openness), yeni deneyimlere, fikirlere ve yaratıcı düşünceye ne kadar açık olduğunu ölçer. Hayal gücü, merak ve entelektüel ilgi ile ilişkilidir.</p>
+      <div class="high-low-grid">
+        <div>
+          <p class="section-label">Yüksek Puan</p>
+          <div class="traits-list">
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Yaratıcı ve hayal gücü geniş</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Yeni deneyimlere açık</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Entelektüel merak dolu</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Soyut düşünceye yatkın</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Sanatsal ve estetik duyarlılığı yüksek</span></div>
+          </div>
+        </div>
+        <div>
+          <p class="section-label">Düşük Puan</p>
+          <div class="traits-list">
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Pratik ve ayakları yere basan</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Geleneksel ve alışılmış yolları tercih eden</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Somut ve elle tutulur bilgiyi seven</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Rutinden memnun</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Değişime temkinli yaklaşan</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">Yüksek açıklığa sahip bireyler ilişkide yaratıcı aktiviteler, derin sohbetler ve yeni deneyimler arar. Düşük açıklıktakiler ise istikrarlı rutinler ve pratik paylaşımlar üzerinden bağ kurar.</p>
+    </div>
+
+    <!-- Conscientiousness -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <div class="letter-badge">C</div>
+        <div>
+          <p class="type-key">CONSCIENTIOUSNESS</p>
+          <h3 class="type-name">Sorumluluk</h3>
+        </div>
+      </div>
+      <p class="description-text">Sorumluluk (Conscientiousness), düzenli, planlı ve disiplinli olma eğilimini ölçer. Hedef odaklılık, güvenilirlik ve öz-kontrol ile ilişkilidir.</p>
+      <div class="high-low-grid">
+        <div>
+          <p class="section-label">Yüksek Puan</p>
+          <div class="traits-list">
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Düzenli ve organize</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Planlı ve hedef odaklı</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Güvenilir ve sözünün eri</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Detaylara dikkat eden</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Öz-disiplini yüksek</span></div>
+          </div>
+        </div>
+        <div>
+          <p class="section-label">Düşük Puan</p>
+          <div class="traits-list">
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Esnek ve spontan</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Anlık kararlar alan</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Kurallardan bağımsız</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Rahat ve gevşek</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Detaylarla uğraşmaktan kaçınan</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">Yüksek sorumluluk sahibi bireyler ilişkide güvenilir, tutarlı ve planlıdır. Düşük sorumluluk sahibi bireyler ise daha spontan ve esnek olsa da, bazen güvenilirlik konusunda zorluk yaşayabilir.</p>
+    </div>
+
+    <!-- Extraversion -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <div class="letter-badge">E</div>
+        <div>
+          <p class="type-key">EXTRAVERSION</p>
+          <h3 class="type-name">Dışadönüklük</h3>
+        </div>
+      </div>
+      <p class="description-text">Dışadönüklük (Extraversion), sosyal ortamlarda ne kadar enerjik, girişken ve coşkulu olduğunu ölçer. Sosyal etkileşimden alınan enerji ve atılganlık ile ilişkilidir.</p>
+      <div class="high-low-grid">
+        <div>
+          <p class="section-label">Yüksek Puan</p>
+          <div class="traits-list">
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Sosyal ve girişken</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Enerjik ve coşkulu</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Sohbeti başlatan</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Dikkat çekmekten hoşlanan</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Grup aktivitelerini seven</span></div>
+          </div>
+        </div>
+        <div>
+          <p class="section-label">Düşük Puan</p>
+          <div class="traits-list">
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Sakin ve düşünceli</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Yalnız zaman geçirmeyi tercih eden</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Dinleyici ve gözlemci</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Küçük ve yakın grupları tercih eden</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Kendi iç dünyasına yönelen</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">Dışadönük bireyler ilişkide sosyal aktiviteler, eğlence ve heyecan arar. İçe dönük bireyler ise derin birebir sohbetler ve sakin ortamlar üzerinden bağ kurar.</p>
+    </div>
+
+    <!-- Agreeableness -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <div class="letter-badge">A</div>
+        <div>
+          <p class="type-key">AGREEABLENESS</p>
+          <h3 class="type-name">Uyumluluk</h3>
+        </div>
+      </div>
+      <p class="description-text">Uyumluluk (Agreeableness), başkalarına karşı ne kadar nazik, empatik ve işbirlikçi olduğunu ölçer. Güven, şefkat ve fedakarlık ile ilişkilidir.</p>
+      <div class="high-low-grid">
+        <div>
+          <p class="section-label">Yüksek Puan</p>
+          <div class="traits-list">
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Empatik ve şefkatli</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">İşbirlikçi ve uyumlu</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Güvenilir ve dürüst</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Fedakar ve yardımsever</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Çatışmadan kaçınan</span></div>
+          </div>
+        </div>
+        <div>
+          <p class="section-label">Düşük Puan</p>
+          <div class="traits-list">
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Eleştirel ve sorgulayıcı</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Rekabetçi ve iddialı</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Bağımsız düşünen</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Doğrudan ve açık sözlü</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Kendi çıkarlarını ön planda tutan</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">Yüksek uyumluluk sahibi bireyler ilişkide fedakar, anlayışlı ve uzlaşmacıdır. Düşük uyumluluk sahibi bireyler ise daha bağımsız ve doğrudan ama bazen çatışma yaratabilir.</p>
+    </div>
+
+    <!-- Neuroticism -->
+    <div class="type-card">
+      <div class="type-card-header">
+        <div class="letter-badge">N</div>
+        <div>
+          <p class="type-key">NEUROTICISM</p>
+          <h3 class="type-name">Duygusal Dengesizlik</h3>
+        </div>
+      </div>
+      <p class="description-text">Duygusal Dengesizlik (Neuroticism), stres, kaygı ve olumsuz duygulara ne kadar yatkın olduğunu ölçer. Duygusal dalgalanma, endişe ve hassasiyet ile ilişkilidir.</p>
+      <div class="high-low-grid">
+        <div>
+          <p class="section-label">Yüksek Puan</p>
+          <div class="traits-list">
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Duygusal dalgalanmalar yaşayan</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Strese karşı hassas</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Endişe ve kaygı eğiliminde</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Kolayca üzülen veya sinirlenen</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Duygu durumu değişken</span></div>
+          </div>
+        </div>
+        <div>
+          <p class="section-label">Düşük Puan</p>
+          <div class="traits-list">
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Duygusal olarak sakin ve kararlı</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Stresle başa çıkabilen</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Nadiren endişelenen</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Duygu durumu istikrarlı</span></div>
+            <div class="trait-row"><span class="trait-dot"></span><span class="trait-text">Soğukkanlı ve dayanıklı</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="section-label">İlişkide</p>
+      <p class="section-text">Yüksek nörotisizme sahip bireyler ilişkide daha hassas ve endişeli olabilir; güvence ve destek ihtiyaçları fazladır. Düşük nörotisizmde olanlar ise ilişkide sakin ve istikrarlı bir güç kaynağı olur.</p>
+    </div>
+
+    <a href="ocean-test.html" class="cta-button">
+      Testi Çöz
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <small>© <span id="y"></span> Typo</small>
+      <div class="footer-links">
+        <a href="../privacy.html">Gizlilik</a>
+        <a href="../kvkk.html">KVKK</a>
+        <a href="../terms.html">Koşullar</a>
+      </div>
+    </div>
+  </footer>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
