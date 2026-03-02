@@ -1,48 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="refresh" content="0; url=https://play.google.com/store/apps/details?id=com.kuark7.typodatingapp&hl=tr">
-    <title>Redirecting to Google Play...</title>
+    <title>Google Play'e yönlendiriliyorsunuz...</title>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: hsl(30, 25%, 97%);
+            color: hsl(220, 20%, 14%);
         }
         .container {
             text-align: center;
+            max-width: 500px;
+            padding: 40px 20px;
+        }
+        .logo {
+            max-width: 280px;
+            width: 80%;
+            height: auto;
+            margin-bottom: 40px;
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .spinner {
-            border: 4px solid rgba(255, 255, 255, 0.3);
+            border: 4px solid rgba(34, 40, 49, 0.1);
             border-radius: 50%;
-            border-top: 4px solid white;
-            width: 40px;
-            height: 40px;
+            border-top: 4px solid hsl(220, 20%, 14%);
+            width: 50px;
+            height: 50px;
             animation: spin 1s linear infinite;
-            margin: 20px auto;
+            margin: 25px auto;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 20px 0;
+            color: hsl(220, 20%, 14%);
+        }
+        p {
+            font-size: 16px;
+            color: hsl(220, 8%, 50%);
+            line-height: 1.6;
+        }
         a {
-            color: white;
+            color: hsl(335, 74%, 18%);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Redirecting to Google Play...</h1>
+        <img src="../assets/text_logo.png" alt="Typo" class="logo" />
         <div class="spinner"></div>
-        <p>If you are not redirected automatically, <a href="https://play.google.com/store/apps/details?id=com.kuark7.typodatingapp&hl=tr">click here</a>.</p>
+        <h1>Google Play'e yönlendiriliyorsunuz...</h1>
+        <p>Otomatik yönlendirilmediyseniz, <a href="https://play.google.com/store/apps/details?id=com.kuark7.typodatingapp&hl=tr">buraya tıklayın</a>.</p>
     </div>
     <script>
         window.location.href = "https://play.google.com/store/apps/details?id=com.kuark7.typodatingapp&hl=tr";
