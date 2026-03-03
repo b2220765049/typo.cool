@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Redirect pages (thin content)
+Disallow: /google/
+Disallow: /apple/
+Disallow: /download/
+
+# ML models (not useful for search)
+Disallow: /models/
+
+# OAuth callback
+Disallow: /oauth/
+
+Sitemap: https://typo.cool/sitemap.xml
