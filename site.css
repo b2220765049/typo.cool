@@ -175,6 +175,27 @@ h1, h2, h3, h4 {
   color: var(--fg);
 }
 
+.header-login-btn {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: linear-gradient(135deg, hsl(0, 0%, 100%), hsl(30, 18%, 96%));
+  color: var(--fg);
+  border-radius: 999px;
+  min-height: 44px;
+  padding: 10px 18px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.header-login-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
 /* Hamburger Menu */
 .nav-toggle {
   display: none;
@@ -615,6 +636,7 @@ h1, h2, h3, h4 {
   }
   .nav-toggle {
     display: flex;
+    margin-left: 6px;
   }
   .nav-links {
     flex-direction: column;
@@ -626,6 +648,12 @@ h1, h2, h3, h4 {
     border-top: 1px solid var(--border);
     margin-top: 12px;
     display: none;
+  }
+
+  .header-login-btn {
+    min-height: 40px;
+    padding: 8px 14px;
+    font-size: 13px;
   }
   .nav-links.active {
     display: flex;
@@ -839,22 +867,6 @@ footer:not(.site-footer) {
   max-width: 760px;
 }
 
-.party-note {
-  font-size: 14px;
-}
-
-.party-warning {
-  margin-top: 10px;
-  background: hsl(37, 100%, 94%);
-  color: hsl(25, 65%, 25%);
-  border: 1px solid hsl(36, 66%, 77%);
-  border-radius: 12px;
-  padding: 12px;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
 .party-status {
   border-radius: 12px;
   margin-top: 16px;
@@ -894,9 +906,38 @@ footer:not(.site-footer) {
   margin-top: 24px;
 }
 
+.party-pipeline {
+  align-items: start;
+}
+
+.pipeline-choice-card {
+  grid-column: 1 / -1;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(236, 112, 99, 0.14), transparent 34%),
+    radial-gradient(circle at 92% 18%, rgba(93, 173, 226, 0.16), transparent 30%),
+    var(--card);
+}
+
+.choice-actions {
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.choice-actions .btn {
+  min-width: 180px;
+}
+
 .party-results,
 .party-test {
   margin-top: 22px;
+}
+
+.party-results {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
 }
 
 .party-card {
@@ -1069,13 +1110,99 @@ footer:not(.site-footer) {
   margin: 0;
 }
 
+/* ==================== LOGIN MODAL ==================== */
+.login-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.login-modal.is-open {
+  display: flex;
+}
+
+.login-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(25, 21, 27, 0.42);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.login-modal-card {
+  position: relative;
+  z-index: 1;
+  width: min(460px, 100%);
+  background: var(--card);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 24px;
+  box-shadow: var(--shadow-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: white;
+  color: var(--fg-muted);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.login-modal-subtitle {
+  margin: 0;
+  color: var(--fg-muted);
+}
+
+.google-login-btn {
+  min-height: 48px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: hsl(0, 0%, 100%);
+  padding: 10px 14px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--fg);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.google-login-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.google-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
 .small-note {
   font-size: 13px;
 }
 
 @media (max-width: 900px) {
   .party-grid,
-  .party-room {
+  .party-room,
+  .party-results {
     grid-template-columns: 1fr;
   }
 }
@@ -1096,6 +1223,10 @@ footer:not(.site-footer) {
   }
 
   .test-progress-track {
+    width: 100%;
+  }
+
+  .choice-actions .btn {
     width: 100%;
   }
 }

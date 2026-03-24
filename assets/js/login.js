@@ -16,12 +16,10 @@
     var custom = (cfg.authRedirectUrl || "").trim();
     if (custom) return custom;
 
-    // In production, always return to typo.cool login page.
     if (window.location.hostname === "typo.cool" || window.location.hostname === "www.typo.cool") {
       return "https://typo.cool/login.html";
     }
 
-    // Local/dev fallback.
     return window.location.origin + "/login.html";
   }
 

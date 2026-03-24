@@ -37,22 +37,24 @@
     <section class="container party-hero">
       <h1>Typo Party</h1>
       <p>Oda olustur, davet linkini paylas, host olarak testi ayni anda baslat. Oda kilitlendikten sonra yeni katilim alinmaz.</p>
-      <p class="party-note">Guvenlik: Frontend sadece public anon key kullanir. Tum yetkili islemler Supabase Edge Functions uzerinden calisir.</p>
       <div id="statusBar" class="party-status info">Hazirlaniyor...</div>
-      <div id="supabaseSetupWarning" class="party-warning" hidden>
-        <strong>Kurulum gerekli:</strong> <span>assets/js/supabase-config.js dosyasina Supabase URL ve anon key ekleyin.</span>
-      </div>
     </section>
 
-    <section id="section-lobby" class="container party-grid">
-      <article class="party-card">
-        <h2>Test Modu</h2>
-        <p>Typo Party testi icin e-posta girisi gecici olarak kapali. Sayfa otomatik anonim oturum acarak oda olusturmayi ve host islemlerini test etmeni saglar.</p>
-        <p class="muted">Canliya gecmeden once bunu tekrar Gmail girisiyle degistirecegiz.</p>
+    <section id="section-lobby" class="container party-grid party-pipeline">
+      <article class="party-card pipeline-choice-card">
+        <h2>Nasil Devam Edelim?</h2>
+        <p>Ilk adimda bir yol sec: yeni oda olustur veya mevcut bir odaya katil.</p>
+        <div class="choice-actions">
+          <button id="chooseCreateBtn" class="btn primary" type="button">Oda Olustur</button>
+          <button id="chooseJoinBtn" class="btn ghost" type="button">Odaya Katil</button>
+        </div>
+        <p class="muted">Secimine gore asagida sadece ilgili kart acilir.</p>
       </article>
 
-      <article class="party-card">
+      <article id="createPathCard" class="party-card" hidden>
         <h2>Oda Olustur</h2>
+        <p class="muted">Host islemleri icin once Google ile giris yapmis olmalisin.</p>
+        <a class="btn ghost" href="../login.html">Google ile Giris Yap</a>
         <form id="createRoomForm" class="stack-form">
           <label for="createRoomName">Oda Adi</label>
           <input id="createRoomName" type="text" maxlength="64" placeholder="ornek: cuma-aksami" required />
@@ -64,22 +66,22 @@
           <input id="maxParticipants" type="number" min="2" max="200" value="12" required />
 
           <button class="btn primary" type="submit">Oda Olustur</button>
+          <button id="switchToJoinBtn" class="btn ghost" type="button">Bunun yerine Odaya Katil</button>
         </form>
       </article>
 
-      <article class="party-card">
+      <article id="joinPathCard" class="party-card" hidden>
         <h2>Odaya Katil</h2>
+        <p class="muted">Oda kodunu ve rumuzunu gir. Host girisi gerekmez.</p>
         <form id="joinRoomForm" class="stack-form">
           <label for="joinRoomCode">Oda Kodu</label>
-          <input id="joinRoomCode" type="text" maxlength="24" placeholder="ornek: AB12CD" />
-
-          <label for="joinRoomName">veya Oda Adi</label>
-          <input id="joinRoomName" type="text" maxlength="64" placeholder="ornek: cuma-aksami" />
+          <input id="joinRoomCode" type="text" maxlength="24" placeholder="ornek: AB12CD" required />
 
           <label for="joinNickname">Rumuz</label>
           <input id="joinNickname" type="text" maxlength="32" placeholder="ornek: Merve" required />
 
           <button class="btn primary" type="submit">Katil</button>
+          <button id="switchToCreateBtn" class="btn ghost" type="button">Bunun yerine Oda Olustur</button>
         </form>
       </article>
     </section>
@@ -135,8 +137,14 @@
       <article class="party-card">
         <h2>Sonucun Kaydedildi</h2>
         <p>IPC tipin: <strong id="myResultBadge">-</strong></p>
-        <p class="muted">Host oturumu bitirene kadar odadaki sonuclar burada guncellenir.</p>
+        <p id="resultsProgressText" class="muted">Sonuclar canli olarak guncellenir.</p>
         <button id="backToLobbyBtn" class="btn ghost" type="button">Lobiye Don</button>
+      </article>
+
+      <article class="party-card">
+        <h3>Anlik Sonuclar</h3>
+        <p class="muted">Host ve tum katilimcilar burada ayni anlik sonucu gorur.</p>
+        <ul id="resultsFinalList" class="simple-list"></ul>
       </article>
     </section>
   </main>

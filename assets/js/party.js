@@ -93,10 +93,10 @@
   var state = {
     supabase: null,
     supabaseUrl: "",
+    entryMode: "choice",
     room: null,
     session: null,
     hostSession: null,
-    isHost: false,
     participantToken: "",
     nickname: "",
     channel: null,
@@ -132,6 +132,23 @@
     });
   }
 
+  function setEntryMode(mode) {
+    state.entryMode = mode;
+
+    var createCard = byId("createPathCard");
+    var joinCard = byId("joinPathCard");
+    var chooseCreateBtn = byId("chooseCreateBtn");
+    var chooseJoinBtn = byId("chooseJoinBtn");
+
+    if (!createCard || !joinCard || !chooseCreateBtn || !chooseJoinBtn) return;
+
+    createCard.hidden = mode !== "create";
+    joinCard.hidden = mode !== "join";
+
+    chooseCreateBtn.className = mode === "create" ? "btn primary" : "btn ghost";
+    chooseJoinBtn.className = mode === "join" ? "btn primary" : "btn ghost";
+  }
+
   function safeRoomCode(raw) {
     return (raw || "").toUpperCase().replace(/[^A-Z0-9_-]/g, "");
   }
@@ -139,15 +156,13 @@
   function parseQuery() {
     var params = new URLSearchParams(window.location.search);
     return {
-      code: safeRoomCode(params.get("code")),
-      room: (params.get("room") || "").trim()
+      code: safeRoomCode(params.get("code"))
     };
   }
 
-  function applyUrl(code, roomName) {
+  function applyUrl(code) {
     var params = new URLSearchParams();
     if (code) params.set("code", code);
-    if (roomName) params.set("room", roomName);
     var next = window.location.pathname + (params.toString() ? "?" + params.toString() : "");
     window.history.replaceState({}, "", next);
   }
@@ -320,7 +335,12 @@
   }
 
   function isHost() {
-    return Boolean(state.isHost);
+    return Boolean(
+      state.hostSession &&
+      state.hostSession.user &&
+      state.room &&
+      state.hostSession.user.id === state.room.host_user_id
+    );
   }
 
   function renderParticipants(participants) {
@@ -343,8 +363,9 @@
     });
   }
 
-  function renderResults(results) {
-    var list = byId("resultsList");
+  function renderResultsToList(listId, results) {
+    var list = byId(listId);
+    if (!list) return;
     list.innerHTML = "";
 
     if (!results || results.length === 0) {
@@ -363,6 +384,11 @@
     });
   }
 
+  function renderResults(results) {
+    renderResultsToList("resultsList", results);
+    renderResultsToList("resultsFinalList", results);
+  }
+
   function renderRoom(snapshot) {
     state.room = snapshot.room || null;
     state.session = snapshot.session || null;
@@ -376,11 +402,19 @@
     byId("roomNameView").textContent = state.room.room_name;
     byId("roomCodeView").textContent = state.room.room_code;
 
-    var deepLink = window.location.origin + "/party/?code=" + encodeURIComponent(state.room.room_code) + "&room=" + encodeURIComponent(state.room.room_name || "");
+    var deepLink = window.location.origin + "/party/?code=" + encodeURIComponent(state.room.room_code);
     byId("roomLinkView").value = deepLink;
 
-    renderParticipants(snapshot.participants || []);
-    renderResults(snapshot.results || []);
+    var participants = snapshot.participants || [];
+    var results = snapshot.results || [];
+
+    renderParticipants(participants);
+    renderResults(results);
+
+    var progress = byId("resultsProgressText");
+    if (progress) {
+      progress.textContent = "Tamamlayan kisi: " + results.length + "/" + participants.length;
+    }
 
     var statusText = "Durum: Acik";
     if (state.room.status === "locked") statusText = "Durum: Kilitli";
@@ -395,6 +429,8 @@
         state.test.active = true;
         showSection("test");
         renderQuestion();
+      } else {
+        showSection("results");
       }
       return;
     }
@@ -412,7 +448,6 @@
     try {
       var snapshot = await postFunction("party-resolve-room", {
         roomCode: state.room.room_code,
-        roomName: state.room.room_name,
         participantToken: state.participantToken || ""
       }, false);
       renderRoom(snapshot);
@@ -443,10 +478,9 @@
 
       state.participantToken = result.participantToken || "";
       state.nickname = hostNickname;
-      state.isHost = true;
       resetTestState();
 
-      applyUrl(result.room.room_code, result.room.room_name);
+      applyUrl(result.room.room_code);
       renderRoom(result);
       subscribeRealtime(result.room.id, result.room.room_code);
       setStatus("Oda olusturuldu.", "success");
@@ -458,7 +492,6 @@
   async function joinRoom(evt) {
     evt.preventDefault();
     var roomCodeInput = safeRoomCode((byId("joinRoomCode").value || "").trim());
-    var roomNameInput = (byId("joinRoomName").value || "").trim();
     var nickname = (byId("joinNickname").value || "").trim();
 
     if (!nickname) {
@@ -466,8 +499,8 @@
       return;
     }
 
-    if (!roomCodeInput && !roomNameInput) {
-      setStatus("Oda kodu veya oda adi gir.", "error");
+    if (!roomCodeInput) {
+      setStatus("Oda kodu gerekli.", "error");
       return;
     }
 
@@ -475,16 +508,14 @@
       setStatus("Odaya katiliniyor...", "info");
       var result = await postFunction("party-join-room", {
         roomCode: roomCodeInput,
-        roomName: roomNameInput,
         nickname: nickname
       }, false);
 
       state.participantToken = result.participantToken || "";
       state.nickname = nickname;
-      state.isHost = false;
       resetTestState();
 
-      applyUrl(result.room.room_code, result.room.room_name);
+      applyUrl(result.room.room_code);
       renderRoom(result);
       subscribeRealtime(result.room.id, result.room.room_code);
       setStatus("Odaya katildin.", "success");
@@ -522,6 +553,21 @@
   }
 
   function bindEvents() {
+    byId("chooseCreateBtn").addEventListener("click", function () {
+      setEntryMode("create");
+      setStatus("Oda olusturma adimini doldur.", "info");
+    });
+    byId("chooseJoinBtn").addEventListener("click", function () {
+      setEntryMode("join");
+      setStatus("Oda kodunu girip katil.", "info");
+    });
+    byId("switchToJoinBtn").addEventListener("click", function () {
+      setEntryMode("join");
+    });
+    byId("switchToCreateBtn").addEventListener("click", function () {
+      setEntryMode("create");
+    });
+
     byId("createRoomForm").addEventListener("submit", createRoom);
     byId("joinRoomForm").addEventListener("submit", joinRoom);
     byId("copyRoomLinkBtn").addEventListener("click", function () {
@@ -545,12 +591,13 @@
       state.participantToken = "";
       resetTestState();
       unsubscribeRealtime();
-      applyUrl("", "");
-      state.isHost = false;
+      applyUrl("");
+      setEntryMode("choice");
       showSection("lobby");
       setStatus("Odadan cikildi.", "info");
     });
     byId("backToLobbyBtn").addEventListener("click", function () {
+      setEntryMode("choice");
       showSection("lobby");
     });
   }
@@ -609,34 +656,36 @@
     }, 8000);
   }
 
-  async function ensureAnonymousSession() {
+  async function hydrateHostSession() {
     if (!state.supabase) return;
 
     var sessionResult = await state.supabase.auth.getSession();
-    var session = sessionResult && sessionResult.data ? sessionResult.data.session : null;
+    state.hostSession = sessionResult && sessionResult.data ? sessionResult.data.session : null;
 
-    if (!session) {
-      var anonResult = await state.supabase.auth.signInAnonymously();
-      if (anonResult.error) {
-        throw new Error("Anonim oturum acilamadi. Supabase Auth ayarlarinda Anonymous Sign-ins'i ac.");
-      }
+    if (!state.authSubscriptionBound) {
+      state.authSubscriptionBound = true;
+      state.supabase.auth.onAuthStateChange(function () {
+        void hydrateHostSession();
+        if (state.room) {
+          setHostControls(isHost());
+        }
+      });
     }
   }
 
   async function tryAutoJoinFromUrl() {
     var query = parseQuery();
-    if (!query.code && !query.room) {
+    if (!query.code) {
       return;
     }
 
     byId("joinRoomCode").value = query.code;
-    byId("joinRoomName").value = query.room;
+    setEntryMode("join");
 
     try {
       setStatus("Oda bilgisi yukleniyor...", "info");
       var snapshot = await postFunction("party-resolve-room", {
         roomCode: query.code,
-        roomName: query.room,
         participantToken: ""
       }, false);
 
@@ -665,18 +714,17 @@
     state.supabaseUrl = ctx.config ? ctx.config.url : "";
 
     if (ctx.error) {
-      setStatus(ctx.error, "error");
-      byId("supabaseSetupWarning").hidden = false;
+      setStatus("Baglanti kurulamadi. Lutfen daha sonra tekrar dene.", "error");
       return false;
     }
 
-    byId("supabaseSetupWarning").hidden = true;
     return true;
   }
 
   async function init() {
     cacheElements();
     bindEvents();
+    setEntryMode("choice");
 
     var ok = initClient();
     if (!ok) {
@@ -684,13 +732,7 @@
       return;
     }
 
-    try {
-      await ensureAnonymousSession();
-    } catch (error) {
-      setStatus(error.message, "error");
-      showSection("lobby");
-      return;
-    }
+    await hydrateHostSession();
     await tryAutoJoinFromUrl();
     if (!state.room) {
       showSection("lobby");
