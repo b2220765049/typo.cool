@@ -19,51 +19,51 @@
       ]
     },
     {
-      statement: "Kalabalik bir ortamda yeni insanlarla tanisiyorsun.",
+      statement: "Kalabalık bir ortamda yeni insanlarla tanışıyorsun.",
       options: [
-        { text: "Sohbeti ben baslatirim.", effect: { dom: 1, lov: 1 } },
-        { text: "Biriyle derin bir sohbet acmaya calisirim.", effect: { dom: 0, lov: 2 } },
-        { text: "Sessiz kalip izlerim.", effect: { dom: -1, lov: -1 } }
+        { text: "Sohbeti ben başlatırım.", effect: { dom: 1, lov: 1 } },
+        { text: "Biriyle derin bir sohbet açmaya çalışırım.", effect: { dom: 0, lov: 2 } },
+        { text: "Sessiz kalıp izlerim.", effect: { dom: -1, lov: -1 } }
       ]
     },
     {
-      statement: "Birisi seni haksizca elestirdi.",
+      statement: "Birisi seni haksızca eleştirdi.",
       options: [
-        { text: "Sinirlarimi net koyarim.", effect: { dom: 2, lov: -1 } },
-        { text: "Neden boyle hissettigini anlamaya calisirim.", effect: { dom: 0, lov: 2 } },
-        { text: "Tepki vermeden geri cekilirim.", effect: { dom: -1, lov: -1 } }
+        { text: "Sınırlarımı net koyarım.", effect: { dom: 2, lov: -1 } },
+        { text: "Neden böyle hissettiğini anlamaya çalışırım.", effect: { dom: 0, lov: 2 } },
+        { text: "Tepki vermeden geri çekilirim.", effect: { dom: -1, lov: -1 } }
       ]
     },
     {
-      statement: "Takimda gorev dagilimi yapiliyor.",
+      statement: "Takımda görev dağılımı yapılıyor.",
       options: [
-        { text: "Liderlik alir, sorumluluk dagitirim.", effect: { dom: 2, lov: 0 } },
-        { text: "Herkesin guclu yonune gore paylastiririm.", effect: { dom: 1, lov: 1 } },
-        { text: "Bana ne verilirse onu yaparim.", effect: { dom: -1, lov: 0 } }
+        { text: "Liderlik alır, sorumluluk dağıtırım.", effect: { dom: 2, lov: 0 } },
+        { text: "Herkesin güçlü yönüne göre paylaştırırım.", effect: { dom: 1, lov: 1 } },
+        { text: "Bana ne verilirse onu yaparım.", effect: { dom: -1, lov: 0 } }
       ]
     },
     {
-      statement: "Arkadasin zor bir donemden geciyor.",
+      statement: "Arkadaşın zor bir dönemden geçiyor.",
       options: [
-        { text: "Pratik bir cozum plani sunarim.", effect: { dom: 1, lov: 0 } },
+        { text: "Pratik bir çözüm planı sunarım.", effect: { dom: 1, lov: 0 } },
         { text: "Dinlerim ve duygusal destek veririm.", effect: { dom: 0, lov: 2 } },
-        { text: "Nasil yaklasacagimi bilemeyip uzak kalirim.", effect: { dom: -1, lov: -1 } }
+        { text: "Nasıl yaklaşacağımı bilemeyip uzak kalırım.", effect: { dom: -1, lov: -1 } }
       ]
     },
     {
-      statement: "Bir konuda hakli oldugunu dusunuyorsun.",
+      statement: "Bir konuda haklı olduğunu düşünüyorsun.",
       options: [
-        { text: "Gorusumu acikca savunurum.", effect: { dom: 2, lov: -1 } },
-        { text: "Uzlasma icin orta yol ararim.", effect: { dom: 0, lov: 1 } },
-        { text: "Konuyu kapatmayi tercih ederim.", effect: { dom: -1, lov: -1 } }
+        { text: "Görüşümü açıkça savunurum.", effect: { dom: 2, lov: -1 } },
+        { text: "Uzlaşma için orta yol ararım.", effect: { dom: 0, lov: 1 } },
+        { text: "Konuyu kapatmayı tercih ederim.", effect: { dom: -1, lov: -1 } }
       ]
     },
     {
-      statement: "Yeni bir gruba katildin.",
+      statement: "Yeni bir gruba katıldın.",
       options: [
-        { text: "Kendimi tanitip enerjiyi yukseltecek sohbet acarim.", effect: { dom: 1, lov: 1 } },
-        { text: "Insanlari tanimak icin soru sorarim.", effect: { dom: 0, lov: 2 } },
-        { text: "Benimle konusulunca cevap veririm.", effect: { dom: -1, lov: 0 } }
+        { text: "Kendimi tanıtıp enerjiyi yükseltecek bir sohbet açarım.", effect: { dom: 1, lov: 1 } },
+        { text: "İnsanları tanımak için soru sorarım.", effect: { dom: 0, lov: 2 } },
+        { text: "Benimle konuşulunca cevap veririm.", effect: { dom: -1, lov: 0 } }
       ]
     }
   ];
@@ -80,13 +80,13 @@
   };
 
   var OCTANT_NAMES = {
-    LM: "Sicak-Uyumlu",
-    NO: "Disadonus-Girisken",
-    PA: "Guvenli-Lider",
-    BC: "Mesafeli-Kontrolcu",
-    DE: "Soguk-Elestirel",
-    FG: "Icedonus-Mesafeli",
-    HI: "Cekingen-Cekimser",
+    LM: "Sıcak-Uyumlu",
+    NO: "Dışadönük-Girişken",
+    PA: "Güvenli-Lider",
+    BC: "Mesafeli-Kontrolcü",
+    DE: "Soğuk-Eleştirel",
+    FG: "İçedönük-Mesafeli",
+    HI: "Çekingen-Çekimser",
     JK: "Nazik-Uysal"
   };
 
@@ -251,7 +251,7 @@
 
   async function postFunction(name, payload, requireAuth) {
     if (!state.supabase || !state.supabaseUrl) {
-      throw new Error("Supabase baglantisi hazir degil.");
+      throw new Error("Supabase bağlantısı hazır değil.");
     }
 
     var headers = {
@@ -264,7 +264,7 @@
         ? sessionResult.data.session.access_token
         : "";
       if (!accessToken) {
-        throw new Error("Bu islem icin host girisi gerekli.");
+        throw new Error("Bu işlem için host girişi gerekli.");
       }
       headers.Authorization = "Bearer " + accessToken;
     }
@@ -283,7 +283,7 @@
     }
 
     if (!response.ok) {
-      var message = (data && (data.error || data.message)) || "Sunucu hatasi";
+      var message = (data && (data.error || data.message)) || "Sunucu hatası";
       throw new Error(message);
     }
 
@@ -411,6 +411,23 @@
     );
   }
 
+  function updateCreateCardSignInStatus() {
+    var googleLoginBtn = byId("party-google-login-btn");
+    var createRoomForm = byId("createRoomForm");
+
+    if (!googleLoginBtn || !createRoomForm) return;
+
+    if (state.hostSession && state.hostSession.user) {
+      // User is signed in - hide login button, show form
+      googleLoginBtn.hidden = true;
+      createRoomForm.hidden = false;
+    } else {
+      // User is not signed in - show login button, hide form
+      googleLoginBtn.hidden = false;
+      createRoomForm.hidden = true;
+    }
+  }
+
   function renderParticipants(participants) {
     var list = byId("participantsList");
     list.innerHTML = "";
@@ -418,7 +435,7 @@
     if (!participants || participants.length === 0) {
       var empty = document.createElement("li");
       empty.className = "muted";
-      empty.textContent = "Henuz kimse katilmadi.";
+      empty.textContent = "Henüz kimse katılmadı.";
       list.appendChild(empty);
       return;
     }
@@ -439,7 +456,7 @@
     if (!results || results.length === 0) {
       var empty = document.createElement("li");
       empty.className = "muted";
-      empty.textContent = "Henuz sonuc gelmedi.";
+      empty.textContent = "Henüz sonuç gelmedi.";
       list.appendChild(empty);
       return;
     }
@@ -462,7 +479,7 @@
     state.session = snapshot.session || null;
 
     if (!state.room) {
-      setStatus("Oda bulunamadi.", "error");
+      setStatus("Oda bulunamadı.", "error");
       showSection("lobby");
       return;
     }
@@ -481,13 +498,13 @@
 
     var progress = byId("resultsProgressText");
     if (progress) {
-      progress.textContent = "Tamamlayan kisi: " + results.length + "/" + participants.length;
+      progress.textContent = "Tamamlayan kişi: " + results.length + "/" + participants.length;
     }
 
-    var statusText = "Durum: Acik";
+    var statusText = "Durum: Açık";
     if (state.room.status === "locked") statusText = "Durum: Kilitli";
-    if (state.room.status === "testing") statusText = "Durum: Test Basladi";
-    if (state.room.status === "completed") statusText = "Durum: Tamamlandi";
+    if (state.room.status === "testing") statusText = "Durum: Test Başladı";
+    if (state.room.status === "completed") statusText = "Durum: Tamamlandı";
     byId("roomStatusView").textContent = statusText;
 
     setHostControls(isHost());
@@ -531,12 +548,12 @@
     var maxParticipants = Number(byId("maxParticipants").value || "12");
 
     if (!roomName || !hostNickname) {
-      setStatus("Oda adi ve host rumuzu gerekli.", "error");
+      setStatus("Oda adı ve host kullanıcı adı gerekli.", "error");
       return;
     }
 
     try {
-      setStatus("Oda olusturuluyor...", "info");
+      setStatus("Oda oluşturuluyor...", "info");
       var payload = {
         roomName: roomName,
         hostNickname: hostNickname,
@@ -551,7 +568,7 @@
       applyUrl(result.room.room_code);
       renderRoom(result);
       subscribeRealtime(result.room.id, result.room.room_code);
-      setStatus("Oda olusturuldu.", "success");
+      setStatus("Oda oluşturuldu.", "success");
     } catch (error) {
       setStatus(error.message, "error");
     }
@@ -563,7 +580,7 @@
     var nickname = (byId("joinNickname").value || "").trim();
 
     if (!nickname) {
-      setStatus("Katilmak icin rumuz gerekli.", "error");
+      setStatus("Katılmak için kullanıcı adı gerekli.", "error");
       return;
     }
 
@@ -573,7 +590,7 @@
     }
 
     try {
-      setStatus("Odaya katiliniyor...", "info");
+      setStatus("Odaya katılınıyor...", "info");
       var result = await postFunction("party-join-room", {
         roomCode: roomCodeInput,
         nickname: nickname
@@ -586,7 +603,7 @@
       applyUrl(result.room.room_code);
       renderRoom(result);
       subscribeRealtime(result.room.id, result.room.room_code);
-      setStatus("Odaya katildin.", "success");
+      setStatus("Odaya katıldın.", "success");
     } catch (error) {
       setStatus(error.message, "error");
     }
@@ -595,12 +612,12 @@
   async function lockAndStart() {
     if (!state.room) return;
     try {
-      setStatus("Oda kilitleniyor ve test baslatiliyor...", "info");
+      setStatus("Oda kilitleniyor ve test başlatılıyor...", "info");
       await postFunction("party-lock-start", {
         roomCode: state.room.room_code
       }, true);
       await refreshRoomSnapshot();
-      setStatus("Test baslatildi.", "success");
+      setStatus("Test başlatıldı.", "success");
     } catch (error) {
       setStatus(error.message, "error");
     }
@@ -609,12 +626,12 @@
   async function endSession() {
     if (!state.room) return;
     try {
-      setStatus("Oturum sonlandiriliyor...", "info");
+      setStatus("Oturum sonlandırılıyor...", "info");
       await postFunction("party-end-session", {
         roomCode: state.room.room_code
       }, true);
       await refreshRoomSnapshot();
-      setStatus("Oturum sonlandi.", "success");
+      setStatus("Oturum sonlandı.", "success");
     } catch (error) {
       setStatus(error.message, "error");
     }
@@ -623,11 +640,11 @@
   function bindEvents() {
     byId("chooseCreateBtn").addEventListener("click", function () {
       setEntryMode("create");
-      setStatus("Oda olusturma adimini doldur.", "info");
+      setStatus("Oda oluşturma adımını doldur.", "info");
     });
     byId("chooseJoinBtn").addEventListener("click", function () {
       setEntryMode("join");
-      setStatus("Oda kodunu girip katil.", "info");
+      setStatus("Oda kodunu girip katıl.", "info");
     });
     byId("switchToJoinBtn").addEventListener("click", function () {
       setEntryMode("join");
@@ -641,7 +658,7 @@
     byId("copyRoomLinkBtn").addEventListener("click", function () {
       void copyText(byId("roomLinkView").value)
         .then(function () {
-          setStatus("Oda linki kopyalandi.", "success");
+          setStatus("Oda bağlantısı kopyalandı.", "success");
         })
         .catch(function () {
           setStatus("Link kopyalanamadi.", "error");
@@ -662,7 +679,7 @@
       applyUrl("");
       setEntryMode("choice");
       showSection("lobby");
-      setStatus("Odadan cikildi.", "info");
+      setStatus("Odadan çıkıldı.", "info");
     });
     byId("backToLobbyBtn").addEventListener("click", function () {
       setEntryMode("choice");
@@ -713,7 +730,7 @@
       })
       .subscribe(function (status) {
         if (status === "SUBSCRIBED") {
-          setStatus("Oda canli baglanti aktif.", "success");
+          setStatus("Oda canlı bağlantısı aktif.", "success");
         }
       });
 
@@ -729,6 +746,8 @@
 
     var sessionResult = await state.supabase.auth.getSession();
     state.hostSession = sessionResult && sessionResult.data ? sessionResult.data.session : null;
+
+    updateCreateCardSignInStatus();
 
     if (!state.authSubscriptionBound) {
       state.authSubscriptionBound = true;
@@ -751,7 +770,7 @@
     setEntryMode("join");
 
     try {
-      setStatus("Oda bilgisi yukleniyor...", "info");
+      setStatus("Oda bilgisi yükleniyor...", "info");
       var snapshot = await postFunction("party-resolve-room", {
         roomCode: query.code,
         participantToken: ""
@@ -761,11 +780,11 @@
       state.session = snapshot.session || null;
 
       if (snapshot.room && snapshot.room.status === "locked") {
-        setStatus("Bu oda kilitli. Yeni katilim kabul edilmiyor.", "error");
+        setStatus("Bu oda kilitli. Yeni katılım kabul edilmiyor.", "error");
       } else if (snapshot.room && snapshot.room.status === "testing") {
-        setStatus("Bu odada test basladi. Yeni katilim kabul edilmiyor.", "error");
+        setStatus("Bu odada test başladı. Yeni katılım kabul edilmiyor.", "error");
       } else {
-        setStatus("Oda bulundu. Katilmak icin rumuz gir.", "info");
+        setStatus("Oda bulundu. Katılmak için kullanıcı adı gir.", "info");
       }
     } catch (error) {
       setStatus(error.message, "error");
@@ -782,7 +801,7 @@
     state.supabaseUrl = ctx.config ? ctx.config.url : "";
 
     if (ctx.error) {
-      setStatus("Baglanti kurulamadi. Lutfen daha sonra tekrar dene.", "error");
+      setStatus("Bağlantı kurulamadı. Lütfen daha sonra tekrar dene.", "error");
       return false;
     }
 
@@ -805,7 +824,7 @@
     if (!state.room) {
       showSection("lobby");
     }
-    setStatus("Typo Party hazir.", "info");
+    setStatus("Typo Party hazır.", "info");
   }
 
   window.addEventListener("beforeunload", function () {

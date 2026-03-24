@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>Typo Party - Oda Olustur ve Iletisim Testini Canli Baslat</title>
-  <meta name="description" content="Typo Party ile oda olustur, linkle katil, host olarak testi ayni anda baslat ve sonuclari guvenli sekilde kaydet." />
+  <title>Typo Party - Oda Oluştur ve İletişim Testini Canlı Başlat</title>
+  <meta name="description" content="Typo Party ile oda oluştur, bağlantıyla katıl, host olarak testi aynı anda başlat ve sonuçları güvenli şekilde kaydet." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://typo.cool/party/" />
   <meta property="og:site_name" content="Typo" />
   <meta property="og:title" content="Typo Party" />
-  <meta property="og:description" content="Canli oda deneyimi ile iletisim testini birlikte cozun." />
+  <meta property="og:description" content="Canlı oda deneyimi ile iletişim testini birlikte çözün." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://typo.cool/party/" />
   <meta property="og:locale" content="tr_TR" />
@@ -32,37 +32,44 @@
         <a href="../terms.html">Koşullar</a>
         <a href="../delete-account.html">Hesap Silme</a>
       </nav>
-      <a class="header-login-btn" href="../login.html">Giriş Yap</a>
+      <div id="profileMenuWrap" class="profile-menu" hidden>
+        <button id="profileMenuToggleBtn" class="header-login-btn profile-toggle-btn" type="button" aria-haspopup="menu" aria-expanded="false">Profil</button>
+        <div id="profileDropdownMenu" class="profile-dropdown" role="menu" aria-label="Profil menusu" hidden>
+          <a href="../profile.html" role="menuitem">Profil Sayfasi</a>
+          <button id="profileLogoutBtn" type="button" role="menuitem">Cikis Yap</button>
+        </div>
+      </div>
+      <button id="openLoginModalBtn" class="header-login-btn" type="button" hidden>Giriş Yap</button>
     </div>
   </header>
 
   <main class="party-main">
     <section class="container party-hero">
       <h1>Typo Party</h1>
-      <p>Oda olustur, davet linkini paylas, host olarak testi ayni anda baslat. Oda kilitlendikten sonra yeni katilim alinmaz.</p>
+      <p>Oda oluştur, davet bağlantısını paylaş, host olarak testi aynı anda başlat. Oda kilitlendikten sonra yeni katılım alınmaz.</p>
       <div id="statusBar" class="party-status error" hidden></div>
     </section>
 
     <section id="section-lobby" class="container party-grid party-pipeline">
       <article id="entryChoiceCard" class="party-card pipeline-choice-card party-entry-card">
-        <h2>Nasil Devam Edelim?</h2>
-        <p>Ilk adimda bir yol sec: yeni oda olustur veya mevcut bir odaya katil.</p>
+        <h2>Nasıl Devam Edelim?</h2>
+        <p>İlk adımda bir yol seç: yeni oda oluştur veya mevcut bir odaya katıl.</p>
         <div class="choice-actions">
-          <button id="chooseCreateBtn" class="btn primary" type="button">Oda Olustur</button>
-          <button id="chooseJoinBtn" class="btn ghost" type="button">Odaya Katil</button>
+          <button id="chooseCreateBtn" class="btn primary" type="button">Oda Oluştur</button>
+          <button id="chooseJoinBtn" class="btn ghost" type="button">Odaya Katıl</button>
         </div>
-        <p class="muted">Secimine gore asagida sadece ilgili kart acilir.</p>
+        <p class="muted">Seçimine göre aşağıda sadece ilgili kart açılır.</p>
       </article>
 
       <article id="createPathCard" class="party-card party-entry-card create-path-card" hidden>
         <div class="create-card-header">
           <span class="create-card-pill">Host Modu</span>
-          <h2>Oda Olustur</h2>
-          <p class="muted">Host islemleri icin once Google ile giris yapmis olmalisin.</p>
+          <h2>Oda Oluştur</h2>
+          <p class="muted">Host işlemleri için önce Google ile giriş yapmış olmalısın.</p>
           <div class="create-card-benefits" aria-hidden="true">
-            <span>Canli katilimci listesi</span>
-            <span>Tek tusla kilitle ve baslat</span>
-            <span>Sonuclar anlik toplanir</span>
+            <span>Canlı katılımcı listesi</span>
+            <span>Tek tuşla kilitle ve başlat</span>
+            <span>Sonuçlar anlık toplanır</span>
           </div>
         </div>
 
@@ -73,36 +80,36 @@
             <path fill="#4A90E2" d="M4.12 10.82a5.39 5.39 0 0 1 0-3.64V4.76H1.01a9 9 0 0 0 0 8.48l3.11-2.42z"></path>
             <path fill="#FBBC05" d="M9 3.58c1.32 0 2.5.45 3.43 1.33l2.57-2.57C13.46.91 11.42 0 9 0 5.49 0 2.49 1.83 1.01 4.76l3.11 2.42C4.81 5.11 6.73 3.58 9 3.58z"></path>
           </svg>
-          <span>Google ile Giris Yap</span>
+          <span>Google ile Giriş Yap</span>
         </a>
 
-        <form id="createRoomForm" class="stack-form create-room-form">
-          <label for="createRoomName">Oda Adi</label>
-          <input id="createRoomName" type="text" maxlength="64" placeholder="ornek: cuma-aksami" required />
+        <form id="createRoomForm" class="stack-form create-room-form" hidden>
+          <label for="createRoomName">Oda Adı</label>
+          <input id="createRoomName" type="text" maxlength="64" placeholder="örnek: cuma-aksami" required />
 
-          <label for="hostNickname">Host Rumuzu</label>
-          <input id="hostNickname" type="text" maxlength="32" placeholder="ornek: Emre" required />
+          <label for="hostNickname">Host Kullanıcı adı</label>
+          <input id="hostNickname" type="text" maxlength="32" placeholder="örnek: Emre" required />
 
-          <label for="maxParticipants">Maksimum Kisi</label>
+          <label for="maxParticipants">Maksimum Kişi</label>
           <input id="maxParticipants" type="number" min="2" max="200" value="12" required />
 
-          <button class="btn primary" type="submit">Oda Olustur</button>
-          <button id="switchToJoinBtn" class="btn ghost" type="button">Bunun yerine Odaya Katil</button>
+          <button class="btn primary" type="submit">Oda Oluştur</button>
+          <button id="switchToJoinBtn" class="btn ghost" type="button">Bunun yerine Odaya Katıl</button>
         </form>
       </article>
 
       <article id="joinPathCard" class="party-card party-entry-card" hidden>
-        <h2>Odaya Katil</h2>
-        <p class="muted">Oda kodunu ve rumuzunu gir. Host girisi gerekmez.</p>
+        <h2>Odaya Katıl</h2>
+        <p class="muted">Oda kodunu ve kullanıcı adını gir. Host girişi gerekmez.</p>
         <form id="joinRoomForm" class="stack-form">
           <label for="joinRoomCode">Oda Kodu</label>
-          <input id="joinRoomCode" type="text" maxlength="24" placeholder="ornek: AB12CD" required />
+          <input id="joinRoomCode" type="text" maxlength="24" placeholder="örnek: AB12CD" required />
 
-          <label for="joinNickname">Rumuz</label>
-          <input id="joinNickname" type="text" maxlength="32" placeholder="ornek: Merve" required />
+          <label for="joinNickname">Kullanıcı adı</label>
+          <input id="joinNickname" type="text" maxlength="32" placeholder="örnek: Merve" required />
 
-          <button class="btn primary" type="submit">Katil</button>
-          <button id="switchToCreateBtn" class="btn ghost" type="button">Bunun yerine Oda Olustur</button>
+          <button class="btn primary" type="submit">Katıl</button>
+          <button id="switchToCreateBtn" class="btn ghost" type="button">Bunun yerine Oda Oluştur</button>
         </form>
       </article>
     </section>
@@ -111,7 +118,7 @@
       <article class="party-card room-head">
         <h2 id="roomNameView">-</h2>
         <p>Kod: <strong id="roomCodeView">-</strong></p>
-        <p id="roomStatusView">Durum: Acik</p>
+        <p id="roomStatusView">Durum: Açık</p>
 
         <div class="stack-form">
           <label for="roomLinkView">Davet Linki</label>
@@ -120,28 +127,28 @@
         </div>
 
         <div id="hostControls" class="host-controls" hidden>
-          <button id="lockStartBtn" class="btn danger" type="button">Testi Baslat ve Odayi Kilitle</button>
+          <button id="lockStartBtn" class="btn danger" type="button">Testi Başlat ve Odayı Kilitle</button>
           <button id="endSessionBtn" class="btn ghost" type="button">Oturumu Bitir</button>
         </div>
 
-        <button id="leaveRoomBtn" class="btn ghost" type="button">Odadan Cik</button>
+        <button id="leaveRoomBtn" class="btn ghost" type="button">Odadan Çık</button>
       </article>
 
       <article class="party-card">
-        <h3>Katilimcilar</h3>
+        <h3>Katılımcılar</h3>
         <ul id="participantsList" class="simple-list"></ul>
       </article>
 
       <article class="party-card">
-        <h3>Anlik Sonuclar</h3>
-        <p class="muted">Sonuclar kullanici gonderdikce gorunur.</p>
+        <h3>Anlık Sonuçlar</h3>
+        <p class="muted">Sonuçlar kullanıcı gönderdikçe görünür.</p>
         <ul id="resultsList" class="simple-list"></ul>
       </article>
     </section>
 
     <section id="section-test" class="container party-test" hidden>
       <article class="party-card test-card-shell">
-        <h2>Iletisim Testi (IPC - Party)</h2>
+        <h2>İletişim Testi (IPC - Party)</h2>
         <div class="test-progress">
           <span>Soru <strong id="questionCounter">1</strong>/<span id="questionTotal">8</span></span>
           <div class="test-progress-track">
@@ -149,22 +156,22 @@
           </div>
         </div>
 
-        <h3 id="questionText">Soru yukleniyor...</h3>
+        <h3 id="questionText">Soru yükleniyor...</h3>
         <div id="questionOptions" class="choices-wrap"></div>
       </article>
     </section>
 
     <section id="section-results" class="container party-results" hidden>
       <article class="party-card">
-        <h2>Sonucun Kaydedildi</h2>
+        <h2>Sonucun kaydedildi</h2>
         <p>IPC tipin: <strong id="myResultBadge">-</strong></p>
-        <p id="resultsProgressText" class="muted">Sonuclar canli olarak guncellenir.</p>
-        <button id="backToLobbyBtn" class="btn ghost" type="button">Lobiye Don</button>
+        <p id="resultsProgressText" class="muted">Sonuçlar canlı olarak güncellenir.</p>
+        <button id="backToLobbyBtn" class="btn ghost" type="button">Lobiye Dön</button>
       </article>
 
       <article class="party-card">
-        <h3>Anlik Sonuclar</h3>
-        <p class="muted">Host ve tum katilimcilar burada ayni anlik sonucu gorur.</p>
+        <h3>Anlık Sonuçlar</h3>
+        <p class="muted">Host ve tüm katılımcılar burada aynı anlık sonucu görür.</p>
         <ul id="resultsFinalList" class="simple-list"></ul>
       </article>
     </section>
@@ -177,7 +184,7 @@
         <a href="../index.html">Ana Sayfa</a>
         <a href="../privacy.html">Gizlilik</a>
         <a href="../kvkk.html">KVKK</a>
-        <a href="../terms.html">Kosullar</a>
+        <a href="../terms.html">Koşullar</a>
       </div>
     </div>
   </footer>
@@ -186,6 +193,7 @@
   <script src="../assets/js/supabase-config.js"></script>
   <script src="../assets/js/supabase-client.js"></script>
   <script src="../assets/js/party.js"></script>
+  <script src="../assets/js/login-modal.js"></script>
 </body>
 </html>
 

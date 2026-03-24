@@ -32,7 +32,14 @@
         <a href="./terms.html">Koşullar</a>
         <a href="./delete-account.html">Hesap Silme</a>
       </nav>
-      <a class="header-login-btn" href="./login.html">Giriş Yap</a>
+      <div id="profileMenuWrap" class="profile-menu" hidden>
+        <button id="profileMenuToggleBtn" class="header-login-btn profile-toggle-btn" type="button" aria-haspopup="menu" aria-expanded="false">Profil</button>
+        <div id="profileDropdownMenu" class="profile-dropdown" role="menu" aria-label="Profil menusu" hidden>
+          <a href="./profile.html" role="menuitem">Profil Sayfasi</a>
+          <button id="profileLogoutBtn" type="button" role="menuitem">Cikis Yap</button>
+        </div>
+      </div>
+      <button id="openLoginModalBtn" class="header-login-btn" type="button" hidden>Giriş Yap</button>
     </div>
   </header>
 
@@ -61,6 +68,7 @@
       </div>
     </div>
   </footer>
+  <script src="./assets/js/login-modal.js"></script>
   <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>

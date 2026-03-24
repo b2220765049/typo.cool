@@ -88,7 +88,7 @@
 
     var ctx = window.typoSupabase.createSupabaseBrowserClient();
     if (ctx.error || !ctx.client) {
-      console.error(ctx.error || "Supabase baglantisi yok");
+      console.error(ctx.error || "Supabase bağlantısı yok");
       byId("googleLoginBtn").disabled = true;
       return;
     }

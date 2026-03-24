@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>Typo Giris - Google ile Devam Et</title>
-  <meta name="description" content="Typo web girisi. Sadece Google ile giris desteklenir." />
+  <title>Typo Giriş - Google ile Devam Et</title>
+  <meta name="description" content="Typo web girişi. Yalnızca Google ile giriş desteklenir." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://typo.cool/login.html" />
   <meta property="og:site_name" content="Typo" />
-  <meta property="og:title" content="Typo Giris" />
-  <meta property="og:description" content="Sadece Google ile giris yap." />
+  <meta property="og:title" content="Typo Giriş" />
+  <meta property="og:description" content="Yalnızca Google ile giriş yap." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://typo.cool/login.html" />
   <meta property="og:locale" content="tr_TR" />
@@ -32,16 +32,23 @@
         <a href="./terms.html">Koşullar</a>
         <a href="./delete-account.html">Hesap Silme</a>
       </nav>
-      <a class="header-login-btn" href="./login.html">Giriş Yap</a>
+      <div id="profileMenuWrap" class="profile-menu" hidden>
+        <button id="profileMenuToggleBtn" class="header-login-btn profile-toggle-btn" type="button" aria-haspopup="menu" aria-expanded="false">Profil</button>
+        <div id="profileDropdownMenu" class="profile-dropdown" role="menu" aria-label="Profil menusu" hidden>
+          <a href="./profile.html" role="menuitem">Profil Sayfasi</a>
+          <button id="profileLogoutBtn" type="button" role="menuitem">Cikis Yap</button>
+        </div>
+      </div>
+      <button id="openLoginModalBtn" class="header-login-btn" type="button" hidden>Giriş Yap</button>
     </div>
   </header>
 
   <main class="container auth-main">
     <section class="auth-card">
-      <h1>Typo Giris</h1>
-      <p>Webde sadece Google hesabi ile giris yapabilirsin.</p>
-      <button id="googleLoginBtn" class="btn primary" type="button">Google ile Giris Yap</button>
-      <button id="logoutBtn" class="btn ghost" type="button" hidden>Cikis Yap</button>
+      <h1>Typo Giriş</h1>
+      <p>Web'de yalnızca Google hesabınla giriş yapabilirsin.</p>
+      <button id="googleLoginBtn" class="btn primary" type="button">Google ile Giriş Yap</button>
+      <button id="logoutBtn" class="btn ghost" type="button" hidden>Çıkış Yap</button>
     </section>
   </main>
 
@@ -52,7 +59,7 @@
         <a href="./index.html">Ana Sayfa</a>
         <a href="./privacy.html">Gizlilik</a>
         <a href="./kvkk.html">KVKK</a>
-        <a href="./terms.html">Kosullar</a>
+        <a href="./terms.html">Koşullar</a>
       </div>
     </div>
   </footer>
@@ -61,6 +68,7 @@
   <script src="./assets/js/supabase-config.js"></script>
   <script src="./assets/js/supabase-client.js"></script>
   <script src="./assets/js/login.js"></script>
+  <script src="./assets/js/login-modal.js"></script>
 </body>
 </html>
 
