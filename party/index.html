@@ -25,7 +25,7 @@
       </a>
       <nav class="nav-links">
         <a href="../index.html">Ana Sayfa</a>
-        <a href="../login.html">Giris</a>
+        <a href="../login.html?next=%2Fparty%2F">Giris</a>
         <a href="../tests/ipc-test.html">Iletisim Testi</a>
         <a href="../privacy.html">Gizlilik</a>
         <a href="../terms.html">Kosullar</a>
@@ -37,7 +37,7 @@
     <section class="container party-hero">
       <h1>Typo Party</h1>
       <p>Oda olustur, davet linkini paylas, host olarak testi ayni anda baslat. Oda kilitlendikten sonra yeni katilim alinmaz.</p>
-      <div id="statusBar" class="party-status info">Hazirlaniyor...</div>
+      <div id="statusBar" class="party-status error" hidden></div>
     </section>
 
     <section id="section-lobby" class="container party-grid party-pipeline">
@@ -54,7 +54,7 @@
       <article id="createPathCard" class="party-card" hidden>
         <h2>Oda Olustur</h2>
         <p class="muted">Host islemleri icin once Google ile giris yapmis olmalisin.</p>
-        <a class="btn ghost" href="../login.html">Google ile Giris Yap</a>
+        <a class="btn ghost" href="../login.html?next=%2Fparty%2F">Google ile Giris Yap</a>
         <form id="createRoomForm" class="stack-form">
           <label for="createRoomName">Oda Adi</label>
           <input id="createRoomName" type="text" maxlength="64" placeholder="ornek: cuma-aksami" required />

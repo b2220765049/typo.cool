@@ -30,16 +30,9 @@
     var closeBtn = byId("closeLoginModalBtn");
     var googleBtn = byId("googleModalLoginBtn");
     var logoutBtn = byId("logoutModalBtn");
-    var statusEl = byId("authModalStatus");
-    var userEmailEl = byId("authModalUserEmail");
 
-    if (!modal || !backdrop || !openBtn || !profileMenuWrap || !profileMenuToggleBtn || !profileDropdownMenu || !profileLogoutBtn || !closeBtn || !googleBtn || !logoutBtn || !statusEl || !userEmailEl) {
+    if (!modal || !backdrop || !openBtn || !profileMenuWrap || !profileMenuToggleBtn || !profileDropdownMenu || !profileLogoutBtn || !closeBtn || !googleBtn || !logoutBtn) {
       return;
-    }
-
-    function setStatus(text, tone) {
-      statusEl.textContent = text;
-      statusEl.className = "party-status " + (tone || "info");
     }
 
     var isSignedIn = false;
@@ -93,9 +86,6 @@
         isSignedIn = true;
         googleBtn.hidden = true;
         logoutBtn.hidden = false;
-        userEmailEl.hidden = false;
-        userEmailEl.textContent = "Giris yapildi: " + (session.user.email || "Google kullanicisi");
-        setStatus("Google girisi aktif.", "success");
         updateHeaderButton();
         return;
       }
@@ -103,9 +93,6 @@
       isSignedIn = false;
       googleBtn.hidden = false;
       logoutBtn.hidden = true;
-      userEmailEl.hidden = true;
-      userEmailEl.textContent = "";
-      setStatus("Giris yok.", "info");
       updateHeaderButton();
     }
 
@@ -127,14 +114,14 @@
       });
 
       if (result.error) {
-        setStatus(result.error.message, "error");
+        console.error(result.error.message);
       }
     }
 
     async function signOut(client) {
       var result = await client.auth.signOut();
       if (result.error) {
-        setStatus(result.error.message, "error");
+        console.error(result.error.message);
         return;
       }
       await refreshUi(client);
@@ -180,14 +167,14 @@
 
     var hasSupabase = window.typoSupabase && typeof window.typoSupabase.createSupabaseBrowserClient === "function";
     if (!hasSupabase) {
-      setStatus("Supabase baglantisi yuklenemedi.", "error");
+      console.error("Supabase baglantisi yuklenemedi.");
       googleBtn.disabled = true;
       return;
     }
 
     var ctx = window.typoSupabase.createSupabaseBrowserClient();
     if (ctx.error || !ctx.client) {
-      setStatus(ctx.error || "Supabase baglantisi yok.", "error");
+      console.error(ctx.error || "Supabase baglantisi yok.");
       googleBtn.disabled = true;
       return;
     }

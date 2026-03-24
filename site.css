@@ -113,6 +113,11 @@ body {
 }
 img { max-width: 100%; height: auto; }
 
+/* Ensure HTML hidden attribute is respected even when layout classes set display. */
+[hidden] {
+  display: none !important;
+}
+
 h1, h2, h3, h4 { 
   font-family: 'Lora', Georgia, serif; 
   font-weight: 700;

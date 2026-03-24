@@ -5,22 +5,42 @@
     return document.getElementById(id);
   }
 
-  function setStatus(text, tone) {
-    var el = byId("authStatus");
-    el.textContent = text;
-    el.className = "party-status " + (tone || "info");
+  function getNextPath() {
+    var params = new URLSearchParams(window.location.search);
+    var next = (params.get("next") || "").trim();
+    if (!next) return "/";
+
+    if (next[0] !== "/") {
+      return "/";
+    }
+
+    if (next.indexOf("//") === 0) {
+      return "/";
+    }
+
+    return next;
   }
 
   function getGoogleRedirectUrl() {
     var cfg = window.TYPO_SUPABASE_CONFIG || {};
     var custom = (cfg.authRedirectUrl || "").trim();
-    if (custom && !/localhost:\\d+/i.test(custom)) return custom;
+    var nextPath = getNextPath();
+    var origin = window.location.origin;
 
-    if (window.location.hostname === "typo.cool" || window.location.hostname === "www.typo.cool") {
-      return "https://typo.cool/";
+    if (custom && !/localhost:\\d+/i.test(custom)) {
+      try {
+        var parsed = new URL(custom);
+        return parsed.origin + nextPath;
+      } catch (error) {
+        return custom;
+      }
     }
 
-    return window.location.origin + "/";
+    if (window.location.hostname === "typo.cool" || window.location.hostname === "www.typo.cool") {
+      return "https://typo.cool" + nextPath;
+    }
+
+    return origin + nextPath;
   }
 
   async function refreshUi(client) {
@@ -30,17 +50,11 @@
     if (session && session.user) {
       byId("googleLoginBtn").hidden = true;
       byId("logoutBtn").hidden = false;
-      byId("userEmail").hidden = false;
-      byId("userEmail").textContent = "Giris yapildi: " + (session.user.email || "Google kullanicisi");
-      setStatus("Google girisi aktif.", "success");
       return;
     }
 
     byId("googleLoginBtn").hidden = false;
     byId("logoutBtn").hidden = true;
-    byId("userEmail").hidden = true;
-    byId("userEmail").textContent = "";
-    setStatus("Giris yok.", "info");
   }
 
   async function signInGoogle(client) {
@@ -56,14 +70,14 @@
     });
 
     if (result.error) {
-      setStatus(result.error.message, "error");
+      console.error(result.error.message);
     }
   }
 
   async function signOut(client) {
     var result = await client.auth.signOut();
     if (result.error) {
-      setStatus(result.error.message, "error");
+      console.error(result.error.message);
       return;
     }
     await refreshUi(client);
@@ -74,7 +88,7 @@
 
     var ctx = window.typoSupabase.createSupabaseBrowserClient();
     if (ctx.error || !ctx.client) {
-      setStatus(ctx.error || "Supabase baglantisi yok", "error");
+      console.error(ctx.error || "Supabase baglantisi yok");
       byId("googleLoginBtn").disabled = true;
       return;
     }

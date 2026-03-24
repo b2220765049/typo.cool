@@ -118,9 +118,17 @@
   }
 
   function setStatus(message, type) {
+    if (!els.statusBar) return;
     var tone = type || "info";
-    els.statusBar.textContent = message;
-    els.statusBar.className = "party-status " + tone;
+    if (tone === "error") {
+      els.statusBar.hidden = false;
+      els.statusBar.textContent = message;
+      els.statusBar.className = "party-status error";
+      return;
+    }
+    els.statusBar.hidden = true;
+    els.statusBar.textContent = "";
+    els.statusBar.className = "party-status error";
   }
 
   function showSection(sectionName) {
