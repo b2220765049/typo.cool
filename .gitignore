@@ -1,1 +1,8 @@
-supabase/sql/
+# Keep Supabase source (functions + SQL migrations) in Git.
+# Ignore only local/dev Supabase secrets and generated files.
+supabase/.env
+supabase/.env.*
+supabase/config.toml
+supabase/.temp/
+supabase/functions/.env
+supabase/functions/.env.*

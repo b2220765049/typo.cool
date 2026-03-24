@@ -1,7 +1,73 @@
 // @ts-nocheck
-import { handleOptions, jsonResponse, normalizeRoomCode, randomToken, sha256 } from "../_shared/cors.ts";
-import { getServiceClient, requireUser } from "../_shared/client.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
+
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS"
+};
+
+function handleOptions(req: Request): Response | null {
+  if (req.method === "OPTIONS") {
+    return new Response("ok", { headers: corsHeaders });
+  }
+  return null;
+}
+
+function jsonResponse(body: unknown, status = 200): Response {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: {
+      ...corsHeaders,
+      "Content-Type": "application/json"
+    }
+  });
+}
+
+function getEnv(name: string): string {
+  const value = Deno.env.get(name) || "";
+  if (!value) throw new Error(`Missing environment variable: ${name}`);
+  return value;
+}
+
+function getServiceClient() {
+  return createClient(getEnv("SUPABASE_URL"), getEnv("SUPABASE_SERVICE_ROLE_KEY"), {
+    auth: { persistSession: false }
+  });
+}
+
+function getUserClient(authHeader: string) {
+  return createClient(getEnv("SUPABASE_URL"), getEnv("SUPABASE_ANON_KEY"), {
+    global: { headers: { Authorization: authHeader } },
+    auth: { persistSession: false }
+  });
+}
+
+async function requireUser(authHeader: string): Promise<{ id: string; email?: string }> {
+  if (!authHeader) throw new Error("Unauthorized");
+  const { data, error } = await getUserClient(authHeader).auth.getUser();
+  if (error || !data.user) throw new Error("Unauthorized");
+  return { id: data.user.id, email: data.user.email || undefined };
+}
+
+function normalizeRoomCode(code: string | null | undefined): string {
+  return (code || "").trim().toUpperCase().replace(/[^A-Z0-9_-]/g, "");
+}
+
+function randomToken(bytes = 24): string {
+  const arr = new Uint8Array(bytes);
+  crypto.getRandomValues(arr);
+  return Array.from(arr).map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+function sha256(input: string): Promise<string> {
+  const bytes = new TextEncoder().encode(input);
+  return crypto.subtle.digest("SHA-256", bytes).then((hashBuffer) => {
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+  });
+}
 
 serve(async (req: Request) => {
   const optionsResponse = handleOptions(req);

@@ -117,3 +117,42 @@ These function names are used by the website page `party/index.html`.
 - `PARTY_JOIN_RATE_LIMIT_PER_MINUTE`
 - `PARTY_SUBMIT_RATE_LIMIT_PER_MINUTE`
 - `PARTY_ROOM_TTL_HOURS`
+
+## Where to write project secrets
+
+### Supabase Dashboard
+
+1. Open your project in Supabase.
+2. Go to `Project Settings` -> `Edge Functions`.
+3. Open `Secrets`.
+4. Add each key/value listed above.
+5. Save and redeploy functions.
+
+### Supabase CLI (alternative)
+
+Run from repo root:
+
+```bash
+supabase secrets set SUPABASE_URL="https://YOUR_PROJECT_REF.supabase.co"
+supabase secrets set SUPABASE_ANON_KEY="YOUR_PUBLIC_ANON_KEY"
+supabase secrets set SUPABASE_SERVICE_ROLE_KEY="YOUR_SERVICE_ROLE_KEY"
+supabase secrets set PARTY_JOIN_RATE_LIMIT_PER_MINUTE="30"
+supabase secrets set PARTY_SUBMIT_RATE_LIMIT_PER_MINUTE="20"
+supabase secrets set PARTY_ROOM_TTL_HOURS="48"
+```
+
+## Deploy commands
+
+Deploy all party functions:
+
+```bash
+supabase functions deploy party-create-room
+supabase functions deploy party-resolve-room
+supabase functions deploy party-join-room
+supabase functions deploy party-lock-start
+supabase functions deploy party-submit-result
+supabase functions deploy party-end-session
+supabase functions deploy party-cleanup-expired
+```
+
+If needed, deploy SQL first from Supabase SQL Editor using `supabase/sql/001_typo_party.sql`.

@@ -1,7 +1,40 @@
 // @ts-nocheck
-import { handleOptions, jsonResponse, normalizeRoomCode } from "../_shared/cors.ts";
-import { getServiceClient } from "../_shared/client.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
+
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS"
+};
+
+function handleOptions(req: Request): Response | null {
+  if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
+  return null;
+}
+
+function jsonResponse(body: unknown, status = 200): Response {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { ...corsHeaders, "Content-Type": "application/json" }
+  });
+}
+
+function getEnv(name: string): string {
+  const value = Deno.env.get(name) || "";
+  if (!value) throw new Error(`Missing environment variable: ${name}`);
+  return value;
+}
+
+function getServiceClient() {
+  return createClient(getEnv("SUPABASE_URL"), getEnv("SUPABASE_SERVICE_ROLE_KEY"), {
+    auth: { persistSession: false }
+  });
+}
+
+function normalizeRoomCode(code: string | null | undefined): string {
+  return (code || "").trim().toUpperCase().replace(/[^A-Z0-9_-]/g, "");
+}
 
 serve(async (req: Request) => {
   const optionsResponse = handleOptions(req);
@@ -24,21 +57,12 @@ serve(async (req: Request) => {
       .order("created_at", { ascending: false })
       .limit(1);
 
-    if (roomCode) {
-      roomQuery = roomQuery.eq("room_code", roomCode);
-    } else {
-      roomQuery = roomQuery.ilike("room_name", roomName);
-    }
+    if (roomCode) roomQuery = roomQuery.eq("room_code", roomCode);
+    else roomQuery = roomQuery.ilike("room_name", roomName);
 
     const { data: room, error: roomError } = await roomQuery.maybeSingle();
-
-    if (roomError) {
-      return jsonResponse({ error: roomError.message }, 500);
-    }
-
-    if (!room) {
-      return jsonResponse({ error: "Room not found" }, 404);
-    }
+    if (roomError) return jsonResponse({ error: roomError.message }, 500);
+    if (!room) return jsonResponse({ error: "Room not found" }, 404);
 
     const { data: participants, error: participantError } = await db
       .from("party_room_members")
@@ -47,9 +71,7 @@ serve(async (req: Request) => {
       .is("left_at", null)
       .order("joined_at", { ascending: true });
 
-    if (participantError) {
-      return jsonResponse({ error: participantError.message }, 500);
-    }
+    if (participantError) return jsonResponse({ error: participantError.message }, 500);
 
     let session = null;
     if (room.current_session_id) {
@@ -67,9 +89,7 @@ serve(async (req: Request) => {
       .eq("room_id", room.id)
       .order("created_at", { ascending: true });
 
-    if (resultError) {
-      return jsonResponse({ error: resultError.message }, 500);
-    }
+    if (resultError) return jsonResponse({ error: resultError.message }, 500);
 
     return jsonResponse({ room, session, participants: participants || [], results: results || [] });
   } catch (error) {
