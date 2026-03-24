@@ -869,14 +869,21 @@ header .nav-links a:hover {
   }
   header .nav {
     padding: 12px 16px;
-    justify-content: flex-start;
+    justify-content: space-between;
     gap: 12px;
+    flex-wrap: wrap;
   }
   header .back-btn {
-    display: flex;
+    display: none;
   }
   header .nav-links {
-    display: none;
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    gap: 6px;
+    padding-bottom: 4px;
   }
 }
 
@@ -979,12 +986,113 @@ footer:not(.site-footer) {
   align-items: start;
 }
 
+.party-entry-card {
+  position: relative;
+}
+
+.party-entry-card.card-enter {
+  animation: partyCardEnter 0.34s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.party-entry-card.card-exit {
+  animation: partyCardExit 0.22s ease;
+}
+
+@keyframes partyCardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+    filter: blur(1px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes partyCardExit {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(8px) scale(0.995);
+    filter: blur(0.5px);
+  }
+}
+
 .pipeline-choice-card {
   grid-column: 1 / -1;
   background:
     radial-gradient(circle at 10% 10%, rgba(236, 112, 99, 0.14), transparent 34%),
     radial-gradient(circle at 92% 18%, rgba(93, 173, 226, 0.16), transparent 30%),
     var(--card);
+}
+
+.create-path-card {
+  grid-column: 1 / -1;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(247, 241, 235, 0.96)),
+    radial-gradient(circle at 100% 0%, rgba(251, 188, 5, 0.16), transparent 42%),
+    radial-gradient(circle at 0% 100%, rgba(66, 133, 244, 0.12), transparent 38%),
+    var(--card);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.create-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.create-card-pill {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 30px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.75);
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.create-card-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.create-card-benefits span {
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.75);
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: hsl(220, 16%, 28%);
+}
+
+.party-google-login-btn {
+  width: 100%;
+  margin-bottom: 12px;
+  text-decoration: none;
+}
+
+.create-room-form {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  padding: 14px;
 }
 
 .choice-actions {
@@ -1297,6 +1405,18 @@ footer:not(.site-footer) {
 
   .choice-actions .btn {
     width: 100%;
+  }
+
+  .create-card-benefits span {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .party-entry-card.card-enter,
+  .party-entry-card.card-exit {
+    animation: none;
   }
 }
 

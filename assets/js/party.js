@@ -99,6 +99,11 @@
     hostSession: null,
     participantToken: "",
     nickname: "",
+    entryHideTimers: {
+      choice: null,
+      create: null,
+      join: null
+    },
     channel: null,
     pollHandle: null,
     authSubscriptionBound: false,
@@ -151,9 +156,40 @@
 
     if (!choiceCard || !createCard || !joinCard || !chooseCreateBtn || !chooseJoinBtn) return;
 
-    choiceCard.hidden = mode !== "choice";
-    createCard.hidden = mode !== "create";
-    joinCard.hidden = mode !== "join";
+    var cards = {
+      choice: choiceCard,
+      create: createCard,
+      join: joinCard
+    };
+
+    Object.keys(cards).forEach(function (key) {
+      var card = cards[key];
+      if (!card) return;
+
+      if (state.entryHideTimers[key]) {
+        window.clearTimeout(state.entryHideTimers[key]);
+        state.entryHideTimers[key] = null;
+      }
+
+      if (key === mode) {
+        card.hidden = false;
+        card.classList.remove("card-exit");
+        card.classList.remove("card-enter");
+        // Reflow to restart the enter animation on each mode switch.
+        void card.offsetWidth;
+        card.classList.add("card-enter");
+      } else if (!card.hidden) {
+        card.classList.remove("card-enter");
+        card.classList.add("card-exit");
+        state.entryHideTimers[key] = window.setTimeout(function () {
+          card.hidden = true;
+          card.classList.remove("card-exit");
+          state.entryHideTimers[key] = null;
+        }, 210);
+      } else {
+        card.hidden = true;
+      }
+    });
 
     chooseCreateBtn.className = mode === "create" ? "btn primary" : "btn ghost";
     chooseJoinBtn.className = mode === "join" ? "btn primary" : "btn ghost";

@@ -25,10 +25,12 @@
       </a>
       <nav class="nav-links">
         <a href="../index.html">Ana Sayfa</a>
-        <a href="../login.html?next=%2Fparty%2F">Giris</a>
-        <a href="../tests/ipc-test.html">Iletisim Testi</a>
+        <a href="../party/">Typo Party</a>
         <a href="../privacy.html">Gizlilik</a>
-        <a href="../terms.html">Kosullar</a>
+        <a href="../kvkk.html">KVKK</a>
+        <a href="../csae.html">Çocuk Güvenliği</a>
+        <a href="../terms.html">Koşullar</a>
+        <a href="../delete-account.html">Hesap Silme</a>
       </nav>
     </div>
   </header>
@@ -41,7 +43,7 @@
     </section>
 
     <section id="section-lobby" class="container party-grid party-pipeline">
-      <article id="entryChoiceCard" class="party-card pipeline-choice-card">
+      <article id="entryChoiceCard" class="party-card pipeline-choice-card party-entry-card">
         <h2>Nasil Devam Edelim?</h2>
         <p>Ilk adimda bir yol sec: yeni oda olustur veya mevcut bir odaya katil.</p>
         <div class="choice-actions">
@@ -51,11 +53,29 @@
         <p class="muted">Secimine gore asagida sadece ilgili kart acilir.</p>
       </article>
 
-      <article id="createPathCard" class="party-card" hidden>
-        <h2>Oda Olustur</h2>
-        <p class="muted">Host islemleri icin once Google ile giris yapmis olmalisin.</p>
-        <a class="btn ghost" href="../login.html?next=%2Fparty%2F">Google ile Giris Yap</a>
-        <form id="createRoomForm" class="stack-form">
+      <article id="createPathCard" class="party-card party-entry-card create-path-card" hidden>
+        <div class="create-card-header">
+          <span class="create-card-pill">Host Modu</span>
+          <h2>Oda Olustur</h2>
+          <p class="muted">Host islemleri icin once Google ile giris yapmis olmalisin.</p>
+          <div class="create-card-benefits" aria-hidden="true">
+            <span>Canli katilimci listesi</span>
+            <span>Tek tusla kilitle ve baslat</span>
+            <span>Sonuclar anlik toplanir</span>
+          </div>
+        </div>
+
+        <a class="google-login-btn party-google-login-btn" href="../login.html?next=%2Fparty%2F">
+          <svg class="google-icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false">
+            <path fill="#EA4335" d="M9 7.36v3.55h4.94c-.21 1.15-.87 2.13-1.86 2.79l3.01 2.34c1.75-1.61 2.76-3.98 2.76-6.8 0-.66-.06-1.29-.17-1.88H9z"></path>
+            <path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.16l-3.01-2.34c-.84.56-1.91.9-2.95.9-2.27 0-4.19-1.53-4.88-3.58H1.01v2.42C2.49 16.17 5.49 18 9 18z"></path>
+            <path fill="#4A90E2" d="M4.12 10.82a5.39 5.39 0 0 1 0-3.64V4.76H1.01a9 9 0 0 0 0 8.48l3.11-2.42z"></path>
+            <path fill="#FBBC05" d="M9 3.58c1.32 0 2.5.45 3.43 1.33l2.57-2.57C13.46.91 11.42 0 9 0 5.49 0 2.49 1.83 1.01 4.76l3.11 2.42C4.81 5.11 6.73 3.58 9 3.58z"></path>
+          </svg>
+          <span>Google ile Giris Yap</span>
+        </a>
+
+        <form id="createRoomForm" class="stack-form create-room-form">
           <label for="createRoomName">Oda Adi</label>
           <input id="createRoomName" type="text" maxlength="64" placeholder="ornek: cuma-aksami" required />
 
@@ -70,7 +90,7 @@
         </form>
       </article>
 
-      <article id="joinPathCard" class="party-card" hidden>
+      <article id="joinPathCard" class="party-card party-entry-card" hidden>
         <h2>Odaya Katil</h2>
         <p class="muted">Oda kodunu ve rumuzunu gir. Host girisi gerekmez.</p>
         <form id="joinRoomForm" class="stack-form">
@@ -167,3 +187,4 @@
   <script src="../assets/js/party.js"></script>
 </body>
 </html>
+
