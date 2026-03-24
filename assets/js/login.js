@@ -11,6 +11,20 @@
     el.className = "party-status " + (tone || "info");
   }
 
+  function getGoogleRedirectUrl() {
+    var cfg = window.TYPO_SUPABASE_CONFIG || {};
+    var custom = (cfg.authRedirectUrl || "").trim();
+    if (custom) return custom;
+
+    // In production, always return to typo.cool login page.
+    if (window.location.hostname === "typo.cool" || window.location.hostname === "www.typo.cool") {
+      return "https://typo.cool/login.html";
+    }
+
+    // Local/dev fallback.
+    return window.location.origin + "/login.html";
+  }
+
   async function refreshUi(client) {
     var sessionResult = await client.auth.getSession();
     var session = sessionResult && sessionResult.data ? sessionResult.data.session : null;
@@ -32,7 +46,7 @@
   }
 
   async function signInGoogle(client) {
-    var redirectTo = window.location.origin + "/login.html";
+    var redirectTo = getGoogleRedirectUrl();
     var result = await client.auth.signInWithOAuth({
       provider: "google",
       options: {
