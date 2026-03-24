@@ -145,7 +145,15 @@
     });
   }
 
+  function getEntryModeOrder(mode) {
+    if (mode === "choice") return 0;
+    if (mode === "create") return 1;
+    if (mode === "join") return 2;
+    return 0;
+  }
+
   function setEntryMode(mode) {
+    var previousMode = state.entryMode;
     state.entryMode = mode;
 
     var choiceCard = byId("entryChoiceCard");
@@ -165,31 +173,45 @@
     Object.keys(cards).forEach(function (key) {
       var card = cards[key];
       if (!card) return;
-
       if (state.entryHideTimers[key]) {
         window.clearTimeout(state.entryHideTimers[key]);
         state.entryHideTimers[key] = null;
       }
-
-      if (key === mode) {
-        card.hidden = false;
-        card.classList.remove("card-exit");
-        card.classList.remove("card-enter");
-        // Reflow to restart the enter animation on each mode switch.
-        void card.offsetWidth;
-        card.classList.add("card-enter");
-      } else if (!card.hidden) {
-        card.classList.remove("card-enter");
-        card.classList.add("card-exit");
-        state.entryHideTimers[key] = window.setTimeout(function () {
-          card.hidden = true;
-          card.classList.remove("card-exit");
-          state.entryHideTimers[key] = null;
-        }, 210);
-      } else {
-        card.hidden = true;
-      }
+      card.classList.remove("slide-out-left", "slide-out-right", "slide-in-left", "slide-in-right");
     });
+
+    var incoming = cards[mode];
+    var outgoing = previousMode !== mode ? cards[previousMode] : null;
+    var direction = getEntryModeOrder(mode) >= getEntryModeOrder(previousMode) ? "forward" : "backward";
+
+    function revealIncoming() {
+      if (!incoming) return;
+      incoming.hidden = false;
+      // Reflow to reliably replay the slide-in animation.
+      void incoming.offsetWidth;
+      incoming.classList.add(direction === "forward" ? "slide-in-right" : "slide-in-left");
+      state.entryHideTimers[mode] = window.setTimeout(function () {
+        incoming.classList.remove("slide-in-right", "slide-in-left");
+        state.entryHideTimers[mode] = null;
+      }, 300);
+    }
+
+    if (outgoing && !outgoing.hidden) {
+      outgoing.classList.add(direction === "forward" ? "slide-out-left" : "slide-out-right");
+      state.entryHideTimers[previousMode] = window.setTimeout(function () {
+        outgoing.hidden = true;
+        outgoing.classList.remove("slide-out-left", "slide-out-right");
+        state.entryHideTimers[previousMode] = null;
+        revealIncoming();
+      }, 250);
+    } else {
+      Object.keys(cards).forEach(function (key) {
+        if (key !== mode && cards[key]) {
+          cards[key].hidden = true;
+        }
+      });
+      revealIncoming();
+    }
 
     chooseCreateBtn.className = mode === "create" ? "btn primary" : "btn ghost";
     chooseJoinBtn.className = mode === "join" ? "btn primary" : "btn ghost";
