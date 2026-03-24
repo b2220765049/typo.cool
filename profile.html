@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Typo Profil</title>
+  <meta name="description" content="Typo profil sayfasi yakinda." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="./assets/app_icon.png" />
+  <link rel="apple-touch-icon" href="./assets/app_icon.png" />
+  <link rel="stylesheet" href="./site.css" />
+</head>
+<body class="auth-page">
+  <header>
+    <div class="container nav">
+      <a class="brand" href="./index.html">
+        <img class="brand-logo" alt="Typo" src="./assets/text_logo.png" />
+      </a>
+      <nav class="nav-links">
+        <a href="./index.html">Ana Sayfa</a>
+        <a href="./party/">Typo Party</a>
+        <a href="./privacy.html">Gizlilik</a>
+        <a href="./terms.html">Kosullar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container auth-main">
+    <section class="auth-card">
+      <h1>Profil</h1>
+      <p>Profil sayfasi yakinda burada olacak.</p>
+      <a class="btn primary" href="./index.html">Ana Sayfaya Don</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <small>© <span id="yearValue"></span> Typo</small>
+      <div class="footer-links">
+        <a href="./index.html">Ana Sayfa</a>
+        <a href="./privacy.html">Gizlilik</a>
+        <a href="./kvkk.html">KVKK</a>
+        <a href="./terms.html">Kosullar</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("yearValue").textContent = String(new Date().getFullYear());
+  </script>
+</body>
+</html>

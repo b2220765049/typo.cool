@@ -14,13 +14,13 @@
   function getGoogleRedirectUrl() {
     var cfg = window.TYPO_SUPABASE_CONFIG || {};
     var custom = (cfg.authRedirectUrl || "").trim();
-    if (custom) return custom;
+    if (custom && !/localhost:\\d+/i.test(custom)) return custom;
 
     if (window.location.hostname === "typo.cool" || window.location.hostname === "www.typo.cool") {
-      return "https://typo.cool/login.html";
+      return "https://typo.cool/";
     }
 
-    return window.location.origin + "/login.html";
+    return window.location.origin + "/";
   }
 
   async function refreshUi(client) {

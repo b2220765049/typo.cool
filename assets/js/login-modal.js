@@ -6,26 +6,74 @@
   }
 
   function getRedirectUrl() {
-    return window.location.origin + window.location.pathname;
+    var cfg = window.TYPO_SUPABASE_CONFIG || {};
+    var custom = (cfg.authRedirectUrl || "").trim();
+    if (custom && !/localhost:\\d+/i.test(custom)) {
+      return custom;
+    }
+
+    if (window.location.hostname === "typo.cool" || window.location.hostname === "www.typo.cool") {
+      return "https://typo.cool/";
+    }
+
+    return window.location.origin + "/";
   }
 
   function init() {
     var modal = byId("loginModal");
     var backdrop = byId("loginModalBackdrop");
     var openBtn = byId("openLoginModalBtn");
+    var profileMenuWrap = byId("profileMenuWrap");
+    var profileMenuToggleBtn = byId("profileMenuToggleBtn");
+    var profileDropdownMenu = byId("profileDropdownMenu");
+    var profileLogoutBtn = byId("profileLogoutBtn");
     var closeBtn = byId("closeLoginModalBtn");
     var googleBtn = byId("googleModalLoginBtn");
     var logoutBtn = byId("logoutModalBtn");
     var statusEl = byId("authModalStatus");
     var userEmailEl = byId("authModalUserEmail");
 
-    if (!modal || !backdrop || !openBtn || !closeBtn || !googleBtn || !logoutBtn || !statusEl || !userEmailEl) {
+    if (!modal || !backdrop || !openBtn || !profileMenuWrap || !profileMenuToggleBtn || !profileDropdownMenu || !profileLogoutBtn || !closeBtn || !googleBtn || !logoutBtn || !statusEl || !userEmailEl) {
       return;
     }
 
     function setStatus(text, tone) {
       statusEl.textContent = text;
       statusEl.className = "party-status " + (tone || "info");
+    }
+
+    var isSignedIn = false;
+
+    function closeProfileDropdown() {
+      profileDropdownMenu.hidden = true;
+      profileMenuToggleBtn.setAttribute("aria-expanded", "false");
+    }
+
+    function openProfileDropdown() {
+      profileDropdownMenu.hidden = false;
+      profileMenuToggleBtn.setAttribute("aria-expanded", "true");
+    }
+
+    function toggleProfileDropdown() {
+      if (profileDropdownMenu.hidden) {
+        openProfileDropdown();
+        return;
+      }
+      closeProfileDropdown();
+    }
+
+    function updateHeaderButton() {
+      if (isSignedIn) {
+        openBtn.hidden = true;
+        profileMenuWrap.hidden = false;
+        closeProfileDropdown();
+      } else {
+        openBtn.hidden = false;
+        openBtn.textContent = "Giriş Yap";
+        openBtn.setAttribute("aria-label", "Giris yap");
+        profileMenuWrap.hidden = true;
+        closeProfileDropdown();
+      }
     }
 
     function openModal() {
@@ -42,19 +90,23 @@
 
     function updateUiFromSession(session) {
       if (session && session.user) {
+        isSignedIn = true;
         googleBtn.hidden = true;
         logoutBtn.hidden = false;
         userEmailEl.hidden = false;
         userEmailEl.textContent = "Giris yapildi: " + (session.user.email || "Google kullanicisi");
         setStatus("Google girisi aktif.", "success");
+        updateHeaderButton();
         return;
       }
 
+      isSignedIn = false;
       googleBtn.hidden = false;
       logoutBtn.hidden = true;
       userEmailEl.hidden = true;
       userEmailEl.textContent = "";
       setStatus("Giris yok.", "info");
+      updateHeaderButton();
     }
 
     async function refreshUi(client) {
@@ -92,6 +144,15 @@
       openModal();
     });
 
+    profileMenuToggleBtn.addEventListener("click", function () {
+      if (!isSignedIn) return;
+      toggleProfileDropdown();
+    });
+
+    profileLogoutBtn.addEventListener("click", function () {
+      void signOut(client);
+    });
+
     closeBtn.addEventListener("click", function () {
       closeModal();
     });
@@ -103,6 +164,17 @@
     document.addEventListener("keydown", function (event) {
       if (event.key === "Escape" && modal.classList.contains("is-open")) {
         closeModal();
+      }
+
+      if (event.key === "Escape" && !profileDropdownMenu.hidden) {
+        closeProfileDropdown();
+      }
+    });
+
+    document.addEventListener("click", function (event) {
+      if (profileMenuWrap.hidden) return;
+      if (!profileMenuWrap.contains(event.target)) {
+        closeProfileDropdown();
       }
     });
 
@@ -121,6 +193,7 @@
     }
 
     var client = ctx.client;
+    updateHeaderButton();
     void refreshUi(client);
 
     googleBtn.addEventListener("click", function () {

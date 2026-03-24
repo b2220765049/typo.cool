@@ -196,6 +196,65 @@ h1, h2, h3, h4 {
   border-color: rgba(0, 0, 0, 0.2);
 }
 
+.profile-menu {
+  position: relative;
+}
+
+.profile-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-toggle-btn::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-1px);
+  transition: transform 0.2s ease;
+}
+
+.profile-toggle-btn[aria-expanded="true"]::after {
+  transform: rotate(-135deg) translateY(-1px);
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 180px;
+  background: var(--card);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  box-shadow: var(--shadow-md);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profile-dropdown a,
+.profile-dropdown button {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  color: var(--fg);
+  text-decoration: none;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 14px;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.profile-dropdown a:hover,
+.profile-dropdown button:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
 /* Hamburger Menu */
 .nav-toggle {
   display: none;
@@ -654,6 +713,11 @@ h1, h2, h3, h4 {
     min-height: 40px;
     padding: 8px 14px;
     font-size: 13px;
+  }
+
+  .profile-dropdown {
+    right: 0;
+    min-width: 160px;
   }
   .nav-links.active {
     display: flex;

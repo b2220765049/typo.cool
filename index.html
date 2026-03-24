@@ -96,12 +96,18 @@
       </button>
       <div class="nav-links">
         <a href="#features">Özellikler</a>
-        <a href="#tests">Testler</a>
         <a href="./party/">Typo Party</a>
         <a href="./privacy.html">Gizlilik</a>
         <a href="./terms.html">Koşullar</a>
       </div>
       <button id="openLoginModalBtn" class="header-login-btn" type="button">Giriş Yap</button>
+      <div id="profileMenuWrap" class="profile-menu" hidden>
+        <button id="profileMenuToggleBtn" class="header-login-btn profile-toggle-btn" type="button" aria-haspopup="menu" aria-expanded="false">Profil</button>
+        <div id="profileDropdownMenu" class="profile-dropdown" role="menu" aria-label="Profil menusu" hidden>
+          <a href="./profile.html" role="menuitem">Profil Sayfasi</a>
+          <button id="profileLogoutBtn" type="button" role="menuitem">Cikis Yap</button>
+        </div>
+      </div>
     </div>
   </nav>
 
@@ -169,114 +175,6 @@
           <h3 class="feature-title">Tam Şeffaflık</h3>
           <p class="feature-text">KVKK ve gizlilik metinlerimiz basit ve anlaşılır. Hesabını istediğin an sil.</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Tests Section -->
-  <section class="tests" id="tests">
-    <div class="container">
-      <div class="section-header">
-        <h2>Kişilik Testleri</h2>
-        <p>Kendinizi keşfedin, uyumlu eşleşmeler bulun</p>
-      </div>
-      <div class="tests-grid">
-        <a href="./tests/ipc-test.html" class="test-card">
-          <img class="test-card-icon" src="./assets/IPC_icons/NO.png" alt="İletişim" />
-          <h3>İletişim Testi</h3>
-          <p>Kişilerarası iletişim tarzını ve ilişki dinamiklerini keşfet.</p>
-          <div class="test-card-meta">
-            <span>📝 26 soru</span>
-            <span>⏱️ ~5 dakika</span>
-          </div>
-        </a>
-        <a href="./tests/mbti-test.html" class="test-card">
-          <img class="test-card-icon" src="./assets/MBTI_icons/INFP.png" alt="MBTI" />
-          <h3>MBTI Testi</h3>
-          <p>16 kişilik tipinden hangisi olduğunu ve bilişsel fonksiyonlarını keşfet.</p>
-          <div class="test-card-meta">
-            <span>📝 25 soru</span>
-            <span>⏱️ ~10 dakika</span>
-          </div>
-        </a>
-        <a href="./tests/attachment-test.html" class="test-card">
-          <img class="test-card-icon" src="./assets/attachment_icons/secure.png" alt="Bağlanma" />
-          <h3>Bağlanma Testi</h3>
-          <p>Yakın ilişkilerdeki bağlanma stilini ve ilişki kalıplarını öğren.</p>
-          <div class="test-card-meta">
-            <span>📝 12 soru</span>
-            <span>⏱️ ~3 dakika</span>
-          </div>
-        </a>
-        <a href="./tests/ocean-test.html" class="test-card">
-          <img class="test-card-icon" src="./assets/OCEAN_icons/O.png" alt="OCEAN" />
-          <h3>Big 5 (OCEAN) Testi</h3>
-          <p>Beş Faktör modeli ile kişiliğinin temel boyutlarını keşfet.</p>
-          <div class="test-card-meta">
-            <span>📝 20 soru</span>
-            <span>⏱️ ~5 dakika</span>
-          </div>
-        </a>
-        <a href="./tests/enneagram-test.html" class="test-card">
-          <img class="test-card-icon" src="./assets/enneagram_icons/1.png" alt="Enneagram" />
-          <h3>Enneagram Testi</h3>
-          <p>9 Enneagram tipinden hangisine daha yakın olduğunu keşfet.</p>
-          <div class="test-card-meta">
-            <span>📝 36 soru</span>
-            <span>⏱️ ~5 dakika</span>
-          </div>
-        </a>
-        <a href="./tests/love-languages-test.html" class="test-card">
-          <img class="test-card-icon" src="./assets/love_languages_icons/words_of_affirmation.png" alt="Sevgi Dilleri" />
-          <h3>Sevgi Dilleri Testi</h3>
-          <p>İlişkilerde seni en çok mutlu eden sevgi dilini keşfet.</p>
-          <div class="test-card-meta">
-            <span>📝 11 soru</span>
-            <span>⏱️ ~3 dakika</span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Explanations Section -->
-  <section class="tests" style="background: var(--bg); padding: 60px 0;">
-    <div class="container">
-      <div class="section-header">
-        <h2>Kişilik Tipi Açıklamaları</h2>
-        <p>Tüm kişilik tiplerini detaylıca inceleyin</p>
-      </div>
-      <div class="tests-grid">
-        <a href="./tests/attachment-explanations.html" class="test-card">
-          <img class="test-card-icon" src="./assets/attachment_icons/secure.png" alt="Bağlanma" />
-          <h3>Bağlanma Tipleri</h3>
-          <p>4 bağlanma tarzının detaylı açıklamalarını incele.</p>
-        </a>
-        <a href="./tests/mbti-explanations.html" class="test-card">
-          <img class="test-card-icon" src="./assets/MBTI_icons/INFP.png" alt="MBTI" />
-          <h3>MBTI Tipleri</h3>
-          <p>16 MBTI kişilik tipinin özelliklerini keşfet.</p>
-        </a>
-        <a href="./tests/ipc-explanations.html" class="test-card">
-          <img class="test-card-icon" src="./assets/IPC_icons/NO.png" alt="İletişim" />
-          <h3>İletişim Tipleri</h3>
-          <p>8 iletişim tarzının detaylarını öğren.</p>
-        </a>
-        <a href="./tests/ocean-explanations.html" class="test-card">
-          <img class="test-card-icon" src="./assets/OCEAN_icons/O.png" alt="OCEAN" />
-          <h3>OCEAN Boyutları</h3>
-          <p>5 temel kişilik boyutunu yakından tanı.</p>
-        </a>
-        <a href="./tests/enneagram-explanations.html" class="test-card">
-          <img class="test-card-icon" src="./assets/enneagram_icons/1.png" alt="Enneagram" />
-          <h3>Enneagram Tipleri</h3>
-          <p>9 Enneagram tipinin özelliklerini incele.</p>
-        </a>
-        <a href="./tests/love-languages-explanations.html" class="test-card">
-          <img class="test-card-icon" src="./assets/love_languages_icons/words_of_affirmation.png" alt="Sevgi Dilleri" />
-          <h3>Sevgi Dilleri</h3>
-          <p>5 sevgi dilini detaylı olarak keşfet.</p>
-        </a>
       </div>
     </div>
   </section>

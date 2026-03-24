@@ -135,13 +135,15 @@
   function setEntryMode(mode) {
     state.entryMode = mode;
 
+    var choiceCard = byId("entryChoiceCard");
     var createCard = byId("createPathCard");
     var joinCard = byId("joinPathCard");
     var chooseCreateBtn = byId("chooseCreateBtn");
     var chooseJoinBtn = byId("chooseJoinBtn");
 
-    if (!createCard || !joinCard || !chooseCreateBtn || !chooseJoinBtn) return;
+    if (!choiceCard || !createCard || !joinCard || !chooseCreateBtn || !chooseJoinBtn) return;
 
+    choiceCard.hidden = mode !== "choice";
     createCard.hidden = mode !== "create";
     joinCard.hidden = mode !== "join";
 
