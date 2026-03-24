@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Typo Party - Oda Olustur ve Iletisim Testini Canli Baslat</title>
+  <meta name="description" content="Typo Party ile oda olustur, linkle katil, host olarak testi ayni anda baslat ve sonuclari guvenli sekilde kaydet." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://typo.cool/party/" />
+  <meta property="og:site_name" content="Typo" />
+  <meta property="og:title" content="Typo Party" />
+  <meta property="og:description" content="Canli oda deneyimi ile iletisim testini birlikte cozun." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://typo.cool/party/" />
+  <meta property="og:locale" content="tr_TR" />
+  <link rel="icon" href="../assets/app_icon.png" />
+  <link rel="apple-touch-icon" href="../assets/app_icon.png" />
+  <link rel="stylesheet" href="../site.css" />
+</head>
+<body class="party-page">
+  <header>
+    <div class="container nav">
+      <a class="brand" href="../index.html">
+        <img class="brand-logo" alt="Typo" src="../assets/text_logo.png" />
+      </a>
+      <nav class="nav-links">
+        <a href="../index.html">Ana Sayfa</a>
+        <a href="../tests/ipc-test.html">Iletisim Testi</a>
+        <a href="../privacy.html">Gizlilik</a>
+        <a href="../terms.html">Kosullar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="party-main">
+    <section class="container party-hero">
+      <h1>Typo Party</h1>
+      <p>Oda olustur, davet linkini paylas, host olarak testi ayni anda baslat. Oda kilitlendikten sonra yeni katilim alinmaz.</p>
+      <p class="party-note">Guvenlik: Frontend sadece public anon key kullanir. Tum yetkili islemler Supabase Edge Functions uzerinden calisir.</p>
+      <div id="statusBar" class="party-status info">Hazirlaniyor...</div>
+      <div id="supabaseSetupWarning" class="party-warning" hidden>
+        <strong>Kurulum gerekli:</strong> <span>assets/js/supabase-config.js dosyasina Supabase URL ve anon key ekleyin.</span>
+      </div>
+    </section>
+
+    <section id="section-lobby" class="container party-grid">
+      <article class="party-card">
+        <h2>Host Girisi</h2>
+        <p>Sadece giris yapmis Typo kullanicilari oda olusturabilir ve testi baslatabilir.</p>
+
+        <div id="hostSignedOut">
+          <form id="hostLoginForm" class="stack-form">
+            <label for="hostEmail">E-posta</label>
+            <input id="hostEmail" type="email" placeholder="host@ornek.com" required />
+            <button class="btn primary" type="submit">Magic Link Gonder</button>
+          </form>
+        </div>
+
+        <div id="hostSignedIn" hidden>
+          <p>Host oturumu acik: <strong id="hostEmailView">-</strong></p>
+          <button id="hostLogoutBtn" class="btn ghost" type="button">Host Cikisi</button>
+        </div>
+      </article>
+
+      <article class="party-card">
+        <h2>Oda Olustur</h2>
+        <form id="createRoomForm" class="stack-form">
+          <label for="createRoomName">Oda Adi</label>
+          <input id="createRoomName" type="text" maxlength="64" placeholder="ornek: cuma-aksami" required />
+
+          <label for="hostNickname">Host Rumuzu</label>
+          <input id="hostNickname" type="text" maxlength="32" placeholder="ornek: Emre" required />
+
+          <label for="maxParticipants">Maksimum Kisi</label>
+          <input id="maxParticipants" type="number" min="2" max="200" value="12" required />
+
+          <button class="btn primary" type="submit">Oda Olustur</button>
+        </form>
+      </article>
+
+      <article class="party-card">
+        <h2>Odaya Katil</h2>
+        <form id="joinRoomForm" class="stack-form">
+          <label for="joinRoomCode">Oda Kodu</label>
+          <input id="joinRoomCode" type="text" maxlength="24" placeholder="ornek: AB12CD" />
+
+          <label for="joinRoomName">veya Oda Adi</label>
+          <input id="joinRoomName" type="text" maxlength="64" placeholder="ornek: cuma-aksami" />
+
+          <label for="joinNickname">Rumuz</label>
+          <input id="joinNickname" type="text" maxlength="32" placeholder="ornek: Merve" required />
+
+          <button class="btn primary" type="submit">Katil</button>
+        </form>
+      </article>
+    </section>
+
+    <section id="section-room" class="container party-room" hidden>
+      <article class="party-card room-head">
+        <h2 id="roomNameView">-</h2>
+        <p>Kod: <strong id="roomCodeView">-</strong></p>
+        <p id="roomStatusView">Durum: Acik</p>
+
+        <div class="stack-form">
+          <label for="roomLinkView">Davet Linki</label>
+          <input id="roomLinkView" type="text" readonly />
+          <button id="copyRoomLinkBtn" class="btn ghost" type="button">Linki Kopyala</button>
+        </div>
+
+        <div id="hostControls" class="host-controls" hidden>
+          <button id="lockStartBtn" class="btn danger" type="button">Testi Baslat ve Odayi Kilitle</button>
+          <button id="endSessionBtn" class="btn ghost" type="button">Oturumu Bitir</button>
+        </div>
+
+        <button id="leaveRoomBtn" class="btn ghost" type="button">Odadan Cik</button>
+      </article>
+
+      <article class="party-card">
+        <h3>Katilimcilar</h3>
+        <ul id="participantsList" class="simple-list"></ul>
+      </article>
+
+      <article class="party-card">
+        <h3>Anlik Sonuclar</h3>
+        <p class="muted">Sonuclar kullanici gonderdikce gorunur.</p>
+        <ul id="resultsList" class="simple-list"></ul>
+      </article>
+    </section>
+
+    <section id="section-test" class="container party-test" hidden>
+      <article class="party-card test-card-shell">
+        <h2>Iletisim Testi (IPC - Party)</h2>
+        <div class="test-progress">
+          <span>Soru <strong id="questionCounter">1</strong>/<span id="questionTotal">8</span></span>
+          <div class="test-progress-track">
+            <div id="testProgressFill" class="test-progress-fill"></div>
+          </div>
+        </div>
+
+        <h3 id="questionText">Soru yukleniyor...</h3>
+        <div id="questionOptions" class="choices-wrap"></div>
+      </article>
+    </section>
+
+    <section id="section-results" class="container party-results" hidden>
+      <article class="party-card">
+        <h2>Sonucun Kaydedildi</h2>
+        <p>IPC tipin: <strong id="myResultBadge">-</strong></p>
+        <p class="muted">Host oturumu bitirene kadar odadaki sonuclar burada guncellenir.</p>
+        <button id="backToLobbyBtn" class="btn ghost" type="button">Lobiye Don</button>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <small>© <span id="yearValue"></span> Typo</small>
+      <div class="footer-links">
+        <a href="../index.html">Ana Sayfa</a>
+        <a href="../privacy.html">Gizlilik</a>
+        <a href="../kvkk.html">KVKK</a>
+        <a href="../terms.html">Kosullar</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../assets/js/supabase-config.js"></script>
+  <script src="../assets/js/supabase-client.js"></script>
+  <script src="../assets/js/party.js"></script>
+</body>
+</html>

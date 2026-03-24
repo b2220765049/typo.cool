@@ -812,6 +812,257 @@ footer:not(.site-footer) {
   color: var(--primary);
 }
 
+/* ==================== TYPO PARTY ==================== */
+.party-page {
+  background:
+    radial-gradient(circle at 10% 10%, rgba(145, 89, 177, 0.08), transparent 35%),
+    radial-gradient(circle at 90% 5%, rgba(220, 95, 75, 0.12), transparent 28%),
+    var(--bg);
+}
+
+.party-main {
+  padding: 28px 0 64px;
+}
+
+.party-hero {
+  padding: 12px 20px 18px;
+}
+
+.party-hero h1 {
+  margin: 0;
+  font-size: clamp(34px, 5vw, 52px);
+  color: var(--primary);
+}
+
+.party-hero p {
+  color: var(--fg-muted);
+  max-width: 760px;
+}
+
+.party-note {
+  font-size: 14px;
+}
+
+.party-warning {
+  margin-top: 10px;
+  background: hsl(37, 100%, 94%);
+  color: hsl(25, 65%, 25%);
+  border: 1px solid hsl(36, 66%, 77%);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.party-status {
+  border-radius: 12px;
+  margin-top: 16px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+
+.party-status.info {
+  background: hsl(213, 100%, 96%);
+  color: hsl(210, 65%, 32%);
+  border-color: hsl(214, 89%, 85%);
+}
+
+.party-status.success {
+  background: hsl(135, 52%, 94%);
+  color: hsl(145, 63%, 24%);
+  border-color: hsl(130, 45%, 82%);
+}
+
+.party-status.error {
+  background: hsl(3, 80%, 95%);
+  color: hsl(358, 57%, 32%);
+  border-color: hsl(3, 75%, 86%);
+}
+
+.party-grid,
+.party-room {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 12px;
+}
+
+.party-room {
+  margin-top: 24px;
+}
+
+.party-results,
+.party-test {
+  margin-top: 22px;
+}
+
+.party-card {
+  background: var(--card);
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-md);
+  padding: 22px;
+}
+
+.party-card h2,
+.party-card h3 {
+  margin-top: 0;
+}
+
+.room-head {
+  grid-column: 1 / -1;
+}
+
+.stack-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stack-form input {
+  width: 100%;
+  min-height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: white;
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--fg);
+}
+
+.stack-form input:focus-visible {
+  outline: 2px solid rgba(123, 71, 154, 0.45);
+  outline-offset: 1px;
+}
+
+.btn {
+  border: none;
+  border-radius: 12px;
+  min-height: 44px;
+  padding: 11px 16px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, var(--primary), hsl(344, 52%, 27%));
+  color: white;
+}
+
+.btn.ghost {
+  background: hsl(0, 0%, 100%);
+  border: 1px solid var(--border);
+  color: var(--fg);
+}
+
+.btn.danger {
+  background: linear-gradient(135deg, hsl(358, 58%, 45%), hsl(8, 70%, 45%));
+  color: white;
+}
+
+.host-controls {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.simple-list {
+  margin: 8px 0 0;
+  padding-left: 20px;
+}
+
+.simple-list li {
+  margin-bottom: 8px;
+}
+
+.muted {
+  color: var(--fg-muted);
+}
+
+.test-card-shell {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.test-progress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.test-progress-track {
+  flex: 1;
+  background: hsl(0, 0%, 92%);
+  border-radius: 999px;
+  height: 10px;
+  overflow: hidden;
+}
+
+.test-progress-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, hsl(16, 74%, 57%), hsl(285, 53%, 45%));
+  transition: width 0.2s ease;
+}
+
+.choices-wrap {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.choice-btn {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: white;
+  color: var(--fg);
+  text-align: left;
+  padding: 12px 14px;
+  min-height: 44px;
+  font: inherit;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.choice-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 900px) {
+  .party-grid,
+  .party-room {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .party-main {
+    padding-top: 8px;
+  }
+
+  .party-card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .test-progress {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .test-progress-track {
+    width: 100%;
+  }
+}
+
 /* ==================== UTILITY ==================== */
 .sr-only {
   position: absolute;
