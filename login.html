@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Typo Giris - Google ile Devam Et</title>
+  <meta name="description" content="Typo web girisi. Sadece Google ile giris desteklenir." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://typo.cool/login.html" />
+  <meta property="og:site_name" content="Typo" />
+  <meta property="og:title" content="Typo Giris" />
+  <meta property="og:description" content="Sadece Google ile giris yap." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://typo.cool/login.html" />
+  <meta property="og:locale" content="tr_TR" />
+  <link rel="icon" href="./assets/app_icon.png" />
+  <link rel="apple-touch-icon" href="./assets/app_icon.png" />
+  <link rel="stylesheet" href="./site.css" />
+</head>
+<body class="auth-page">
+  <header>
+    <div class="container nav">
+      <a class="brand" href="./index.html">
+        <img class="brand-logo" alt="Typo" src="./assets/text_logo.png" />
+      </a>
+      <nav class="nav-links">
+        <a href="./index.html">Ana Sayfa</a>
+        <a href="./party/">Typo Party</a>
+        <a href="./privacy.html">Gizlilik</a>
+        <a href="./terms.html">Kosullar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container auth-main">
+    <section class="auth-card">
+      <h1>Typo Giris</h1>
+      <p>Webde sadece Google hesabi ile giris yapabilirsin.</p>
+      <button id="googleLoginBtn" class="btn primary" type="button">Google ile Giris Yap</button>
+      <button id="logoutBtn" class="btn ghost" type="button" hidden>Cikis Yap</button>
+      <div id="authStatus" class="party-status info">Hazirlaniyor...</div>
+      <p id="userEmail" class="muted" hidden></p>
+      <p class="muted small-note">Not: Gmail/Google girisi icin Supabase -> Auth -> Providers -> Google etkin olmali.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <small>© <span id="yearValue"></span> Typo</small>
+      <div class="footer-links">
+        <a href="./index.html">Ana Sayfa</a>
+        <a href="./privacy.html">Gizlilik</a>
+        <a href="./kvkk.html">KVKK</a>
+        <a href="./terms.html">Kosullar</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./assets/js/supabase-config.js"></script>
+  <script src="./assets/js/supabase-client.js"></script>
+  <script src="./assets/js/login.js"></script>
+</body>
+</html>

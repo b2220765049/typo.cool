@@ -96,6 +96,7 @@
     room: null,
     session: null,
     hostSession: null,
+    isHost: false,
     participantToken: "",
     nickname: "",
     channel: null,
@@ -319,7 +320,7 @@
   }
 
   function isHost() {
-    return Boolean(state.hostSession && state.room && state.hostSession.user && state.hostSession.user.id === state.room.host_user_id);
+    return Boolean(state.isHost);
   }
 
   function renderParticipants(participants) {
@@ -442,6 +443,7 @@
 
       state.participantToken = result.participantToken || "";
       state.nickname = hostNickname;
+      state.isHost = true;
       resetTestState();
 
       applyUrl(result.room.room_code, result.room.room_name);
@@ -479,6 +481,7 @@
 
       state.participantToken = result.participantToken || "";
       state.nickname = nickname;
+      state.isHost = false;
       resetTestState();
 
       applyUrl(result.room.room_code, result.room.room_name);
@@ -518,52 +521,9 @@
     }
   }
 
-  async function sendMagicLink(evt) {
-    evt.preventDefault();
-    if (!state.supabase) {
-      setStatus("Supabase baglantisi yok.", "error");
-      return;
-    }
-
-    var email = (byId("hostEmail").value || "").trim();
-    if (!email) {
-      setStatus("Host girisi icin e-posta gerekli.", "error");
-      return;
-    }
-
-    var redirectTo = window.location.origin + "/party/";
-
-    var response = await state.supabase.auth.signInWithOtp({
-      email: email,
-      options: {
-        emailRedirectTo: redirectTo
-      }
-    });
-
-    if (response.error) {
-      setStatus(response.error.message, "error");
-      return;
-    }
-
-    setStatus("Magic link gonderildi. E-postani kontrol et.", "success");
-  }
-
-  async function logoutHost() {
-    if (!state.supabase) return;
-    await state.supabase.auth.signOut();
-    state.hostSession = null;
-    byId("hostSignedIn").hidden = true;
-    byId("hostSignedOut").hidden = false;
-    setHostControls(false);
-    setStatus("Host oturumu kapatildi.", "info");
-  }
-
   function bindEvents() {
     byId("createRoomForm").addEventListener("submit", createRoom);
     byId("joinRoomForm").addEventListener("submit", joinRoom);
-    byId("hostLoginForm").addEventListener("submit", function (e) {
-      void sendMagicLink(e);
-    });
     byId("copyRoomLinkBtn").addEventListener("click", function () {
       void copyText(byId("roomLinkView").value)
         .then(function () {
@@ -586,11 +546,9 @@
       resetTestState();
       unsubscribeRealtime();
       applyUrl("", "");
+      state.isHost = false;
       showSection("lobby");
       setStatus("Odadan cikildi.", "info");
-    });
-    byId("hostLogoutBtn").addEventListener("click", function () {
-      void logoutHost();
     });
     byId("backToLobbyBtn").addEventListener("click", function () {
       showSection("lobby");
@@ -651,29 +609,17 @@
     }, 8000);
   }
 
-  async function hydrateHostSession() {
+  async function ensureAnonymousSession() {
     if (!state.supabase) return;
 
     var sessionResult = await state.supabase.auth.getSession();
-    state.hostSession = sessionResult && sessionResult.data ? sessionResult.data.session : null;
+    var session = sessionResult && sessionResult.data ? sessionResult.data.session : null;
 
-    if (state.hostSession && state.hostSession.user) {
-      byId("hostSignedOut").hidden = true;
-      byId("hostSignedIn").hidden = false;
-      byId("hostEmailView").textContent = state.hostSession.user.email || "Host";
-    } else {
-      byId("hostSignedIn").hidden = true;
-      byId("hostSignedOut").hidden = false;
-    }
-
-    if (!state.authSubscriptionBound) {
-      state.authSubscriptionBound = true;
-      state.supabase.auth.onAuthStateChange(function () {
-        void hydrateHostSession();
-        if (state.room) {
-          setHostControls(isHost());
-        }
-      });
+    if (!session) {
+      var anonResult = await state.supabase.auth.signInAnonymously();
+      if (anonResult.error) {
+        throw new Error("Anonim oturum acilamadi. Supabase Auth ayarlarinda Anonymous Sign-ins'i ac.");
+      }
     }
   }
 
@@ -738,7 +684,13 @@
       return;
     }
 
-    await hydrateHostSession();
+    try {
+      await ensureAnonymousSession();
+    } catch (error) {
+      setStatus(error.message, "error");
+      showSection("lobby");
+      return;
+    }
     await tryAutoJoinFromUrl();
     if (!state.room) {
       showSection("lobby");

@@ -1036,6 +1036,43 @@ footer:not(.site-footer) {
   box-shadow: var(--shadow-sm);
 }
 
+/* ==================== AUTH PAGE ==================== */
+.auth-page {
+  background:
+    radial-gradient(circle at 15% 10%, rgba(66, 133, 244, 0.12), transparent 35%),
+    radial-gradient(circle at 85% 12%, rgba(219, 68, 55, 0.12), transparent 30%),
+    var(--bg);
+}
+
+.auth-main {
+  min-height: calc(100vh - 220px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 30px;
+  padding-bottom: 40px;
+}
+
+.auth-card {
+  width: min(560px, 100%);
+  background: var(--card);
+  border-radius: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-lg);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.auth-card h1 {
+  margin: 0;
+}
+
+.small-note {
+  font-size: 13px;
+}
+
 @media (max-width: 900px) {
   .party-grid,
   .party-room {
